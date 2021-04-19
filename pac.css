@@ -3,54 +3,49 @@
     color: Red;
 }
 
-#navbar{
-	z-index : 10000 ;
+#navbar {
+    z-index: 10000;
 }
 
-ul{
-	display: inline-block;
-	width: 100%;
-	list-style: none;
-	background-color: rgb(55, 56, 63, 0.6);
-	text-align: center;
-	padding: 0;
-	margin: 0;
-}
-
-.nav{
-	display: inline;
-	float: left;
-	overflow: hidden;
-}
-.nav:hover{
-	box-shadow: 2px 2px 10px #66686e;
-}
-
-a.nav_link{
-	display: inline-block;
-	line-height: 35px;
-	min-width:110px;
-	padding: 2px 2px #DADADA;
-	color: #ffffff;
-	text-align: center;
-	text-decoration: none;
-	font-family:segoe script,dancing, purisa;
-	font-size: 14px;
-}
-
-a.nav_link:hover{
-	padding: 0px;
-	background: #2091dd;
-	color: #000000;
-}
-
-.register{
+ul {
+    display: inline-block;
+    width: 100%;
+    list-style: none;
+    background-color: rgb(55, 56, 63, 0.6);
     text-align: center;
+    padding: 0;
+    margin: 0;
 }
 
+.nav {
+    display: inline;
+    float: left;
+    overflow: hidden;
+}
 
+.nav:hover {
+    box-shadow: 2px 2px 10px #66686e;
+}
 
-.login {
+a.nav_link {
+    display: inline-block;
+    line-height: 35px;
+    min-width: 110px;
+    padding: 2px 2px #DADADA;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-family: segoe script, dancing, purisa;
+    font-size: 14px;
+}
+
+a.nav_link:hover {
+    padding: 0px;
+    background: #2091dd;
+    color: #000000;
+}
+
+.form {
     border: none;
     outline: none;
     text-align: center;

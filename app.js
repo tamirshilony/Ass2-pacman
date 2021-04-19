@@ -178,9 +178,9 @@ function show_div(div_name) {
     div2show.style.display = "block"
 }
 
-function hide_all_sections(){
+function hide_all_sections() {
     var divs = document.getElementsByClassName("section");
-    for(var i = 0; i<divs.length; i++){
+    for (var i = 0; i < divs.length; i++) {
         divs[i].style.display = "none";
     }
 }

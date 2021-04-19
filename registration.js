@@ -7,5 +7,4 @@ function save_user() {
     var info = { username: uName, password: uPSW, name: uFullName, mail: uEmail, date: uDate };
     console.log(info);
     localStorage.setItem(uName, JSON.stringify(info));
-    userName = uName;
 }
