@@ -2,8 +2,10 @@ function checkLoginValid(msg1, msg2) {
     //get the user input
     username = document.getElementById('lusername_fill').value;
     password = document.getElementById('lpassword_fill').value;
-    // get the user information from the data base
-    info = localStorage.getItem(username);
+    console.log(password)
+        // get the user information from the data base
+    var info = JSON.parse(localStorage.getItem(username));
+    console.log(typeof(info));
     //checking if user exsist
     if (info === null) {
         document.getElementById(msg1).style.display = "inline"
@@ -11,7 +13,9 @@ function checkLoginValid(msg1, msg2) {
     } else {
         // checking valid password
         // getting the real password
-        real_password = info['password'];
+        console.log(info);
+        var real_password = info['password'];
+        console.log(real_password);
         if (password != real_password) {
             document.getElementById(msg2).style.display = "inline"
             document.getElementById("Login_sec").reset();
