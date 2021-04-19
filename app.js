@@ -173,9 +173,16 @@ function UpdatePosition() {
 }
 
 function show_div(div_name) {
+    hide_all_sections();
     div2show = document.getElementById(div_name);
-    currdiv.style.display = "none"
     div2show.style.display = "block"
+}
+
+function hide_all_sections(){
+    var divs = document.getElementsByClassName("section");
+    for(var i = 0; i<divs.length; i++){
+        divs[i].style.display = "none";
+    }
 }
 
 function random_setup() {

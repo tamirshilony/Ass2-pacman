@@ -3,7 +3,7 @@ $().ready(function() {
         rules:{
             username:{
                 required: true,
-                minlength: 3
+                minlength: 2
             },
             password:{
                 required: true,
