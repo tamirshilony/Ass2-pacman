@@ -10,8 +10,9 @@ function checkLoginValid(msg1, msg2) {
         document.getElementById("Login_sec").reset();
     } else {
         // checking valid password
-        pw = info['password'];
-        if (password != pw) {
+        // getting the real password
+        real_password = info['password'];
+        if (password != real_password) {
             document.getElementById(msg2).style.display = "inline"
             document.getElementById("Login_sec").reset();
         }
