@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="./jquery-3.4.1.slim.min.js"></script>
+		<script src = "https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+		<script type="text/javascript" src="./app.js"></script>
+	</head>
+
+	<body>
+		<div id="score">
+			<label for="lblScore">SCORE:</label>
+			<input id="lblScore" type="text" />
+		</div>
+		<div id="time">
+			<label for="lblTime">TIME:</label>
+			<input id="lblTime" type="text" />
+		</div>
+		<div id="game">
+			<canvas id="canvas" height="600" width="600"></canvas>
+		</div>
+
+		<div class = "section" id = "register">
+			<form class = "form" id = "regform" method = "get">
+				<div class = container>
+					<h1 class = "title">Registration</h1>
+					<p>
+						<label for="rusername">User Name</label>
+						<input type="text" name = "username" required><br/>
+					</p>
+					<p>
+						<label for="rpassword">Password (should contain at least 6 english letters or numbers)</label>
+						<input type="password" name = "password" s><br/>
+					</p>
+						
+					<p>
+						<label for="fullname">Full Name</label>
+						<input type="text" name = "fullname"><br/>
+					</p>
+					<p>
+						<label for="email">Email</label>
+						<input type="email" name = "email"><br/>	
+					</p>
+					<p>
+						<label for="date">Date of Birth</label>
+						<input type="date" name = "date"><br/>
+					</p>
+					<p>
+						<!-- <input type="submit" value ="submit" onclick="return addUser();">Submit</button> -->
+						<button id ="submit" type="button" >Submit</button>
+					</p>
+				</div>
+			</form>
+		</div>
+		<script src="validate.js"></script>
+	</body>
+</html>
