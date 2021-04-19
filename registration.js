@@ -1,25 +1,19 @@
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
+function save_user() {
+    // if(!checkForm(document.forms["registerform"])){
+    // 	document.forms["registerform"].focus();
+    // 	return false;
+    // }
+    uName = document.getElementById('rusername').value;
+    uPSW = document.getElementById('rpassword').value;
+    uFullName = document.getElementById('rname').value;
+    uEmail = document.getElementById('rmail').value;
+    uDate = document.getElementById('rdate').value;
+    // var uName = document.forms["regform"]["rusername"].value;
+    // var uPSW = document.forms["regform"]["rpassword"].value;
+    // var uFullName = document.forms["regform"]["rname"].value;
+    // var uEmail = document.forms["regform"]["rmail"].value;
+    // var uDate = document.forms["regform"]["rdate"].value;
+    var info = { 'username': uName, 'password': uPSW, 'name': uFullName, 'mail': uEmail, 'date': uDate }
+    localStorage.setItem(uName, info)
+    userName = uName;
 }
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-} 
