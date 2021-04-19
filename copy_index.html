@@ -12,6 +12,15 @@
 
 <body>
 
+    <div class="navbar">
+        <ul>
+            <li class=nav><a class=nav_link>Welcom</a></li>
+            <li class=nav><a class=nav_link onclick="show_div('register')">Register</a></li>
+            <li class=nav><a class=nav_link onclick="show_div('Login')">Login</a></li>
+            <li class=nav><a class=nav_link onclick="show_div()">About</a></li>
+        </ul>
+    </div>
+
     <div id="score">
         <label for="lblScore">SCORE:</label>
         <input id="lblScore" type="text" />
@@ -24,7 +33,7 @@
         <canvas id="canvas" height="600" width="600"></canvas>
     </div>
 
-    <div class="section" id="register">
+    <div class="section" id="register" style="display: block;">
         <form class="form" id="regform" name="regform" method="get">
             <div class=c ontainer>
                 <h1 class="title">Registration</h1>
@@ -58,8 +67,8 @@
     </div>
 
 
-    <div class="section" id="Login">
-        <form class="login" id="Login_sec">
+    <div class="section" id="Login" style="display: none;">
+        <form class="form" id="Login_sec">
             <div class="form"></div>
             <h1 class="title">Login</h1>
             <p>
@@ -81,18 +90,23 @@
     </div>
     </form>
     </div>
-    <div class="section" id="setup">
-        <h1>Selecting Your Game Settings Please</h1>
-        <div class="choose_setup">
-            <h2>Click 'Customize Setting' To Initialize Game Setting By Your Self</h2>
-            <button type="button" onclick="show_div('Customize_Setting')">Customize Setting</button>
-            <span class="Customize_Setting_explain">By clicking on 'Customize Setting' you will need to choose buttons, difficulty and time </span>
-            </br>
-            <h2>Or</h2>
-            <h2>Click 'Start With Randomize Setting'</h2>
-            <button type="button" onclick="random_setup()">Start With Randomize Setting</button>
-            <span class="random_setup_explain">By clicking on 'Start With Randomize Setting' you will get<br> 
-            defult buttons to move with and random game properties</span>
+    <div class="section" id="setup" style="display: none;">
+        <h1 class="title">Game Setup</h1>
+        <h2>Selecting Your Game Settings Please</h2>
+        <div class="setup">
+            <div class="choose_setup">
+                <h3>Click 'Customize Setting' To Initialize Game Setting By Your Self</h3>
+                <button type="button" onclick="show_div('Customize_Setting')">Customize Setting</button>
+                <span class="tooltiptext" id="Customize_Setting_explain">By clicking on 'Customize Setting' you will need to choose buttons, difficulty and time </span>
+                </br>
+            </div>
+            <h3>Or</h3>
+            <div class="choose_setup">
+                <h3>Click 'Start With Randomize Setting'</h3>
+                <button type="button" onclick="random_setup()">Start With Randomize Setting</button>
+                <span class="tooltiptext" id="random_setup_explain">By clicking on 'Start With Randomize Setting' you will get<br> 
+                defult buttons to move with and random game properties</span>
+            </div>
         </div>
     </div>
     <script src="validate.js"></script>
