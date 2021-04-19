@@ -4,6 +4,9 @@
 <head>
     <script src="./jquery-3.4.1.slim.min.js"></script>
     <script type="text/javascript" src="./app.js"></script>
+    <script type="text/javascript" src="./registration.js"></script>
+    <script type="text/javascript" src="./login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
     <link rel="stylesheet" type="text/css" href="pac.css" />
 </head>
 
@@ -20,6 +23,40 @@
     <div id="game">
         <canvas id="canvas" height="600" width="600"></canvas>
     </div>
+
+    <div class="section" id="register">
+        <form class="form" id="regform" name="regform" method="get">
+            <div class=c ontainer>
+                <h1 class="title">Registration</h1>
+                <p>
+                    <label for="rusername">User Name</label>
+                    <input type="text" name="username" id="rusername" required><br/>
+                </p>
+                <p>
+                    <label for="rpassword">Password (should contain at least 6 english letters or numbers)</label>
+                    <input type="password" name="password" id="rpassword"><br/>
+                </p>
+
+                <p>
+                    <label for="fullname">Full Name</label>
+                    <input type="text" name="fullname" id="rname"><br/>
+                </p>
+                <p>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="rmail"><br/>
+                </p>
+                <p>
+                    <label for="date">Date of Birth</label>
+                    <input type="date" name="date" id="rdate"><br/>
+                </p>
+                <p>
+                    <!-- <input type="submit" value ="submit" onclick="return addUser();">Submit</button> -->
+                    <button id="submit" type="button" onclick="save_user()">Submit</button>
+                </p>
+            </div>
+        </form>
+    </div>
+
 
     <div class="section" id="Login">
         <form class="login" id="Login_sec">
@@ -58,7 +95,7 @@
             defult buttons to move with and random game properties</span>
         </div>
     </div>
-
+    <script src="validate.js"></script>
 </body>
 
 </html>

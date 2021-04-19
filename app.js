@@ -172,29 +172,6 @@ function UpdatePosition() {
     }
 }
 
-function checkLoginValid(msg1, msg2) {
-
-    userName = document.getElementById('lusername_fill').value;
-    Password = document.getElementById('lpassword_fill').value;
-    check_user = localStorage.getItem(userName);
-    //checking if user exsist
-    if (check_user === null) {
-        document.getElementById(msg1).style.display = "inline"
-        document.getElementById("Login_sec").reset();
-    } else {
-        user_info = JSON.parse(localStorage.getItem(userName));
-        check_password = user_info[1];
-        // checking valid password
-        if (check_password != Password) {
-            document.getElementById(msg2).style.display = "inline"
-            document.getElementById("Login_sec").reset();
-        }
-    }
-    // if pass here username and password are valid
-    divToShow = "setup";
-    return show_div(divToShow);
-}
-
 function show_div(div_name) {
     div2show = document.getElementById(div_name);
     currdiv.style.display = "none"
