@@ -26,4 +26,5 @@ function checkLoginValid(msg1, msg2) {
         }
     }
 
+    return modal_handler('loginModal');
 }

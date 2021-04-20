@@ -1,4 +1,4 @@
-function showModel(modalID) {
+function modal_handler(modalID) {
 
 	// Get the modal
 	var modal = document.getElementById(modalID);
@@ -19,24 +19,8 @@ function showModel(modalID) {
   		}
 	}
 }
-// function modal_handler(modalID){
-//     let modal = document.getElementById(modalID);
-//     console.log(modal);
-//     modal.style.display = "block";
 
-//     let esc = document.getElementsByClassName('closeModal')[0];
-//     console.log(esc)
-//     esc.onclick = close_modal(modalID);
-    
-// }
-
-// function close_modal(modalID){
-//     document.getElementById(modalID).style.display = "block";
-// }
-//     function open_modal(modalID){
-//         document.getElementById(modalID).style.display = "block";
-//     }
-
-    // window.onclick = function(event){
-    //     if(event.target == modal)
-    // }
+function close_modal_move_to_setup(modalID){
+	document.getElementById(modalID).style.display ="none";
+	show_div('setup');
+}
