@@ -19,6 +19,6 @@ function checkLoginValid(msg1, msg2) {
             document.getElementById("Login_sec").reset();
         }
     }
-    // if pass here username and password are valid
-    show_div('setup');
+    
+    return modal_handler('loginModal');
 }
