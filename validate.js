@@ -44,8 +44,9 @@ $.validator.addMethod('validName',function(value,element){
     || value.search(/[0-9]/) == -1;
 },"Full name should contains only letters")
 
-$("#regform")
 
 $("#submit").on('click',function(){
     $("#regform").valid();
 });
+
+

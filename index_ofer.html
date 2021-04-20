@@ -6,6 +6,7 @@
     <script type="text/javascript" src="./app.js"></script>
     <script type="text/javascript" src="./registration.js"></script>
     <script type="text/javascript" src="./login.js"></script>
+    <script type="text/javascript" src="./siteFunctionality.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
     <link rel="stylesheet" type="text/css" href="pac.css" />
 </head>
@@ -14,10 +15,10 @@
 
 <div class = "navbar">
     <ul>
-        <li class = nav><a class = nav_link >Welcom</a></li>
+        <li class = nav><a class = nav_link onclick="show_div('welcome')" >Welcom</a></li>
         <li class = nav><a class = nav_link onclick="show_div('register')" >Register</a></li>
         <li class = nav><a class = nav_link onclick="show_div('Login')">Login</a></li>
-        <li class = nav><a class = nav_link onclick="show_div()">About</a></li>
+        <li class = nav><a class = nav_link onclick="showModel('about')">About</a></li>
     </ul>
 </div>
 
@@ -32,8 +33,18 @@
     <div id="game">
         <canvas id="canvas" height="600" width="600"></canvas>
     </div>
+    
+    <div class="section" id="welcome" style="display: block;">
+        <h1 class="title">Welcome</h1>
+        <div id="lwelcome">
+            <span class='welcomelink'  onclick="show_div('Login')">Login</span>
+        </div>
+        <div id="rwelcome" >
+            <span class="welcomelink"  onclick="show_div('register')">Register</span>
+        </div>
+    </div>
 
-    <div class="section" id="register" style="display: block;">
+    <div class="section" id="register" style="display: none;">
         <form class="form" id="regform" name="regform" method="get">
             <div class=c ontainer>
                 <h1 class="title">Registration</h1>
@@ -59,16 +70,14 @@
                     <input type="date" name="date" id="rdate"><br/>
                 </p>
                 <p>
-                    <!-- <input type="submit" value ="submit" onclick="return addUser();">Submit</button> -->
                     <button id="submit" type="button" onclick="save_user()">Submit</button>
                 </p>
             </div>
         </form>
     </div>
 
-
     <div class="section" id="Login" style="display: none;">
-        <form class="login" id="Login_sec">
+        <form class="form" id="Login_sec">
             <div class="form"></div>
             <h1 class="title">Login</h1>
             <p>
@@ -104,6 +113,62 @@
             defult buttons to move with and random game properties</span>
         </div>
     </div>
+    <dialog class="modal" id="about">
+        <div class="modal-content">
+          <div class="modal-header">
+                <span class="closeModal">&times;</span>
+                <h1>About Us</h1>
+          </div>
+          <div class="modal-body">
+                  <h2 ><span>we are: Inbal Bitton and  Noa Shabtay</span></h2>
+                <h2><span>PlugIn: to make the validation form we used this links :</span></h2>
+                <h3><span>https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js</span><br>
+                    https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js<br>
+                    https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js</span></h3>
+                <h2><span>Difficulties:</span></h2>
+                <h3><span>In the beginning we had difficulty connecting the scripts to html.<br> 
+                    After many attempts we study the subject ans the work was much simpler</span></h3>
+          </div>
+        </div>
+    </dialog>
+
+    <dialog class="modal" id="registerModal">
+        <div class="modal-content">
+          <div class="modal-header">
+                <span class="closeModal">&times;</span>
+                <h1>About Us</h1>
+          </div>
+          <div class="modal-body">
+                  <h2 ><span>Registration has been successfully completed</span></h2>
+                <h2><span>Thank you for registering our game</span></h2>
+                <h3><span>https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js</span><br>
+                    https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js<br>
+                    https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js</span></h3>
+                <h2><span>Difficulties:</span></h2>
+                <h3><span>In the beginning we had difficulty connecting the scripts to html.<br> 
+                    After many attempts we study the subject ans the work was much simpler</span></h3>
+          </div>
+        </div>
+    </dialog>
+
+    <dialog class="modal" id="loginModal">
+        <div class="modal-content">
+          <div class="modal-header">
+                <span class="closeModal">&times;</span>
+                <h1>About Us</h1>
+          </div>
+          <div class="modal-body">
+                  <h2 ><span>we are: Inbal Bitton and  Noa Shabtay</span></h2>
+                <h2><span>PlugIn: to make the validation form we used this links :</span></h2>
+                <h3><span>https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js</span><br>
+                    https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js<br>
+                    https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js</span></h3>
+                <h2><span>Difficulties:</span></h2>
+                <h3><span>In the beginning we had difficulty connecting the scripts to html.<br> 
+                    After many attempts we study the subject ans the work was much simpler</span></h3>
+          </div>
+        </div>
+    </dialog>
     <script src="validate.js"></script>
 </body>
 
