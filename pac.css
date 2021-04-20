@@ -105,3 +105,9 @@ button:hover {
 .choose_setup:hover .tooltiptext {
     visibility: visible;
 }
+
+.title {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+}

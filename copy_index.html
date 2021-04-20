@@ -109,6 +109,126 @@
             </div>
         </div>
     </div>
+    <div class="Customize_Setting">
+        <div class="section" id="select_keys" style="display: none;">
+            <h1 class="title">Setting The Game Buttons</h1>
+            <br>
+            <br><br>
+            <form class="form" id="buttonsForm">
+                <label class="lablesButtons"><strong>Enter Your Moves Buttons:</strong></label><br>
+                <br><br>
+                <label class="lablesButtons"><strong>please press the button to move right</strong></label>
+                <input id="rightBotton" type="text" maxlength="1" onkeydown="displays_button(event,'rightBotton')">
+                <br><br>
+                <label class="lablesButtons"><strong>please press the button to move left</strong></label>
+                <input id="leftBotton" type="text" maxlength="1" onkeydown="displays_button(event,'leftBotton')">
+                <br><br>
+                <label class="lablesButtons"><strong>please press the button to move up</strong></label>
+                <input id="upBotton" type="text" maxlength="1" onkeydown="displays_button(event,'upBotton')">
+                <br><br>
+                <label class="lablesButtons"><strong>please press the button to move down</strong></label>
+                <input id="downBotton" type="text" maxlength="1" onkeydown="displays_button(event,'downBotton')">
+                <br>
+                <label id="key-error" class="err">Please enter uniqe key</label><br />
+                <br><br>
+                <button type="button" onclick="SaveButtonMoves()">Save My button moves</button><br>
+                <button type="button" id="nextInvisible" onclick="ShowDivInProp('Balls1')">move to next step</button>
+            </form>
+        </div>
+        <div class="section" id="ball_setup">
+            <br>
+            <br><br>
+            <p>
+                <label class="lablball"><strong>Write Number Of Balls In The Game (Between 50 To 90):</strong></label>
+                <br><br>
+                <input id="numBalls" type="text" name="numB" autofocus required onchange="validNumBalls('balls-error')">
+                <br>
+                <label class="errorMsg" id="balls-error">Invalid Number Of Balls</label>
+                <br><br>
+                <button type="button" onclick="SaveBalls()">Save</button>
+                <br><br>
+                <button type="button" id="cp" onclick="ColorPickerDisplay()">Next</button>
+            </p>
+        </div>
+        <div class="PropSection" id="balls2" style="display: none;">
+            <br>
+            <img src="PacmanImages/mortiD.png" width=60 height="60">
+            <br><br>
+            <p>
+                <lable class="lablball">Choose Different Colors For 3 Type Of Balls:</lable>
+            </p>
+            <table>
+                <tr>
+                    <th>
+                        <label class="lablball"><strong>5 Points Ball Color:</strong> </label>
+                    </th>
+                    <th>
+                        <label class="lablball"><strong>15 Points Ball Color:</strong> </label>
+                    </th>
+                    <th>
+                        <label class="lablball"><strong>25 Points Ball Color: </strong></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td id="clr1">
+                        Red <input class="c1" type="range" min="0" max="255" step="1" id="red1"><br> Green <input class="c1" type="range" min="0" max="255" step="1" id="grn1"><br> Blue <input class="c1" type="range" min="0" max="255" step="1" id="blu1"><br>
+                        <div class="displayColor" id="color1"></div>
+                    </td>
+                    <td id="clr2">
+                        Red <input class="c2" type="range" min="0" max="255" step="1" id="red2"><br> Green <input class="c2" type="range" min="0" max="255" step="1" id="grn2"><br> Blue <input class="c2" type="range" min="0" max="255" step="1" id="blu2"><br>
+                        <div class="displayColor" id="color2"></div>
+                    </td>
+                    <td id="clr3">
+                        Red<input class="c3" type="range" min="0" max="255" step="1" id="red3"><br> Green
+                        <input class="c3" type="range" min="0" max="255" step="1" id="grn3"><br> Blue
+                        <input class="c3" type="range" min="0" max="255" step="1" id="blu3"><br>
+                        <div class="displayColor" id="color3"></div>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <p>
+                <button type="button" onclick="submitBalls('color-error')">Next</button><br>
+                <label class="errorMsg" id="color-error">Invalid Colors! 1 Or More are The Same!</label>
+            </p>
+        </div>
+        <div class="PropSection" id="GameTime">
+            <br>
+            <img src="PacmanImages/mortiD.png" width=70 height="70">
+            <br><br>
+            <p>
+                <lable class="lablball"><strong>Write Time in Seconds (60 seconds Or More):</strong></lable>
+                <br><br>
+                <img src="CandyandClock/clock1.png" width=50 height="50">
+                <br><br>
+                <input id="timer" type="text" name="time" autofocus required onchange="validTimer('time-error')">
+                <br><br><br><br>
+                <button type="button" onclick="SaveTime()">Next</button>
+                <br>
+                <label class="errorMsg" id="time-error">Invalid Time!</label>
+            </p>
+
+        </div>
+        <div class="PropSection" id="Monsters">
+            <br>
+            <img src="PacmanImages/mortiD.png" width=70 height="70">
+            <br><br>
+            <lable class="lablball"><strong>Write Number Of Monsters:</strong></lable>
+            <br>
+            <lable class="lablball"><strong>(Between 1 To 4 include)</strong></lable>
+            <br><br>
+            <input id="monst" replace="number of monsters" type="text" name="mst" required onchange="validNumberMonst('monst-error')">
+            <br><br><br><br>
+            <img src="MonstersAndWall/mons1.png" width=70 height="70">
+            <img src="MonstersAndWall/mons2.png" width=70 height="70">
+            <img src="MonstersAndWall/mons3.png" width=70 height="70">
+            <img src="MonstersAndWall/mons4.png" width=70 height="70">
+            <br><br><br><br>
+            <button type="button" onclick="SaveMonsters('monst')">Submit</button>
+            <br>
+            <label class="errorMsg" id="monst-error">Invalid Number Of Monsters!</label>
+        </div>
+    </div>
     <script src="validate.js"></script>
 </body>
 

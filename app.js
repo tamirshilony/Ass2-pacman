@@ -184,16 +184,3 @@ function hide_all_sections() {
         divs[i].style.display = "none";
     }
 }
-
-function random_setup() {
-    game_settings = { right: 39, left: 37, up: 38, down: 40 };
-    num_balls = Math.floor(50 + Math.random() * 40);
-    balls_color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-    game_len = Math.floor(60 + Math.random() * 120);
-    num_mansters = Math.floor(1 + Math.random() * 3);
-    game_settings['num_balls'] = num_balls;
-    game_settings['game_len'] = game_len;
-    game_settings['num_mansters'] = num_mansters;
-    game_settings['balls_color'] = balls_color;
-
-}
