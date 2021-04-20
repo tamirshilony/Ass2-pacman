@@ -70,3 +70,38 @@ function Save_monsters() {
         game_settings['monster'] = monster_num;
     }
 }
+
+function ColorPickerDisplay() {
+    var input1 = document.querySelectorAll("input");
+    var input2 = document.querySelectorAll("input");
+    var input3 = document.querySelectorAll("input");
+
+    for (var i = 0; i < input1.length; i++) {
+        input1[i].addEventListener("input", function() {
+            var red = document.getElementById("red1").value,
+                green = document.getElementById("grn1").value,
+                blue = document.getElementById("blu1").value;
+            var display = document.getElementById("color1");
+            display.style.background = "rgb(" + red + ", " + green + ", " + blue + ")"
+
+        })
+
+        input2[i].addEventListener("input", function() {
+            var red = document.getElementById("red2").value,
+                green = document.getElementById("grn2").value,
+                blue = document.getElementById("blu2").value;
+            var display = document.getElementById("color2");
+            display.style.background = "rgb(" + red + ", " + green + ", " + blue + ")"
+
+        })
+
+        input3[i].addEventListener("input", function() {
+            var red = document.getElementById("red3").value,
+                green = document.getElementById("grn3").value,
+                blue = document.getElementById("blu3").value;
+            var display = document.getElementById("color3");
+            display.style.background = "rgb(" + red + ", " + green + ", " + blue + ")"
+
+        })
+    }
+}
