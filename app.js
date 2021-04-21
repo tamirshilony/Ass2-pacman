@@ -6,7 +6,7 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-let game_setting = new Object();
+var game_settings = new Object();
 
 $(document).ready(function() {
     context = canvas.getContext("2d");
@@ -14,7 +14,6 @@ $(document).ready(function() {
 });
 
 function Start() {
-    game_setting = {};
     board = new Array();
     score = 0;
     pac_color = "yellow";

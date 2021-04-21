@@ -1,39 +1,52 @@
 function random_setup() {
-    game_settings = {};
-    game_settings['right'] = 39;
-    game_settings['left'] = 37;
-    game_settings['up'] = 38;
-    game_settings['down'] = 40;
+    game_settings['rightBotton'] = 39;
+    game_settings['leftBotton'] = 37;
+    game_settings['upBotton'] = 38;
+    game_settings['downBotton'] = 40;
     num_balls = Math.floor(50 + Math.random() * 40);
-    balls_color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+    colors = [];
+    for (i = 0; i < 3; i++) {
+        colors[i] = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+    }
+    game_settings['color5p'] = colors[0];
+    game_settings['color15p'] = colors[1];
+    game_settings['color25p'] = colors[2];
     game_len = Math.floor(60 + Math.random() * 120);
     num_mansters = Math.floor(1 + Math.random() * 3);
     game_settings['num_balls'] = num_balls;
     game_settings['game_len'] = game_len;
     game_settings['num_mansters'] = num_mansters;
     game_settings['balls_color'] = balls_color;
+    console.log(game_settings);
+    // start game
 
 }
 
 function displays_button(event, button) {
-    user_key = event.key;
-    document.getElementById(button).value = "" + x;
+    user_key = event.keyCode;
+    // game_settings[button] = user_key;
+}
+
+function uniKeyCode(event, id) {
+    var x = event.key;
+    var key = event.keyCode;
+    console.log(key)
+    game_settings[id] = key;
+    document.getElementById(id).value = "" + x;
 }
 
 function Save_button() {
-    game_settings = {};
     var right = document.getElementById("rightBotton").value;
     var left = document.getElementById("leftBotton").value;
     var up = document.getElementById("upBotton").value;
     var down = document.getElementById("downBotton").value;
-    game_settings['right'] = right;
-    game_settings['left'] = left;
-    game_settings['up'] = up;
-    game_settings['down'] = down;
+    game_settings['right_button'] = right;
+    game_settings['left_button'] = left;
+    game_settings['up_button'] = up;
+    game_settings['down_button'] = down;
 }
 
 function save_num_ball() {
-    game_settings = {};
     num_balls = document.getElementById("numBalls").value;
     if (num_balls >= 50 && num_balls <= 90) {
         document.getElementById("end_ball_num").disabled = false;
@@ -42,7 +55,6 @@ function save_num_ball() {
 }
 
 function save_color() {
-    game_settings = {};
     var color5p = document.getElementById("color1").style.background;
     var color15p = document.getElementById("color2").style.background;
     var color25p = document.getElementById("color3").style.background;
@@ -53,7 +65,6 @@ function save_color() {
 }
 
 function saveTime() {
-    game_settings = {};
     var time = document.getElementById("time_game").value;
     if (time >= 60) {
         document.getElementById("finish_time").disabled = false;
@@ -63,11 +74,12 @@ function saveTime() {
 }
 
 function Save_monsters() {
-    game_settings = {};
     var monster_num = document.getElementById("Nmonster").value;
     if (monster_num >= 1 && monster_num <= 4) {
         document.getElementById("finish_monster").disabled = false;
         game_settings['monster'] = monster_num;
+        console.log(game_settings);
+        //start game
     }
 }
 

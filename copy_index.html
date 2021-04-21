@@ -130,20 +130,20 @@
                 <label class="lablesButtons"><strong>Enter Your Moves Buttons:</strong></label><br>
                 <br><br>
                 <label class="lablesButtons"><strong>please press the button to move right</strong></label>
-                <input id="rightBotton" type="text" maxlength="1" onkeydown="displays_button(event,'rightBotton')">
+                <input id="rightBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'rightBotton')">
                 <br><br>
                 <label class="lablesButtons"><strong>please press the button to move left</strong></label>
-                <input id="leftBotton" type="text" maxlength="1" onkeydown="displays_button(event,'leftBotton')">
+                <input id="leftBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'leftBotton')">
                 <br><br>
                 <label class="lablesButtons"><strong>please press the button to move up</strong></label>
-                <input id="upBotton" type="text" maxlength="1" onkeydown="displays_button(event,'upBotton')">
+                <input id="upBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'upBotton')">
                 <br><br>
                 <label class="lablesButtons"><strong>please press the button to move down</strong></label>
-                <input id="downBotton" type="text" maxlength="1" onkeydown="displays_button(event,'downBotton')">
+                <input id="downBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'downBotton')">
                 <br>
                 <label id="key-error" class="err">Please enter uniqe key</label><br />
                 <br><br>
-                <button type="button" onclick="Save_button()">Save My button moves</button><br>
+                <!-- <button type="button" onclick="Save_button()">Save My button moves</button><br> -->
                 <button type="button" id="next_step" onclick="show_div('ball_setup')">move to next step</button>
             </form>
         </div>
