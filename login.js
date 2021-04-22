@@ -1,5 +1,8 @@
 function checkLoginValid(msg1, msg2) {
-    //get the user input
+    // close err message from before
+    document.getElementById(msg1).style.display = "none"
+    document.getElementById(msg2).style.display = "none"
+        //get the user input
     username = document.getElementById('lusername_fill').value;
     password = document.getElementById('lpassword_fill').value;
     console.log(password)
@@ -17,8 +20,10 @@ function checkLoginValid(msg1, msg2) {
         if (password != real_password) {
             document.getElementById(msg2).style.display = "inline"
             document.getElementById("Login_sec").reset();
+        } else { // if pass here username and password are valid
+            document.getElementById(msg1).style.display = "none"
+                // return show_div('setup');
+            return modal_handler('loginModal');
         }
     }
-    
-    return modal_handler('loginModal');
 }

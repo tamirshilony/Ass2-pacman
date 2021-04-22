@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 let context;
 let shape = new Object();
 let board;
@@ -7,6 +8,17 @@ let start_time;
 let time_elapsed;
 let interval;
 let board_size = 16;
+=======
+var context;
+var shape = new Object();
+var board;
+var score;
+var pac_color;
+var start_time;
+var time_elapsed;
+var interval;
+var game_settings = new Object();
+>>>>>>> 4b38c641dbcfdc7be8593afc0e40153e508e5774
 
 $(document).ready(function() {
     context = canvas.getContext("2d");
@@ -197,6 +209,7 @@ function hide_all_sections(){
     for(let i = 0; i<divs.length; i++){
         divs[i].style.display = "none";
     }
+<<<<<<< HEAD
 }
 
 function random_setup() {
@@ -260,4 +273,6 @@ function fix_mosters_n_walls(i){
         for(let j = 0; j< board_size; j++)
             board[i][j] = 4;
     }
+=======
+>>>>>>> 4b38c641dbcfdc7be8593afc0e40153e508e5774
 }
