@@ -22,9 +22,8 @@ function checkLoginValid(msg1, msg2) {
             document.getElementById("Login_sec").reset();
         } else { // if pass here username and password are valid
             document.getElementById(msg1).style.display = "none"
-            return show_div('setup');
+                // return show_div('setup');
+            return modal_handler('loginModal');
         }
     }
-
-    return modal_handler('loginModal');
 }

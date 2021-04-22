@@ -3,6 +3,7 @@
 
 <head>
     <script src="./jquery-3.4.1.slim.min.js"></script>
+    <script src="./jquery.drawrpalette.js" defer></script>
     <script type="text/javascript" src="./app.js"></script>
     <script type="text/javascript" src="./registration.js"></script>
     <script type="text/javascript" src="./login.js"></script>
@@ -87,7 +88,6 @@
                 <label for="lusername">User Name</label>
                 <input id="lusername_fill" type="text" required>
             </p>
-            <br>
             <p>
                 <label for="lpassword">Password</label>
                 <input id="lpassword_fill" type="password" required>
@@ -141,10 +141,11 @@
                 <label class="lablesButtons"><strong>please press the button to move down</strong></label>
                 <input id="downBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'downBotton')">
                 <br>
-                <label id="key-error" class="err">Please enter uniqe key</label><br />
+                <label id="key_error" class="err">Please enter uniqe key for each one</label><br />
                 <br><br>
-                <!-- <button type="button" onclick="Save_button()">Save My button moves</button><br> -->
-                <button type="button" id="next_step" onclick="show_div('ball_setup')">move to next step</button>
+                <button type="button" id="check_buttons" onclick="save_buttons()">Save Buttons</button>
+                <br>
+                <button type="button" id="next_step" style="display: none;" onclick="show_div('ball_setup')">Move To Next Step</button>
             </form>
         </div>
         <div class="section" id="ball_setup" style="display: none;">
@@ -186,17 +187,15 @@
                 </tr>
                 <tr>
                     <td id="color5p">
-                        Red <input class="c1" type="range" min="0" max="255" step="1" id="red1"><br> Green <input class="c1" type="range" min="0" max="255" step="1" id="grn1"><br> Blue <input class="c1" type="range" min="0" max="255" step="1" id="blu1"><br>
+                        Please Select color 1: <input class="c1" type="text" id="col1n" value="#222222"><br>
                         <div class="displayColor" id="color1"></div>
                     </td>
                     <td id="color15p">
-                        Red <input class="c2" type="range" min="0" max="255" step="1" id="red2"><br> Green <input class="c2" type="range" min="0" max="255" step="1" id="grn2"><br> Blue <input class="c2" type="range" min="0" max="255" step="1" id="blu2"><br>
+                        Please Select color 2: <input class="c1" type="text" id="col2n" value="#222222"><br>
                         <div class="displayColor" id="color2"></div>
                     </td>
                     <td id="color25p">
-                        Red<input class="c3" type="range" min="0" max="255" step="1" id="red3"><br> Green
-                        <input class="c3" type="range" min="0" max="255" step="1" id="grn3"><br> Blue
-                        <input class="c3" type="range" min="0" max="255" step="1" id="blu3"><br>
+                        Please Select color 3: <input class="c2" type="text" id="col3n" value="#222222"><br>
                         <div class="displayColor" id="color3"></div>
                     </td>
                 </tr>
@@ -213,9 +212,9 @@
                 <lable class="time_lable"><strong>Insert The Desirable Time in Seconds (60 seconds Or More):</strong></lable>
                 <br><br>
                 <input id="time_game" name="time_game" type="text" name="time" autofocus>
-                <br><br><br><br>
+                <br><br>
                 <button type="button" id="save_time" name="save_time" onclick="saveTime()">Save</button>
-                <br><br><br><br>
+                <br><br>
                 <div class="next">
                     <button type="button" id="finish_time" name="finish_time" disabled onclick="show_div('Monsters')">Next</button>
                 </div>
