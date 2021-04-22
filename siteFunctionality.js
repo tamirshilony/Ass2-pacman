@@ -1,3 +1,17 @@
+function show_div(div_name) {
+    hide_all_sections();
+    div2show = document.getElementById(div_name);
+    div2show.style.display = "block"
+}
+
+function hide_all_sections(){
+    let divs = document.getElementsByClassName("section");
+    for(let i = 0; i<divs.length; i++){
+        divs[i].style.display = "none";
+    }
+}
+
+
 function modal_handler(modalID) {
 
     // Get the modal
@@ -26,32 +40,32 @@ function close_modal_move_to_setup(modalID) {
 }
 
 
-$(function() {
-    $("#col1n").drawrpalette();
-});
+// $(function() {
+//     $("#col1n").drawrpalette();
+// });
 
-$("#col1n").click(function() {
-    $("#col1n").drawrpalette();
+// $("#col1n").click(function() {
+//     $("#col1n").drawrpalette();
 
-});
+// });
 
-$(function() {
-    $("#col2n").drawrpalette();
-});
+// $(function() {
+//     $("#col2n").drawrpalette();
+// });
 
-$("#col2n").click(function() {
-    $("#col2n").drawrpalette();
+// $("#col2n").click(function() {
+//     $("#col2n").drawrpalette();
 
-});
+// });
 
-$(function() {
-    $("#col3n").drawrpalette();
-});
+// $(function() {
+//     $("#col3n").drawrpalette();
+// });
 
-$("#col3n").click(function() {
-    $("#col3n").drawrpalette();
+// $("#col3n").click(function() {
+//     $("#col3n").drawrpalette();
 
-});
+// });
 
 $(function() {
 

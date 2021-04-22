@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 let context;
 let shape = new Object();
 let board;
@@ -6,19 +5,23 @@ let score;
 let pac_color;
 let start_time;
 let time_elapsed;
-let interval;
+let interval1;
+let interval2;
 let board_size = 16;
-=======
-var context;
-var shape = new Object();
-var board;
-var score;
-var pac_color;
-var start_time;
-var time_elapsed;
-var interval;
-var game_settings = new Object();
->>>>>>> 4b38c641dbcfdc7be8593afc0e40153e508e5774
+let game_settings = new Object();
+let monster_num;
+
+
+function MovingObject(type,i,j,typeBefore){
+    this.type = type; //5 for monster, 10 for moving food
+    this.i = i;
+    this.j = j;
+    this.typeBefore = typeBefore //keeps the object type on this [i][j] so it wont lost
+}
+
+let moving_objects = [new MovingObject(10,null,null,0),new MovingObject(5,1,1,0),new MovingObject(5,1,14,0),
+    new MovingObject(5,14,1,0),new MovingObject(5,14,14,0),];//1 moving food 4 monsters 
+
 
 $(document).ready(function() {
     context = canvas.getContext("2d");
@@ -29,17 +32,24 @@ function Start() {
     board = new Array(board_size).fill(0);
     score = 0;
     pac_color = "yellow";
-    let cnt = board_size^2;
-    let food_remain = 80;
+    let food_remain = 90;
     let food5 = Math.floor(food_remain*0.6);
     let food15 = Math.floor(food_remain*0.3);
     let food25 = food_remain - food5 - food15;
-    let monst_remain = 4;
+    // let monster_remains = game_settings.num_mansters;
+    monster_num = 3;
     start_time = new Date();
+    
+
     for (let i = 0; i < board_size; i++) {
         board[i] = new Array(board_size).fill(0);
-        fix_mosters_n_walls(i);
+        fix_walls(i);
     }
+
+    for (let m = 1; m <= monster_num; m++){
+        board[moving_objects[m].i][moving_objects[m].j] = 5
+    }
+
     // place all kinds of food on board randomly
     while (food_remain > 0) {
         let food_kind;
@@ -54,6 +64,12 @@ function Start() {
         board[emptyCell[0]][emptyCell[1]] = food_kind;
         food_remain--;
     }
+
+    //place moving food
+    emptyCell = findRandomEmptyCell(board);
+    moving_objects[0].i = emptyCell[0];
+    moving_objects[0].j = emptyCell[1];
+    board[emptyCell[0]][emptyCell[1]] = 2;
 
     // place pacman
     emptyCell = findRandomEmptyCell(board);
@@ -77,7 +93,8 @@ function Start() {
         },
         false
     );
-    interval = setInterval(UpdatePosition, 250);
+    interval1 = setInterval(UpdatePosition, 250);
+    interval2 = setInterval(UpdateObjectsPositions, 350);
 }
 
 function findRandomEmptyCell(board) {
@@ -191,25 +208,30 @@ function UpdatePosition() {
         pac_color = "green";
     }
     if (score == 50) {
-        window.clearInterval(interval);
+        window.clearInterval(interval1);
+        window.clearInterval(interval2);
         window.alert("Game completed");
     } else {
         Draw();
     }
 }
 
-function show_div(div_name) {
-    hide_all_sections();
-    div2show = document.getElementById(div_name);
-    div2show.style.display = "block"
-}
-
-function hide_all_sections(){
-    let divs = document.getElementsByClassName("section");
-    for(let i = 0; i<divs.length; i++){
-        divs[i].style.display = "none";
+function UpdateObjectsPositions(){
+    for(let m = 0; m < (monster_num + 1); m++){
+        board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;
+        let direction = Math.floor(Math.random()*3 + 1);
+        switch (direction){
+            case 0: 
+                (moving_objects[m].j > 0 && board[moving_objects[m].i][moving_objects[m].j - 1] != 4) ? moving_objects[m].j-- : m--;
+            case 1:
+                (moving_objects[m].j < (board_size-1) && board[moving_objects[m].i][moving_objects[m].j + 1] != 4) ? moving_objects[m].j++ : m--;
+            case 2:
+                (moving_objects[m].i > 0 && board[moving_objects[m].i - 1][moving_objects[m].j] != 4) ? moving_objects[m].i--: m--;
+            case 3:
+                (moving_objects[m].i < (board_size-1) && board[moving_objects[m].i + 1][moving_objects[m].j] != 4) ? moving_objects[m].i++ : m --;
+        }
+        board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].type;
     }
-<<<<<<< HEAD
 }
 
 function random_setup() {
@@ -222,16 +244,19 @@ function random_setup() {
     game_settings['game_len'] = game_len;
     game_settings['num_mansters'] = num_mansters;
     game_settings['balls_color'] = balls_color;
+}
+
+function MoveObjects(obj){
 
 }
 
-function fix_mosters_n_walls(i){
+
+function fix_walls(i){
 	if ( i == 0 ){
         for(let j = 0; j< board_size; j++)
             board[i][j] = 4;
     }else if ( i == 1 ){
         board[i][9] = 4; board[i][0] = 4; board[i][15] = 4;
-        board[i][1] = 5; board[i][14] = 5;// Monsters
     }else if ( i == 2 ){
         for(let j = 3; j < 8; j++)
             board[i][j] = 4;
@@ -268,11 +293,8 @@ function fix_mosters_n_walls(i){
 		board[i][7] = 4; board[i][12] = 4; board[i][13] = 4; board[i][15] = 4;board[i][0] = 4;
     }else if( i == 14 ){
 		board[i][15] = 4;board[i][0] = 4;
-        board[i][1] = 5; board[i][14] = 5;// Monsters
     }else if ( i == board_size-1 ){
         for(let j = 0; j< board_size; j++)
             board[i][j] = 4;
     }
-=======
->>>>>>> 4b38c641dbcfdc7be8593afc0e40153e508e5774
 }
