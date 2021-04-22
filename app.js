@@ -6,7 +6,7 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-let currdiv;
+var board_size = 16;
 
 $(document).ready(function() {
     context = canvas.getContext("2d");
@@ -17,37 +17,27 @@ function Start() {
     board = new Array();
     score = 0;
     pac_color = "yellow";
-    var cnt = 100;
+    var cnt = board_size^2;
     var food_remain = 50;
     var pacman_remain = 1;
     start_time = new Date();
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < board_size; i++) {
         board[i] = new Array();
-        //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-        for (var j = 0; j < 10; j++) {
-            if (
-                (i == 3 && j == 3) ||
-                (i == 3 && j == 4) ||
-                (i == 3 && j == 5) ||
-                (i == 6 && j == 1) ||
-                (i == 6 && j == 2)
-            ) {
-                board[i][j] = 4;
-            } else {
-                var randomNum = Math.random();
-                if (randomNum <= (1.0 * food_remain) / cnt) {
-                    food_remain--;
-                    board[i][j] = 1;
-                } else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-                    shape.i = i;
-                    shape.j = j;
-                    pacman_remain--;
-                    board[i][j] = 2;
-                } else {
-                    board[i][j] = 0;
-                }
-                cnt--;
+        fix_walls(i);
+        for (var j = 0; j < board_size; j++) {
+            if(board[i][j] == 4)
+                continue;
+            var randomNum = Math.random();
+            if (randomNum <= (1.0 * food_remain) / cnt) {
+                food_remain--;
+                board[i][j] = 1;
+            }else if{
+                
             }
+            } else {
+                board[i][j] = 0;
+            }
+            cnt--;
         }
     }
     while (food_remain > 0) {
@@ -55,6 +45,12 @@ function Start() {
         board[emptyCell[0]][emptyCell[1]] = 1;
         food_remain--;
     }
+    emptyCell = findRandomEmptyCell(board);
+    shape.i = emptyCell[0];
+    shape.j = emptyCell[1];
+    board[emptyCell[0]][emptyCell[1]] = 2;
+
+
     keysDown = {};
     addEventListener(
         "keydown",
@@ -74,11 +70,11 @@ function Start() {
 }
 
 function findRandomEmptyCell(board) {
-    var i = Math.floor(Math.random() * 9 + 1);
-    var j = Math.floor(Math.random() * 9 + 1);
+    var i = Math.floor(Math.random() * (board_size-1) + 1);
+    var j = Math.floor(Math.random() * (board_size-1) + 1);
     while (board[i][j] != 0) {
-        i = Math.floor(Math.random() * 9 + 1);
-        j = Math.floor(Math.random() * 9 + 1);
+        i = Math.floor(Math.random() * (board_size-1) + 1);
+        j = Math.floor(Math.random() * (board_size-1) + 1);
     }
     return [i, j];
 }
@@ -102,8 +98,8 @@ function Draw() {
     canvas.width = canvas.width; //clean board
     lblScore.value = score;
     lblTime.value = time_elapsed;
-    for (var i = 0; i < 10; i++) {
-        for (var j = 0; j < 10; j++) {
+    for (var i = 0; i < board_size; i++) {
+        for (var j = 0; j < board_size; j++) {
             var center = new Object();
             center.x = i * 60 + 30;
             center.y = j * 60 + 30;
@@ -141,7 +137,7 @@ function UpdatePosition() {
         }
     }
     if (x == 2) {
-        if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+        if (shape.j < (board_size-1) && board[shape.i][shape.j + 1] != 4) {
             shape.j++;
         }
     }
@@ -151,7 +147,7 @@ function UpdatePosition() {
         }
     }
     if (x == 4) {
-        if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+        if (shape.i < (board_size-1) && board[shape.i + 1][shape.j] != 4) {
             shape.i++;
         }
     }
@@ -178,9 +174,9 @@ function show_div(div_name) {
     div2show.style.display = "block"
 }
 
-function hide_all_sections() {
+function hide_all_sections(){
     var divs = document.getElementsByClassName("section");
-    for (var i = 0; i < divs.length; i++) {
+    for(var i = 0; i<divs.length; i++){
         divs[i].style.display = "none";
     }
 }
@@ -196,4 +192,52 @@ function random_setup() {
     game_settings['num_mansters'] = num_mansters;
     game_settings['balls_color'] = balls_color;
 
+}
+
+function fix_walls(i){
+	if ( i == 0 ){
+        for(var j = 0; j< board_size; j++)
+            board[i][j] = 4;
+    }else if ( i == 1 ){
+        board[i][9] = 4; board[i][0] = 4; board[i][15] = 4;
+    }else if ( i == 2 ){
+        for(var j = 3; j < 8; j++)
+            board[i][j] = 4;
+        board[i][0] = 4;board[i][9] = 4; board[i][10] = 4; board[i][15] = 4;
+    }else if (i == 3){
+        board[i][7] = 4; board[i][0] = 4; board[i][15] = 4;
+    }else if ( i == 4 ){
+		for(var j = 10; j< 15; j++){
+            board[i][j] = 4;
+        } board[i][7] = 4;board[i][0] = 4;board[i][15] = 4;
+    }else if ( i == 5 ){
+        board[i][7] = 4; board[i][6] = 4; board[i][10] = 4;board[i][0] = 4; 
+        board[i][15] = 4; board[i][5] = 4;
+	}else if ( i == 6 ){
+        board[i][7] = 4; board[i][9] = 4; board[i][10] = 4;board[i][0] = 4; board[i][15] = 4;
+    }else if ( i == 7 ){
+        board[i][0] = 4; board[i][2] = 4; board[i][15] = 4; board[i][7] = 4;
+	}else if( i == 8 ){
+		board[i][4] = 4; board[i][1] = 4; board[i][2] = 4; board[i][7] = 4;
+        board[i][12] = 4; board[i][13] = 4; board[i][15] = 4;board[i][0] = 4;
+    }else if ( i == 9 ){
+        board[i][0] = 4; board[i][4] = 4; board[i][12] = 4; board[i][15] = 4;
+        board[i][7] = 4; board[i][8] = 4;
+    }else if ( i == 10 ){
+        board[i][0] = 4; board[i][4] = 4; board[i][12] = 4; board[i][15] = 4; board[i][15] = 4;
+	}else if ( i == 11 ){
+        for(var j = 9; j< 13; j++){
+            board[i][j] = 4;
+        } board[i][4] = 4; board[i][15] = 4;board[i][0] = 4;
+	}else if( i == 12 ){
+		board[i][4] = 4; board[i][3] = 4; board[i][2] = 4; board[i][9] = 4; 
+        board[i][15] = 4;board[i][0] = 4;
+    }else if( i == 13 ){
+		board[i][7] = 4; board[i][12] = 4; board[i][13] = 4; board[i][15] = 4;board[i][0] = 4;
+    }else if( i == 14 ){
+		board[i][15] = 4;board[i][0] = 4;
+    }else if ( i == board_size-1 ){
+        for(var j = 0; j< board_size; j++)
+            board[i][j] = 4;
+    }
 }
