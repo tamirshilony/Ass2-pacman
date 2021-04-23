@@ -4,9 +4,9 @@ function show_div(div_name) {
     div2show.style.display = "block"
 }
 
-function hide_all_sections(){
+function hide_all_sections() {
     let divs = document.getElementsByClassName("section");
-    for(let i = 0; i<divs.length; i++){
+    for (let i = 0; i < divs.length; i++) {
         divs[i].style.display = "none";
     }
 }
@@ -40,74 +40,29 @@ function close_modal_move_to_setup(modalID) {
 }
 
 
-// $(function() {
-//     $("#col1n").drawrpalette();
-// });
+$(function() {
+    $("#col1n").drawrpalette();
+});
 
-// $("#col1n").click(function() {
-//     $("#col1n").drawrpalette();
+$("#col1n").click(function() {
+    $("#col1n").drawrpalette();
 
-// });
-
-// $(function() {
-//     $("#col2n").drawrpalette();
-// });
-
-// $("#col2n").click(function() {
-//     $("#col2n").drawrpalette();
-
-// });
-
-// $(function() {
-//     $("#col3n").drawrpalette();
-// });
-
-// $("#col3n").click(function() {
-//     $("#col3n").drawrpalette();
-
-// });
+});
 
 $(function() {
-
-    $('input[name^="text"]').change(function() {
-
-        var $current = $(this);
-
-        $('input[name^="text"]').each(function() {
-            if ($(this).val() == $current.val() && $(this).attr('id') != $current.attr('id')) {
-                alert('duplicate found!');
-            }
-
-        });
-    });
+    $("#col2n").drawrpalette();
 });
 
-$("#rightBotton").click(function() {
-    $('input[name^="text"]').change(function() {
-
-        var $current = $(this);
-
-        $('input[name^="text"]').each(function() {
-            if ($(this).val() == $current.val() && $(this).attr('id') != $current.attr('id')) {
-                alert('duplicate found!');
-            }
-
-        });
-    });
+$("#col2n").click(function() {
+    $("#col2n").drawrpalette();
 
 });
 
-$("#leftBotton").click(function() {
-    $('input[name^="text"]').change(function() {
+$(function() {
+    $("#col3n").drawrpalette();
+});
 
-        var $current = $(this);
-
-        $('input[name^="text"]').each(function() {
-            if ($(this).val() == $current.val() && $(this).attr('id') != $current.attr('id')) {
-                alert('duplicate found!');
-            }
-
-        });
-    });
+$("#col3n").click(function() {
+    $("#col3n").drawrpalette();
 
 });

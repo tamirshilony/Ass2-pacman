@@ -12,15 +12,16 @@ let game_settings = new Object();
 let monster_num;
 
 
-function MovingObject(type,i,j,typeBefore){
+function MovingObject(type, i, j, typeBefore) {
     this.type = type; //5 for monster, 10 for moving food
     this.i = i;
     this.j = j;
     this.typeBefore = typeBefore //keeps the object type on this [i][j] so it wont lost
 }
 
-let moving_objects = [new MovingObject(10,null,null,0),new MovingObject(5,1,1,0),new MovingObject(5,1,14,0),
-    new MovingObject(5,14,1,0),new MovingObject(5,14,14,0),];//1 moving food 4 monsters 
+let moving_objects = [new MovingObject(10, null, null, 0), new MovingObject(5, 1, 1, 0), new MovingObject(5, 1, 14, 0),
+    new MovingObject(5, 14, 1, 0), new MovingObject(5, 14, 14, 0),
+]; //1 moving food 4 monsters 
 
 
 $(document).ready(function() {
@@ -33,8 +34,8 @@ function Start() {
     score = 0;
     pac_color = "yellow";
     let food_remain = 90;
-    let food5 = Math.floor(food_remain*0.6);
-    let food15 = Math.floor(food_remain*0.3);
+    let food5 = Math.floor(food_remain * 0.6);
+    let food15 = Math.floor(food_remain * 0.3);
     let food25 = food_remain - food5 - food15;
     // let monster_num = game_settings.num_mansters;
     monster_num = 3;
@@ -54,11 +55,11 @@ function Start() {
     // place all kinds of food on board randomly
     while (food_remain > 0) {
         let food_kind;
-        if(food_remain > food15 + food25){
+        if (food_remain > food15 + food25) {
             food_kind = 20;
-        }else if(food_remain > food25){
+        } else if (food_remain > food25) {
             food_kind = 21;
-        }else{
+        } else {
             food_kind = 22;
         }
         let emptyCell = findRandomEmptyCell(board);
@@ -99,11 +100,11 @@ function Start() {
 }
 
 function findRandomEmptyCell(board) {
-    let i = Math.floor(Math.random() * (board_size-1) + 1);
-    let j = Math.floor(Math.random() * (board_size-1) + 1);
+    let i = Math.floor(Math.random() * (board_size - 1) + 1);
+    let j = Math.floor(Math.random() * (board_size - 1) + 1);
     while (board[i][j] != 0) {
-        i = Math.floor(Math.random() * (board_size-1) + 1);
-        j = Math.floor(Math.random() * (board_size-1) + 1);
+        i = Math.floor(Math.random() * (board_size - 1) + 1);
+        j = Math.floor(Math.random() * (board_size - 1) + 1);
     }
     return [i, j];
 }
@@ -145,32 +146,32 @@ function Draw() {
             } else if (board[i][j] == 20) {
                 DrawFood(center.x, center.y, 'green');
             } else if (board[i][j] == 21) {
-                DrawFood(center.x, center.y,'red');
+                DrawFood(center.x, center.y, 'red');
             } else if (board[i][j] == 22) {
-                DrawFood(center.x, center.y,'blue');
+                DrawFood(center.x, center.y, 'blue');
             } else if (board[i][j] == 4) {
-                DrawFullRect(center.x, center.y,'grey')
-            }else if(board[i][j] == 5){
-                DrawFullRect(center.x, center.y,'black')
+                DrawFullRect(center.x, center.y, 'grey')
+            } else if (board[i][j] == 5) {
+                DrawFullRect(center.x, center.y, 'black')
             }
         }
     }
 }
 
-function DrawFood(x,y,color){
+function DrawFood(x, y, color) {
     context.beginPath();
     context.arc(x, y, 15, 0, 2 * Math.PI); // circle
     context.fillStyle = color; //color
     context.fill();
 }
 
-function DrawFullRect(x,y,color){
+function DrawFullRect(x, y, color) {
     context.beginPath();
     context.rect(x - 30, y - 30, 60, 60);
     context.fillStyle = color; //color
     context.fill();
 }
-    
+
 function UpdatePosition() {
     board[shape.i][shape.j] = 0;
     let x = GetKeyPressed();
@@ -180,7 +181,7 @@ function UpdatePosition() {
         }
     }
     if (x == 2) {
-        if (shape.j < (board_size-1) && board[shape.i][shape.j + 1] != 4) {
+        if (shape.j < (board_size - 1) && board[shape.i][shape.j + 1] != 4) {
             shape.j++;
         }
     }
@@ -190,16 +191,16 @@ function UpdatePosition() {
         }
     }
     if (x == 4) {
-        if (shape.i < (board_size-1) && board[shape.i + 1][shape.j] != 4) {
+        if (shape.i < (board_size - 1) && board[shape.i + 1][shape.j] != 4) {
             shape.i++;
         }
     }
     if (board[shape.i][shape.j] == 20) {
-        score+=5;
-    }else if (board[shape.i][shape.j] == 21) {
-        score+=15;
-    }else if (board[shape.i][shape.j] == 22) {
-        score+=25;
+        score += 5;
+    } else if (board[shape.i][shape.j] == 21) {
+        score += 15;
+    } else if (board[shape.i][shape.j] == 22) {
+        score += 25;
     }
 
     board[shape.i][shape.j] = 2;
@@ -220,16 +221,16 @@ function UpdatePosition() {
 function UpdateObjectsPositions(){
     for(let m = 0; m <= monster_num; m++){
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;
-        let direction = Math.floor(Math.random()*3 + 1);
-        switch (direction){
-            case 0: 
-                (moving_objects[m].j > 0 && board[moving_objects[m].i][moving_objects[m].j - 1] != 4) ? moving_objects[m].j-- : m--;
+        let direction = Math.floor(Math.random() * 3 + 1);
+        switch (direction) {
+            case 0:
+                (moving_objects[m].j > 0 && board[moving_objects[m].i][moving_objects[m].j - 1] != 4) ? moving_objects[m].j--: m--;
             case 1:
-                (moving_objects[m].j < (board_size-1) && board[moving_objects[m].i][moving_objects[m].j + 1] != 4) ? moving_objects[m].j++ : m--;
+                (moving_objects[m].j < (board_size - 1) && board[moving_objects[m].i][moving_objects[m].j + 1] != 4) ? moving_objects[m].j++: m--;
             case 2:
                 (moving_objects[m].i > 0 && board[moving_objects[m].i - 1][moving_objects[m].j] != 4) ? moving_objects[m].i--: m--;
             case 3:
-                (moving_objects[m].i < (board_size-1) && board[moving_objects[m].i + 1][moving_objects[m].j] != 4) ? moving_objects[m].i++ : m --;
+                (moving_objects[m].i < (board_size - 1) && board[moving_objects[m].i + 1][moving_objects[m].j] != 4) ? moving_objects[m].i++: m--;
         }
         moving_objects[m].typeBefore = board[moving_objects[m].i][moving_objects[m].j];
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].type;
@@ -248,55 +249,102 @@ function random_setup() {
     game_settings['balls_color'] = balls_color;
 }
 
-function MoveObjects(obj){
+function MoveObjects(obj) {
 
 }
 
 
-function fix_walls(i){
-	if ( i == 0 ){
-        for(let j = 0; j< board_size; j++)
+function fix_walls(i) {
+    if (i == 0) {
+        for (let j = 0; j < board_size; j++)
             board[i][j] = 4;
-    }else if ( i == 1 ){
-        board[i][9] = 4; board[i][0] = 4; board[i][15] = 4;
-    }else if ( i == 2 ){
-        for(let j = 3; j < 8; j++)
+    } else if (i == 1) {
+        board[i][9] = 4;
+        board[i][0] = 4;
+        board[i][15] = 4;
+    } else if (i == 2) {
+        for (let j = 3; j < 8; j++)
             board[i][j] = 4;
-        board[i][0] = 4;board[i][9] = 4; board[i][10] = 4; board[i][15] = 4;
-    }else if (i == 3){
-        board[i][7] = 4; board[i][0] = 4; board[i][15] = 4;
-    }else if ( i == 4 ){
-		for(let j = 10; j< 15; j++){
+        board[i][0] = 4;
+        board[i][9] = 4;
+        board[i][10] = 4;
+        board[i][15] = 4;
+    } else if (i == 3) {
+        board[i][7] = 4;
+        board[i][0] = 4;
+        board[i][15] = 4;
+    } else if (i == 4) {
+        for (let j = 10; j < 15; j++) {
             board[i][j] = 4;
-        } board[i][7] = 4;board[i][0] = 4;board[i][15] = 4;
-    }else if ( i == 5 ){
-        board[i][7] = 4; board[i][6] = 4; board[i][10] = 4;board[i][0] = 4; 
-        board[i][15] = 4; board[i][5] = 4;
-	}else if ( i == 6 ){
-        board[i][7] = 4; board[i][9] = 4; board[i][10] = 4;board[i][0] = 4; board[i][15] = 4;
-    }else if ( i == 7 ){
-        board[i][0] = 4; board[i][2] = 4; board[i][15] = 4; board[i][7] = 4;
-	}else if( i == 8 ){
-		board[i][4] = 4; board[i][1] = 4; board[i][2] = 4; board[i][7] = 4;
-        board[i][12] = 4; board[i][13] = 4; board[i][15] = 4;board[i][0] = 4;
-    }else if ( i == 9 ){
-        board[i][0] = 4; board[i][4] = 4; board[i][12] = 4; board[i][15] = 4;
-        board[i][7] = 4; board[i][8] = 4;
-    }else if ( i == 10 ){
-        board[i][0] = 4; board[i][4] = 4; board[i][12] = 4; board[i][15] = 4; board[i][15] = 4;
-	}else if ( i == 11 ){
-        for(let j = 9; j< 13; j++){
+        }
+        board[i][7] = 4;
+        board[i][0] = 4;
+        board[i][15] = 4;
+    } else if (i == 5) {
+        board[i][7] = 4;
+        board[i][6] = 4;
+        board[i][10] = 4;
+        board[i][0] = 4;
+        board[i][15] = 4;
+        board[i][5] = 4;
+    } else if (i == 6) {
+        board[i][7] = 4;
+        board[i][9] = 4;
+        board[i][10] = 4;
+        board[i][0] = 4;
+        board[i][15] = 4;
+    } else if (i == 7) {
+        board[i][0] = 4;
+        board[i][2] = 4;
+        board[i][15] = 4;
+        board[i][7] = 4;
+    } else if (i == 8) {
+        board[i][4] = 4;
+        board[i][1] = 4;
+        board[i][2] = 4;
+        board[i][7] = 4;
+        board[i][12] = 4;
+        board[i][13] = 4;
+        board[i][15] = 4;
+        board[i][0] = 4;
+    } else if (i == 9) {
+        board[i][0] = 4;
+        board[i][4] = 4;
+        board[i][12] = 4;
+        board[i][15] = 4;
+        board[i][7] = 4;
+        board[i][8] = 4;
+    } else if (i == 10) {
+        board[i][0] = 4;
+        board[i][4] = 4;
+        board[i][12] = 4;
+        board[i][15] = 4;
+        board[i][15] = 4;
+    } else if (i == 11) {
+        for (let j = 9; j < 13; j++) {
             board[i][j] = 4;
-        } board[i][4] = 4; board[i][15] = 4;board[i][0] = 4;
-	}else if( i == 12 ){
-		board[i][4] = 4; board[i][3] = 4; board[i][2] = 4; board[i][9] = 4; 
-        board[i][15] = 4;board[i][0] = 4;
-    }else if( i == 13 ){
-		board[i][7] = 4; board[i][12] = 4; board[i][13] = 4; board[i][15] = 4;board[i][0] = 4;
-    }else if( i == 14 ){
-		board[i][15] = 4;board[i][0] = 4;
-    }else if ( i == board_size-1 ){
-        for(let j = 0; j< board_size; j++)
+        }
+        board[i][4] = 4;
+        board[i][15] = 4;
+        board[i][0] = 4;
+    } else if (i == 12) {
+        board[i][4] = 4;
+        board[i][3] = 4;
+        board[i][2] = 4;
+        board[i][9] = 4;
+        board[i][15] = 4;
+        board[i][0] = 4;
+    } else if (i == 13) {
+        board[i][7] = 4;
+        board[i][12] = 4;
+        board[i][13] = 4;
+        board[i][15] = 4;
+        board[i][0] = 4;
+    } else if (i == 14) {
+        board[i][15] = 4;
+        board[i][0] = 4;
+    } else if (i == board_size - 1) {
+        for (let j = 0; j < board_size; j++)
             board[i][j] = 4;
     }
 }
