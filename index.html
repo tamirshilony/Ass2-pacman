@@ -3,10 +3,27 @@
 
 <head>
     <script src="./jquery-3.4.1.slim.min.js"></script>
+    <script src="./jquery.drawrpalette.js" defer></script>
     <script type="text/javascript" src="./app.js"></script>
+    <script type="text/javascript" src="./registration.js"></script>
+    <script type="text/javascript" src="./login.js"></script>
+    <script type="text/javascript" src="./setup.js"></script>
+    <script type="text/javascript" src="./siteFunctionality.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    <link rel="stylesheet" type="text/css" href="pac.css" />
 </head>
 
 <body>
+
+    <div class="navbar">
+        <ul>
+            <li class=nav><a class=nav_link>Welcom</a></li>
+            <li class=nav><a class=nav_link onclick="show_div('register')">Register</a></li>
+            <li class=nav><a class=nav_link onclick="show_div('Login')">Login</a></li>
+            <li class=nav><a class=nav_link onclick="show_div()">About</a></li>
+        </ul>
+    </div>
+
     <div id="score">
         <label for="lblScore">SCORE:</label>
         <input id="lblScore" type="text" />
@@ -16,8 +33,259 @@
         <input id="lblTime" type="text" />
     </div>
     <div id="game">
-        <canvas id="canvas" height="600" width="600"></canvas>
+        <canvas id="canvas" height="960" width="960"></canvas>
     </div>
+
+    <div class="section" id="welcome" style="display: block;">
+        <h1 class="title">Welcome</h1>
+        <div id="lwelcome">
+            <span class='welcomelink' onclick="show_div('Login')">Login</span>
+        </div>
+        <div id="rwelcome">
+            <span class="welcomelink" onclick="show_div('register')">Register</span>
+        </div>
+    </div>
+
+    <div class="section" id="register" style="display: none;">
+        <form class="form" id="regform" name="regform" method="get">
+            <div class=c ontainer>
+                <h1 class="title">Registration</h1>
+                <p>
+                    <label for="rusername">User Name</label>
+                    <input type="text" name="username" id="rusername" required><br/>
+                </p>
+                <p>
+                    <label for="rpassword">Password (should contain at least 6 english letters or numbers)</label>
+                    <input type="password" name="password" id="rpassword"><br/>
+                </p>
+
+                <p>
+                    <label for="fullname">Full Name</label>
+                    <input type="text" name="fullname" id="rname"><br/>
+                </p>
+                <p>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="rmail"><br/>
+                </p>
+                <p>
+                    <label for="date">Date of Birth</label>
+                    <input type="date" name="date" id="rdate"><br/>
+                </p>
+                <p>
+                    <!-- <input type="submit" value ="submit" onclick="return addUser();">Submit</button> -->
+                    <button id="submit" type="button" onclick="save_user()">Submit</button>
+                </p>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="section" id="Login" style="display: none;">
+        <form class="form" id="Login_sec">
+            <div class="form"></div>
+            <h1 class="title">Login</h1>
+            <p>
+                <label for="lusername">User Name</label>
+                <input id="lusername_fill" type="text" required>
+            </p>
+            <p>
+                <label for="lpassword">Password</label>
+                <input id="lpassword_fill" type="password" required>
+            </p>
+            </br>
+            <p>
+                <button type="button" onclick="checkLoginValid('usename_err','pass_err')">Login</button>
+                <label id="usename_err" class="err">username does not exist! Try Again!</label>
+                <label id="pass_err" class="err">Invalid password! Try Again!</label>
+                <br>
+            </p>
+    </div>
+    </form>
+    </div>
+    <div class="section" id="setup" style="display: none;">
+        <h1 class="title">Game Setup</h1>
+        <h2>Selecting Your Game Settings Please</h2>
+        <div class="setup">
+            <div class="choose_setup">
+                <h3>Click 'Customize Setting' To Initialize Game Setting By Your Self</h3>
+                <button type="button" onclick="show_div('select_keys')">Customize Setting</button>
+                <span class="tooltiptext" id="Customize_Setting_explain">By clicking on 'Customize Setting' you will need to choose buttons, difficulty and time </span>
+                </br>
+            </div>
+            <h3>Or</h3>
+            <div class="choose_setup">
+                <h3>Click 'Start With Randomize Setting'</h3>
+                <button type="button" onclick="random_setup()">Start With Randomize Setting</button>
+                <span class="tooltiptext" id="random_setup_explain">By clicking on 'Start With Randomize Setting' you will get<br> 
+                defult buttons to move with and random game properties</span>
+            </div>
+        </div>
+    </div>
+    <div class="Customize_Setting">
+        <div class="section" id="select_keys" style="display: none;">
+            <h1 class="title">Setting The Game Buttons</h1>
+            <br>
+            <br><br>
+            <form class="form" id="buttonsForm">
+                <label class="lablesButtons"><strong>Enter Your Moves Buttons:</strong></label><br>
+                <br><br>
+                <label class="lablesButtons"><strong>please press the button to move right</strong></label>
+                <input id="rightBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'rightBotton')">
+                <br><br>
+                <label class="lablesButtons"><strong>please press the button to move left</strong></label>
+                <input id="leftBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'leftBotton')">
+                <br><br>
+                <label class="lablesButtons"><strong>please press the button to move up</strong></label>
+                <input id="upBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'upBotton')">
+                <br><br>
+                <label class="lablesButtons"><strong>please press the button to move down</strong></label>
+                <input id="downBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'downBotton')">
+                <br>
+                <label id="key_error" class="err">Please enter uniqe key for each one</label><br />
+                <br><br>
+                <button type="button" id="check_buttons" onclick="save_buttons()">Save Buttons</button>
+                <br>
+                <button type="button" id="next_step" style="display: none;" onclick="show_div('ball_setup')">Move To Next Step</button>
+            </form>
+        </div>
+        <div class="section" id="ball_setup" style="display: none;">
+            <br>
+            <br><br>
+            <form class="form" id="balls_form" name="balls_form">
+                <label class="ballLable"><strong>Write The Desirable Number Of Balls In The Game (Between 50 To 90):</strong></label>
+                <br><br>
+                <input id="numBalls" name="numBalls" type="text">
+                <br>
+                <label class="err" id="balls_err">Invalid Number Of Balls</label>
+                <label class="err" id="balls_ok">valid Number Of Balls!<br> Can Advance To The Next Stage</label>
+                <br><br>
+                <button id="check_nballs" name="check_nballs" type="button" onclick="save_num_ball()">Save</button>
+                <br><br>
+                <div class="choose_setup">
+                    <button type="button" id="end_ball_num" disabled onclick="show_div('balls_color')">Next</button>
+                    <span class="tooltiptext" id="Nball">You Can Only Continue After Inserting And Saving A Valid Number Of Balls </span>
+                </div>
+            </form>
+        </div>
+        <div class="section" id="balls_color" style="display: none;">
+            <br>
+            <br><br>
+            <p>
+                <lable class="color_lable">Choose Different Colors For 3 Type Of Balls:</lable>
+            </p>
+            <table>
+                <tr>
+                    <th>
+                        <label class="color_lable"><strong>5 Points Ball Color:</strong> </label>
+                    </th>
+                    <th>
+                        <label class="color_lable"><strong>15 Points Ball Color:</strong> </label>
+                    </th>
+                    <th>
+                        <label class="color_lable"><strong>25 Points Ball Color: </strong></label>
+                    </th>
+                </tr>
+                <tr>
+                    <td id="color5p">
+                        Please Select color 1: <input class="c1" type="text" id="col1n" value="#222222"><br>
+                        <div class="displayColor" id="color1"></div>
+                    </td>
+                    <td id="color15p">
+                        Please Select color 2: <input class="c1" type="text" id="col2n" value="#222222"><br>
+                        <div class="displayColor" id="color2"></div>
+                    </td>
+                    <td id="color25p">
+                        Please Select color 3: <input class="c2" type="text" id="col3n" value="#222222"><br>
+                        <div class="displayColor" id="color3"></div>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <p>
+                <button type="button" onclick="save_color()">Next</button><br>
+            </p>
+        </div>
+
+        <div class="section" id="Game_time" style="display: none;">
+            <br><br>
+            <form class="form" id="time_form" name="time_form">
+                <lable class="time_lable"><strong>Insert The Desirable Time in Seconds (60 seconds Or More):</strong></lable>
+                <br><br>
+                <input id="time_game" name="time_game" type="text" name="time" autofocus>
+                <br><br>
+                <button type="button" id="save_time" name="save_time" onclick="saveTime()">Save</button>
+                <br><br>
+                <div class="next">
+                    <button type="button" id="finish_time" name="finish_time" disabled onclick="show_div('Monsters')">Next</button>
+                </div>
+            </form>
+        </div>
+        <div class="section" id="Monsters" style="display: none;">
+            <br>
+            <form class="form" id="Monsters_form" name="Monsters_form">
+                <lable class="monster_lable"><strong>Write Number Of Monsters:</strong></lable>
+                <br>
+                <lable class="monster_lable"><strong>(Between 1 To 4 include)</strong></lable>
+                <br><br>
+                <input id="Nmonster" type="text" name="Nmonster" required>
+                <br><br>
+                <button type="button" id="save_monster" name="save_monster" onclick="Save_monsters()">Save</button>
+                <br><br>
+                <button type="button" id="finish_monster" disabled>Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- model -->
+
+    <dialog class="modal" id="about">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="closeModal">&times;</span>
+                <h1>About Us</h1>
+            </div>
+            <div class="modal-body">
+                <h2><span>we are: Inbal Bitton and  Noa Shabtay</span></h2>
+                <h2><span>PlugIn: to make the validation form we used this links :</span></h2>
+                <h3><span>https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js</span><br> https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js
+                    <br> https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js
+                    </span>
+                </h3>
+                <h2><span>Difficulties:</span></h2>
+                <h3><span>In the beginning we had difficulty connecting the scripts to html.<br> 
+                    After many attempts we study the subject ans the work was much simpler</span></h3>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="closeModal">&times;</span>
+                <h1><span>Registration has been successfully completed</span></h2>
+            </div>
+            <div class="modal-body">
+                <h2><span>Thank you for registering our game</span></h2>
+                <h3><span>Now its time for Packman!!!</span><br>
+                    <button class="modalBtn" onclick="close_modal_move_to_setup('registerModal')">continue</button>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="closeModal">&times;</span>
+                <h1><span>You have been logged in successfully</span></h2>
+            </div>
+            <div class="modal-body">
+                <h3><span>Please click the continue button</span><br>
+                    <button class="modalBtn" onclick="close_modal_move_to_setup('loginModal')">continue</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="validate.js"></script>
 </body>
 
 </html>

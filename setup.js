@@ -92,5 +92,10 @@ function Save_monsters() {
         game_settings['monster'] = monster_num;
         console.log(game_settings);
         //start game
+        document.getElementById("display_prop").style.display = "block";
     }
+}
+
+function display_prop() {
+    prop = JSON.stringify(game_settings);
 }
