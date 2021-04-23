@@ -36,16 +36,17 @@ function Start() {
     let food5 = Math.floor(food_remain*0.6);
     let food15 = Math.floor(food_remain*0.3);
     let food25 = food_remain - food5 - food15;
-    // let monster_remains = game_settings.num_mansters;
+    // let monster_num = game_settings.num_mansters;
     monster_num = 3;
     start_time = new Date();
     
-
+    //creat board and fix walls
     for (let i = 0; i < board_size; i++) {
         board[i] = new Array(board_size).fill(0);
         fix_walls(i);
     }
 
+    //place monsters
     for (let m = 1; m <= monster_num; m++){
         board[moving_objects[m].i][moving_objects[m].j] = 5
     }
@@ -69,7 +70,7 @@ function Start() {
     emptyCell = findRandomEmptyCell(board);
     moving_objects[0].i = emptyCell[0];
     moving_objects[0].j = emptyCell[1];
-    board[emptyCell[0]][emptyCell[1]] = 2;
+    board[emptyCell[0]][emptyCell[1]] = 10;
 
     // place pacman
     emptyCell = findRandomEmptyCell(board);
@@ -217,7 +218,7 @@ function UpdatePosition() {
 }
 
 function UpdateObjectsPositions(){
-    for(let m = 0; m < (monster_num + 1); m++){
+    for(let m = 0; m <= monster_num; m++){
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;
         let direction = Math.floor(Math.random()*3 + 1);
         switch (direction){
@@ -230,6 +231,7 @@ function UpdateObjectsPositions(){
             case 3:
                 (moving_objects[m].i < (board_size-1) && board[moving_objects[m].i + 1][moving_objects[m].j] != 4) ? moving_objects[m].i++ : m --;
         }
+        moving_objects[m].typeBefore = board[moving_objects[m].i][moving_objects[m].j];
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].type;
     }
 }
