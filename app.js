@@ -10,7 +10,10 @@ let interval2;
 let board_size = 16;
 let game_settings = new Object();
 let monster_num;
-
+let keyCodeUp;
+let keyCodeDown;
+let keyCodeRight;
+let keyCodeLeft;
 
 function MovingObject(type, i, j, typeBefore) {
     this.type = type; //5 for monster, 10 for moving food
@@ -20,8 +23,7 @@ function MovingObject(type, i, j, typeBefore) {
 }
 
 let moving_objects = [new MovingObject(10, null, null, 0), new MovingObject(5, 1, 1, 0), new MovingObject(5, 1, 14, 0),
-    new MovingObject(5, 14, 1, 0), new MovingObject(5, 14, 14, 0),
-]; //1 moving food 4 monsters 
+    new MovingObject(5, 14, 1, 0), new MovingObject(5, 14, 14, 0),]; //1 moving food 4 monsters 
 
 
 $(document).ready(function() {
@@ -52,6 +54,11 @@ function Start() {
         board[moving_objects[m].i][moving_objects[m].j] = 5
     }
 
+    //place moving food
+    moving_objects[0].i = 7;
+    moving_objects[0].j = 7;
+    board[7][7] = 10;
+
     // place all kinds of food on board randomly
     while (food_remain > 0) {
         let food_kind;
@@ -67,17 +74,9 @@ function Start() {
         food_remain--;
     }
 
-    //place moving food
-    emptyCell = findRandomEmptyCell(board);
-    moving_objects[0].i = emptyCell[0];
-    moving_objects[0].j = emptyCell[1];
-    board[emptyCell[0]][emptyCell[1]] = 10;
 
-    // place pacman
-    emptyCell = findRandomEmptyCell(board);
-    shape.i = emptyCell[0];
-    shape.j = emptyCell[1];
-    board[emptyCell[0]][emptyCell[1]] = 2;
+    placePacman();
+    
 
 
     keysDown = {};
@@ -95,8 +94,15 @@ function Start() {
         },
         false
     );
-    interval1 = setInterval(UpdatePosition, 250);
-    interval2 = setInterval(UpdateObjectsPositions, 350);
+    interval1 = setInterval(UpdatePosition, 200);
+    interval2 = setInterval(UpdateObjectsPositions, 700);
+}
+
+function placePacman(){
+    emptyCell = findRandomEmptyCell(board);
+        shape.i = emptyCell[0];
+        shape.j = emptyCell[1];
+        board[emptyCell[0]][emptyCell[1]] = 2;
 }
 
 function findRandomEmptyCell(board) {
@@ -153,6 +159,8 @@ function Draw() {
                 DrawFullRect(center.x, center.y, 'grey')
             } else if (board[i][j] == 5) {
                 DrawFullRect(center.x, center.y, 'black')
+            }else if (board[i][j] == 10) {
+                DrawFullRect(center.x, center.y, 'DarkMagenta')
             }
         }
     }
@@ -195,13 +203,7 @@ function UpdatePosition() {
             shape.i++;
         }
     }
-    if (board[shape.i][shape.j] == 20) {
-        score += 5;
-    } else if (board[shape.i][shape.j] == 21) {
-        score += 15;
-    } else if (board[shape.i][shape.j] == 22) {
-        score += 25;
-    }
+    CheckCollision();
 
     board[shape.i][shape.j] = 2;
     let currentTime = new Date();
@@ -209,7 +211,7 @@ function UpdatePosition() {
     if (score >= 20 && time_elapsed <= 10) {
         pac_color = "green";
     }
-    if (score == 50) {
+    if (score == 101) {
         window.clearInterval(interval1);
         window.clearInterval(interval2);
         window.alert("Game completed");
@@ -219,38 +221,88 @@ function UpdatePosition() {
 }
 
 function UpdateObjectsPositions(){
+    let mov, next_i, next_j;
+    
     for(let m = 0; m <= monster_num; m++){
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;
-        let direction = Math.floor(Math.random() * 3 + 1);
-        switch (direction) {
-            case 0:
-                (moving_objects[m].j > 0 && board[moving_objects[m].i][moving_objects[m].j - 1] != 4) ? moving_objects[m].j--: m--;
-            case 1:
-                (moving_objects[m].j < (board_size - 1) && board[moving_objects[m].i][moving_objects[m].j + 1] != 4) ? moving_objects[m].j++: m--;
-            case 2:
-                (moving_objects[m].i > 0 && board[moving_objects[m].i - 1][moving_objects[m].j] != 4) ? moving_objects[m].i--: m--;
-            case 3:
-                (moving_objects[m].i < (board_size - 1) && board[moving_objects[m].i + 1][moving_objects[m].j] != 4) ? moving_objects[m].i++: m--;
-        }
-        moving_objects[m].typeBefore = board[moving_objects[m].i][moving_objects[m].j];
-        board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].type;
+        do{
+
+            mov = getDirection(moving_objects[m]);
+            next_i = moving_objects[m].i + mov[0];
+            next_j = moving_objects[m].j + mov[1];
+
+        } while (board[next_i][next_j] == 4)
+        
+        board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;// put back what ever was in this square before
+        
+        moving_objects[m].i += mov[0];
+        moving_objects[m].j += mov[1];
+        
+        if( board[moving_objects[m].i][moving_objects[m].j] == 0 || board[moving_objects[m].i][moving_objects[m].j] > 5)
+            moving_objects[m].typeBefore = board[moving_objects[m].i][moving_objects[m].j];// keep whatever is in this square
+
+        board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].type;// move myself to next square
+
+        CheckCollision()
+
+        Draw();
+        
     }
 }
 
-function random_setup() {
-    game_settings = { right: 39, left: 37, up: 38, down: 40 };
-    num_balls = Math.floor(50 + Math.random() * 40);
-    balls_color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-    game_len = Math.floor(60 + Math.random() * 120);
-    num_mansters = Math.floor(1 + Math.random() * 3);
-    game_settings['num_balls'] = num_balls;
-    game_settings['game_len'] = game_len;
-    game_settings['num_mansters'] = num_mansters;
-    game_settings['balls_color'] = balls_color;
+function CheckCollision(){
+    if (board[shape.i][shape.j] == 20) {
+        score += 5;
+    } else if (board[shape.i][shape.j] == 21) {
+        score += 15;
+    } else if (board[shape.i][shape.j] == 22) {
+        score += 25;
+    } else if (board[shape.i][shape.j] == 5) {
+        score -= 10;
+        board[shape.i][shape.j] = 5;
+        placePacman();
+    } else if (board[shape.i][shape.j] == 10){
+        moving_objects[0].type = 0;
+        score += 50;
+    }
 }
 
-function MoveObjects(obj) {
+// function MoveObjects(obj) {
 
+// }
+
+function getDirection(obj){
+    let i_change, j_change;
+    let rand = Math.random();
+    let directions_prob = [0.25,0.5,0.75];// all directions get the same probability
+
+    if (obj.type == 5){
+
+        // calculate in which direction the movment of the monster should get higer probability
+
+        if (Math.abs(obj.i - shape.i) - Math.abs(obj.j - shape.j) >= 0)// check on which axis the diff is larger
+            if (obj.i - shape.i > 0)// pacman is on the left of monster
+                directions_prob = [0.55,0.7,0.85]; 
+            else
+                directions_prob = [0.15,0.7,0.85]; 
+        else        
+            if (obj.j - shape.j > 0)// pacman is higher than monster
+                directions_prob = [0.15,0.3,0.85]; 
+            else
+                directions_prob = [0.15,0.3,0.45]; 
+    }
+
+    if (rand < directions_prob[0]){ 
+        i_change = -1, j_change = 0; // left
+    }else if (directions_prob[0] <= rand && rand < directions_prob[1]){ 
+        i_change = 1, j_change = 0; // right
+
+    }else if (directions_prob[1] <= rand && rand < directions_prob[2]){ 
+        i_change = 0, j_change = -1; // up
+    }else if (directions_prob[2] <= rand){ 
+        i_change = 0, j_change = 1; // down
+    }
+    return [i_change, j_change]
 }
 
 
@@ -335,6 +387,7 @@ function fix_walls(i) {
         board[i][15] = 4;
         board[i][0] = 4;
     } else if (i == 13) {
+        board[i][6] = 4;
         board[i][7] = 4;
         board[i][12] = 4;
         board[i][13] = 4;
