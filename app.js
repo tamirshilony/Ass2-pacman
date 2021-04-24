@@ -16,16 +16,21 @@ let keyCodeUp;
 let keyCodeDown;
 let keyCodeRight;
 let keyCodeLeft;
+let endMsg;
 
-function MovingObject(type, i, j, typeBefore) {
-    this.type = type; //5 for monster, 10 for moving food
-    this.i = i;
-    this.j = j;
-    this.typeBefore = typeBefore //keeps the object type on this [i][j] so it wont lost
+class MovingObject {
+    constructor(type, i = 0, j = 0, typeBefore = 0) {
+        this.type = type; //5 for monster, 1 for moving food
+        this.i = i;
+        this.j = j;
+        this.typeBefore = typeBefore; //keeps the object type on this [i][j] so it wont lost
+    }
 }
 
-let moving_objects = [new MovingObject(10, null, null, 0), new MovingObject(5, 1, 1, 0), new MovingObject(5, 1, 14, 0),
-    new MovingObject(5, 14, 1, 0), new MovingObject(5, 14, 14, 0),]; //1 moving food 4 monsters 
+let moving_objects = [new MovingObject(1), new MovingObject(5), new MovingObject(5),
+    new MovingObject(5), new MovingObject(5),]; //1 moving food 4 monsters 
+    
+let monst_loc = [[1,1],[1,14],[14,1],[14,14]];
 
 
 $(document).ready(function() {
@@ -42,6 +47,8 @@ function Start() {
     let food5 = Math.floor(food_remain * 0.6);
     let food15 = Math.floor(food_remain * 0.3);
     let food25 = food_remain - food5 - food15;
+    endMsg = document.getElementById('endMsg');
+    console.log(endMsg);
     // let monster_num = game_settings.num_mansters;
     monster_num = 3;
     moving_objects_num = monster_num + 1; // monsters + candy
@@ -53,15 +60,18 @@ function Start() {
         fix_walls(i);
     }
 
-    //place monsters
-    for (let m = 1; m <= monster_num; m++){
-        board[moving_objects[m].i][moving_objects[m].j] = 5
-    }
+    placeMonsters();
 
-    //place moving food
+    //place moving food in center
     moving_objects[0].i = 7;
     moving_objects[0].j = 7;
-    board[7][7] = 10;
+    board[7][7] = 1;
+
+    // place time and life food
+    let emptyCell = findRandomEmptyCell(board);
+    board[emptyCell[0]][emptyCell[1]] = 23;
+    emptyCell = findRandomEmptyCell(board);
+    board[emptyCell[0]][emptyCell[1]] = 24;
 
     // place all kinds of food on board randomly
     while (food_remain > 0) {
@@ -73,16 +83,13 @@ function Start() {
         } else {
             food_kind = 22;
         }
-        let emptyCell = findRandomEmptyCell(board);
+        emptyCell = findRandomEmptyCell(board);
         board[emptyCell[0]][emptyCell[1]] = food_kind;
         food_remain--;
     }
 
-
     placePacman();
     
-
-
     keysDown = {};
     addEventListener(
         "keydown",
@@ -98,10 +105,27 @@ function Start() {
         },
         false
     );
-    interval1 = setInterval(UpdatePosition, 200);
-    interval2 = setInterval(UpdateObjectsPositions, 500);
+    interval1 = setInterval(UpdatePosition, 150);
+    interval2 = setInterval(UpdateObjectsPositions, 400);
 }
 
+function placeMonsters(){
+    let l = 0, m = 0;
+    if (moving_objects[m].type == 1)// check if the first object is moving food
+        m =1;
+
+    for(m; m < moving_objects_num; m++){
+        if(moving_objects[m].i != 0) // only if it is not the first move
+            board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;
+
+        //go back to corners
+        moving_objects[m].i = monst_loc[l][0]; 
+        moving_objects[m].j =  monst_loc[l][1];
+        board[moving_objects[m].i][moving_objects[m].j] = 5;
+        l++;
+    }
+}
+    
 function placePacman(){
     emptyCell = findRandomEmptyCell(board);
         shape.i = emptyCell[0];
@@ -160,11 +184,15 @@ function Draw() {
                 DrawFood(center.x, center.y, 'red');
             } else if (board[i][j] == 22) {
                 DrawFood(center.x, center.y, 'blue');
+            } else if (board[i][j] == 23) {
+                DrawFullRect(center.x, center.y, 'DeepPink')
+            } else if (board[i][j] == 24) {
+                DrawFullRect(center.x, center.y, 'BlueViolet')
             } else if (board[i][j] == 4) {
                 DrawFullRect(center.x, center.y, 'grey')
             } else if (board[i][j] == 5) {
                 DrawFullRect(center.x, center.y, 'black')
-            }else if (board[i][j] == 10) {
+            }else if (board[i][j] == 1) {
                 DrawFullRect(center.x, center.y, 'DarkMagenta')
             }
         }
@@ -217,18 +245,18 @@ function UpdatePosition() {
         pac_color = "green";
     }
     if (score == 101) {
-        window.clearInterval(interval1);
-        window.clearInterval(interval2);
+        EndGame();
         window.alert("Game completed");
     } else {
         Draw();
     }
 }
 
+
 function UpdateObjectsPositions(){
     let mov, next_i, next_j;
-    
-    for(let m = 0; m <= moving_objects_num; m++){
+    let copy_objects = moving_objects
+    for(let m = 0; m < moving_objects_num; m++){
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;
         do{
 
@@ -247,12 +275,9 @@ function UpdateObjectsPositions(){
             moving_objects[m].typeBefore = board[moving_objects[m].i][moving_objects[m].j];// keep whatever is in this square
 
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].type;// move myself to next square
-
-        CheckCollision()
-
-        Draw();
-        
     }
+    CheckCollision()
+    Draw();
 }
 
 function CheckCollision(){
@@ -262,16 +287,25 @@ function CheckCollision(){
         score += 15;
     } else if (board[shape.i][shape.j] == 22) {
         score += 25;
+    } else if (board[shape.i][shape.j] == 23) {
+        game_settings.time += 10;
+    } else if (board[shape.i][shape.j] == 24) {
+        life ++;
     } else if (board[shape.i][shape.j] == 5) {
         score -= 10;
         life --;
+        if (life == 0){
+            endMsg.innerHTML = "Loser!"
+            
+            EndGame();
+        }
         board[shape.i][shape.j] = 5;
+        placeMonsters();
         placePacman();
-    } else if (board[shape.i][shape.j] == 10){
-        moving_objects[0].type = 0;
-        moving_objects.shift()
+    } else if (board[shape.i][shape.j] == 1){
         moving_objects_num --;
         score += 50;
+        moving_objects.shift()
     }
 }
 
@@ -287,17 +321,17 @@ function getDirection(obj){
     if (obj.type == 5){
 
         // calculate in which direction the movment of the monster should get higer probability
-
-        if (Math.abs(obj.i - shape.i) - Math.abs(obj.j - shape.j) >= 0)// check on which axis the diff is larger
+        if (Math.abs(obj.i - shape.i) - Math.abs(obj.j - shape.j) >= 0){// check on which axis the diff is larger
             if (obj.i - shape.i > 0)// pacman is on the left of monster
-                directions_prob = [0.55,0.7,0.85]; 
+                directions_prob = [0.7,0.8,0.9]; 
             else
-                directions_prob = [0.15,0.7,0.85]; 
-        else        
+                directions_prob = [0.1,0.8,0.9]; 
+        } else{
             if (obj.j - shape.j > 0)// pacman is higher than monster
-                directions_prob = [0.15,0.3,0.85]; 
+            directions_prob = [0.1,0.2,0.9]; 
             else
-                directions_prob = [0.15,0.3,0.45]; 
+            directions_prob = [0.1,0.2,0.3]; 
+        }        
     }
 
     if (rand < directions_prob[0]){ 
@@ -313,6 +347,11 @@ function getDirection(obj){
     return [i_change, j_change]
 }
 
+function EndGame(){
+    window.clearInterval(interval1);
+    window.clearInterval(interval2);
+    modal_handler('gameEnd');
+}
 
 function fix_walls(i) {
     if (i == 0) {
@@ -381,9 +420,9 @@ function fix_walls(i) {
         board[i][15] = 4;
         board[i][15] = 4;
     } else if (i == 11) {
-        for (let j = 9; j < 13; j++) {
-            board[i][j] = 4;
-        }
+        board[i][9] = 4;
+        board[i][10] = 4;
+        board[i][12] = 4;
         board[i][4] = 4;
         board[i][15] = 4;
         board[i][0] = 4;
