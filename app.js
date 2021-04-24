@@ -17,6 +17,7 @@ let keyCodeDown;
 let keyCodeRight;
 let keyCodeLeft;
 let endMsg;
+game_settings.time = 5;
 
 class MovingObject {
     constructor(type, i = 0, j = 0, typeBefore = 0) {
@@ -244,9 +245,8 @@ function UpdatePosition() {
     if (score >= 20 && time_elapsed <= 10) {
         pac_color = "green";
     }
-    if (score == 101) {
+    if (lblTime.value == game_settings.time) {
         EndGame();
-        window.alert("Game completed");
     } else {
         Draw();
     }
@@ -295,8 +295,6 @@ function CheckCollision(){
         score -= 10;
         life --;
         if (life == 0){
-            endMsg.innerHTML = "Loser!"
-            
             EndGame();
         }
         board[shape.i][shape.j] = 5;
@@ -309,10 +307,7 @@ function CheckCollision(){
     }
 }
 
-// function MoveObjects(obj) {
-
-// }
-
+// get direction for moving objects
 function getDirection(obj){
     let i_change, j_change;
     let rand = Math.random();
@@ -350,6 +345,15 @@ function getDirection(obj){
 function EndGame(){
     window.clearInterval(interval1);
     window.clearInterval(interval2);
+
+    if (life == 0){
+        endMsg.innerHTML = "Loser!"
+    }
+    if(score < 100){
+        endMsg.innerHTML = "You are better than " + score + " points!"  
+    }else {
+        endMsg.innerHTML = "Winner!!!"      
+    }
     modal_handler('gameEnd');
 }
 
