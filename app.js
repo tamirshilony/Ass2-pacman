@@ -2,6 +2,7 @@ let context;
 let shape = new Object();
 let board;
 let score;
+let life;
 let pac_color;
 let start_time;
 let time_elapsed;
@@ -10,6 +11,7 @@ let interval2;
 let board_size = 16;
 let game_settings = new Object();
 let monster_num;
+let moving_objects_num;
 let keyCodeUp;
 let keyCodeDown;
 let keyCodeRight;
@@ -34,6 +36,7 @@ $(document).ready(function() {
 function Start() {
     board = new Array(board_size).fill(0);
     score = 0;
+    life = 5;
     pac_color = "yellow";
     let food_remain = 90;
     let food5 = Math.floor(food_remain * 0.6);
@@ -41,6 +44,7 @@ function Start() {
     let food25 = food_remain - food5 - food15;
     // let monster_num = game_settings.num_mansters;
     monster_num = 3;
+    moving_objects_num = monster_num + 1; // monsters + candy
     start_time = new Date();
     
     //creat board and fix walls
@@ -95,7 +99,7 @@ function Start() {
         false
     );
     interval1 = setInterval(UpdatePosition, 200);
-    interval2 = setInterval(UpdateObjectsPositions, 700);
+    interval2 = setInterval(UpdateObjectsPositions, 500);
 }
 
 function placePacman(){
@@ -133,7 +137,8 @@ function GetKeyPressed() {
 function Draw() {
     canvas.width = canvas.width; //clean board
     lblScore.value = score;
-    lblTime.value = time_elapsed;
+    lblTime.value = Math.floor(time_elapsed);
+    lblLife.value = life;
     for (let i = 0; i < board_size; i++) {
         for (let j = 0; j < board_size; j++) {
             let center = new Object();
@@ -223,7 +228,7 @@ function UpdatePosition() {
 function UpdateObjectsPositions(){
     let mov, next_i, next_j;
     
-    for(let m = 0; m <= monster_num; m++){
+    for(let m = 0; m <= moving_objects_num; m++){
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;
         do{
 
@@ -259,10 +264,13 @@ function CheckCollision(){
         score += 25;
     } else if (board[shape.i][shape.j] == 5) {
         score -= 10;
+        life --;
         board[shape.i][shape.j] = 5;
         placePacman();
     } else if (board[shape.i][shape.j] == 10){
         moving_objects[0].type = 0;
+        moving_objects.shift()
+        moving_objects_num --;
         score += 50;
     }
 }
