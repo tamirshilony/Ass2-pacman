@@ -17,7 +17,6 @@ let keyCodeDown;
 let keyCodeRight;
 let keyCodeLeft;
 let endMsg;
-game_settings.time = 20;
 
 class MovingObject {
     constructor(type, i = 0, j = 0, typeBefore = 0) {
@@ -39,6 +38,11 @@ let monst_loc = [
     [14, 14]
 ];
 
+function startGame() {
+    // document.getElementById("game").style.display = "block";
+    show_div("game");
+    Start();
+}
 
 $(document).ready(function() {
     context = canvas.getContext("2d");
@@ -50,14 +54,13 @@ function Start() {
     score = 0;
     life = 5;
     pac_color = "yellow";
-    let food_remain = 90;
+    let food_remain = game_settings.num_balls;
     let food5 = Math.floor(food_remain * 0.6);
     let food15 = Math.floor(food_remain * 0.3);
     let food25 = food_remain - food5 - food15;
     endMsg = document.getElementById('endMsg');
     console.log(endMsg);
-    // let monster_num = game_settings.num_mansters;
-    monster_num = 3;
+    let monster_num = game_settings.num_mansters;
     moving_objects_num = monster_num + 1; // monsters + candy
     start_time = new Date();
 
