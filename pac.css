@@ -3,9 +3,10 @@ body {
     background-size: cover;
 }
 
-.err {
+.error {
     display: none;
     color: Red;
+    font-size: 25px;
 }
 
 #navbar {
@@ -141,12 +142,6 @@ label {
     font-family: "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 
-
-/* label.color_lable {
-    font-size: 30px;
-    color: salmon;
-} */
-
 .choose_setup {
     position: relative;
     display: inline-block;
@@ -178,6 +173,25 @@ label {
     font-size: 75px;
     font-weight: bold;
     font-family: "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+.prop_display {
+    float: left;
+    width: 25%;
+    height: 160px;
+    border: 1px solid black;
+    font-size: 13px;
+    font-family: "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+td {
+    font-weight: bold;
+}
+
+.update_pram {
+    float: left;
+    width: 50%;
+    height: 160px;
 }
 
 
@@ -218,6 +232,7 @@ label {
     border: 1px solid #888;
     width: 1200px;
     height: 600px;
+    align-items: center;
 }
 
 

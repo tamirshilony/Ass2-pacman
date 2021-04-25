@@ -159,16 +159,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-    if (keysDown[38]) {
+    if (keysDown[game_settings.upBotton]) {
         return 1;
     }
-    if (keysDown[40]) {
+    if (keysDown[game_settings.downBotton]) {
         return 2;
     }
-    if (keysDown[37]) {
+    if (keysDown[game_settings.leftBotton]) {
         return 3;
     }
-    if (keysDown[39]) {
+    if (keysDown[game_settings.rightBotton]) {
         return 4;
     }
 }
@@ -325,9 +325,9 @@ function CheckCollision() {
     }
 }
 
-function eatAndCheckWin(){
-    game_settings.num_balls --;
-    if(game_settings.num_balls == 0){
+function eatAndCheckWin() {
+    game_settings.num_balls--;
+    if (game_settings.num_balls == 0) {
         EndGame();
     }
 }
@@ -373,7 +373,7 @@ function EndGame() {
 
     if (life == 0) {
         endMsg.innerHTML = "Loser!"
-    }else if (score < 100) {
+    } else if (score < 100) {
         endMsg.innerHTML = "You are better than " + score + " points!"
     } else {
         endMsg.innerHTML = "Winner!!!"
@@ -381,7 +381,7 @@ function EndGame() {
     modal_handler('gameEnd');
 }
 
-function hideShowSpan(id){
+function hideShowSpan(id) {
     $(id).children('span').show();
     setInterval(function() {
         $(id).children('span').hide()
@@ -497,19 +497,19 @@ function fix_walls(i) {
         board[i][3] = 4;
         board[i][4] = 4;
         board[i][5] = 4;
-        
+
     } else if (i == 17) {
         board[i][4] = 4;
         board[i][15] = 4;
         board[i][0] = 4;
         board[i][9] = 4;
-        
+
     } else if (i == 18) {
         board[i][4] = 4;
         board[i][15] = 4;
         board[i][0] = 4;
         board[i][9] = 4;
-        
+
     } else if (i == board_width - 1) {
         for (let j = 0; j < board_hgit; j++)
             board[i][j] = 4;

@@ -29,60 +29,64 @@
     </div>
 
     <div class="section" id="game_container" style="display: none;">
-        <div id="score">
-            <label for="lblScore" style='font-size:15px;'>&#x1F3C6:</label>
-            <input id="lblScore" type="text" />
+        <div class="update_pram">
+            <div id="score">
+                <label for="lblScore" style='font-size:20px;'>&#x1F3C6:</label>
+                <input id="lblScore" type="text" style="width: 10%; font-size: 15px;" />
+            </div>
+            <div id="life">
+                <label for="lblLife" style='font-size:20px;'>&#128151:</label>
+                <input id="lblLife" type="text" style="width: 10%; font-size: 15px;" />
+                <span style="display: none;">+1 &#128151</span>
+            </div>
+            <div id="time">
+                <label for="lblTime" style='font-size:20px;'>&#8987:</label>
+                <input id="lblTime" type="text" style="width: 10%; font-size: 15px;" />
+                <span style="display: none;">+10 &#8987</span>
+            </div>
         </div>
-        <div id="life">
-            <label for="lblLife" style='font-size:15px;'>&#128151:</label>
-            <input id="lblLife" type="text" />
-            <span style="display: none;">+1 &#128151</span>
-        </div>
-        <div id="time">
-            <label for="lblTime" style='font-size:15px;'>&#8987:</label>
-            <input id="lblTime" type="text" />
+
+        <div class="prop_display" id="prop_display">
+            <table id="myTable" style="display: none;">
+
+                <tr>
+                    <td>UserName: </td>
+                    <td id='currUserName'></td>
+                </tr>
+                <tr>
+                    <tr>
+                        <td>To move right press: </td>
+                        <td id='Rbutton'></td>
+                    </tr>
+                    <tr>
+                        <td>To move left press: </td>
+                        <td id='Lbutton'></td>
+                    </tr>
+                    <tr>
+                        <td>To move up press: </td>
+                        <td id='Ubutton'></td>
+                    </tr>
+                    <tr>
+                        <td>To move down press: </td>
+                        <td id='Dbutton'></td>
+                    </tr>
+                    <tr>
+                        <td>Number of balls is: </td>
+                        <td id='Nball'></td>
+                    </tr>
+                    <tr>
+                        <td>Number of mansters is: </td>
+                        <td id='Nmanster'></td>
+                    </tr>
+                    <tr>
+                        <td>Game lenght(in sec) is: </td>
+                        <td id='gameLen'></td>
+                    </tr>
+            </table>
         </div>
 
         <div id="game">
-            <canvas id="canvas" height="400" width="800"></canvas>
-            <div class="prop_display" id="prop_display">
-                <table id="myTable" style="display: none;">
-
-                    <tr>
-                        <td>UserName: </td>
-                        <td id='currUserName'></td>
-                    </tr>
-                    <tr>
-                        <tr>
-                            <td>To move right press: </td>
-                            <td id='Rbutton'></td>
-                        </tr>
-                        <tr>
-                            <td>To move left press: </td>
-                            <td id='Lbutton'></td>
-                        </tr>
-                        <tr>
-                            <td>To move up press: </td>
-                            <td id='Ubutton'></td>
-                        </tr>
-                        <tr>
-                            <td>To move down press: </td>
-                            <td id='Dbutton'></td>
-                        </tr>
-                        <tr>
-                            <td>Number of balls is: </td>
-                            <td id='Nball'></td>
-                        </tr>
-                        <tr>
-                            <td>Number of mansters is: </td>
-                            <td id='Nmanster'></td>
-                        </tr>
-                        <tr>
-                            <td>Game lenght(in sec) is: </td>
-                            <td id='gameLen'></td>
-                        </tr>
-                </table>
-            </div>
+            <canvas class="game_board" id="canvas" height="400" width="800"></canvas>
         </div>
     </div>
 
@@ -146,8 +150,8 @@
             </br>
             <p>
                 <button class="before_game" type="button" onclick="checkLoginValid('usename_err','pass_err')">Login</button>
-                <label id="usename_err" class="err">username does not exist! Try Again!</label>
-                <label id="pass_err" class="err">Invalid password! Try Again!</label>
+                <label id="usename_err" class="error">username does not exist! Try Again!</label>
+                <label id="pass_err" class="error">Invalid password! Try Again!</label>
                 <br>
             </p>
     </div>
@@ -194,7 +198,7 @@
                 <label class="lablesButtons"><strong>please press the button to move down</strong></label>
                 <input id="downBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'downBotton')">
                 <br>
-                <label id="key_error" class="err">Please enter uniqe key for each one</label><br />
+                <label id="key_error" class="error">Please enter uniqe key for each one</label><br />
                 <br><br>
                 <button class="before_game" type="button" id="check_buttons" onclick="save_buttons()">Save Buttons</button>
                 <br>
@@ -210,8 +214,8 @@
                 <br><br>
                 <input id="numBalls" name="numBalls" type="text">
                 <br>
-                <label class="err" id="balls_err">Invalid Number Of Balls</label>
-                <label class="err" id="balls_ok">valid Number Of Balls!<br> Can Advance To The Next Stage</label>
+                <label class="error" id="balls_err">Invalid Number Of Balls</label>
+                <label class="error" id="balls_ok">valid Number Of Balls!<br> Can Advance To The Next Stage</label>
                 <br><br>
                 <button class="before_game" id="check_nballs" name="check_nballs" type="button" onclick="save_num_ball()">Save</button>
                 <br><br>
@@ -341,7 +345,7 @@
                 <h1><span style="font-size: 40px; color: rgb(180, 58, 13);">You have been logged in successfully</span></h1>
             </div>
             <div class="modal-body">
-                <h3><span style="font-size: 40px;color: rgb(180, 58, 13);">Please click the continue button and toghter fight the covid 19</span><br>
+                <h3><span style="font-size: 40px;color: rgb(180, 58, 13);">Please click the continue button<br><br> and toghter fight the covid 19</span><br>
                     <button class="modalBtn" onclick="close_modal_move_to_setup('loginModal')">continue</button>
             </div>
         </div>
