@@ -10,6 +10,7 @@ let interval2;
 let board_size = 16;
 let game_settings = new Object();
 let monster_num;
+let keyCodeRight;
 
 
 function MovingObject(type, i, j, typeBefore) {
@@ -40,7 +41,7 @@ function Start() {
     // let monster_num = game_settings.num_mansters;
     monster_num = 3;
     start_time = new Date();
-    
+
     //creat board and fix walls
     for (let i = 0; i < board_size; i++) {
         board[i] = new Array(board_size).fill(0);
@@ -48,7 +49,7 @@ function Start() {
     }
 
     //place monsters
-    for (let m = 1; m <= monster_num; m++){
+    for (let m = 1; m <= monster_num; m++) {
         board[moving_objects[m].i][moving_objects[m].j] = 5
     }
 
@@ -218,8 +219,8 @@ function UpdatePosition() {
     }
 }
 
-function UpdateObjectsPositions(){
-    for(let m = 0; m <= monster_num; m++){
+function UpdateObjectsPositions() {
+    for (let m = 0; m <= monster_num; m++) {
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;
         let direction = Math.floor(Math.random() * 3 + 1);
         switch (direction) {

@@ -14,16 +14,26 @@ function random_setup() {
     game_len = Math.floor(60 + Math.random() * 120);
     num_mansters = Math.floor(1 + Math.random() * 3);
     game_settings['num_balls'] = num_balls;
-    game_settings['game_len'] = game_len;
+    game_settings['time'] = game_len;
     game_settings['num_mansters'] = num_mansters;
     game_settings['balls_color'] = balls_color;
     console.log(game_settings);
+    display_prop();
     // start game
 
 }
 
 function uniKeyCode(event, id) {
     var x = event.key;
+    if (id == "rightBotton") {
+        keyCodeRight = x;
+    } else if (id == "leftBotton") {
+        keyCodeLeft = x;
+    } else if (id == "upBotton") {
+        keyCodeUp = x;
+    } else if (id == "downBotton") {
+        keyCodeDown = x;
+    }
     var key = event.keyCode;
     console.log(key)
     game_settings[id] = key;
@@ -91,11 +101,26 @@ function Save_monsters() {
         document.getElementById("finish_monster").disabled = false;
         game_settings['monster'] = monster_num;
         console.log(game_settings);
+        display_prop();
         //start game
-        document.getElementById("display_prop").style.display = "block";
     }
 }
 
 function display_prop() {
-    prop = JSON.stringify(game_settings);
+    // var right = game_settings.rightBotton;
+    var right = keyCodeRight;
+    document.getElementById("Rbutton").innerHTML = right;
+    var left = game_settings.leftBotton;
+    document.getElementById("Lbutton").innerHTML = left;
+    var up = game_settings.upBotton;
+    document.getElementById("Ubutton").innerHTML = up;
+    var down = game_settings.downBotton;
+    document.getElementById("Dbutton").innerHTML = down;
+    var ball = game_settings.num_balls;
+    document.getElementById("Nball").innerHTML = ball;
+    var manster = game_settings.num_mansters;
+    document.getElementById("Nmanster").innerHTML = manster;
+    var len = game_settings.time;
+    document.getElementById("gameLen").innerHTML = len;
+    document.getElementById("myTable").style.display = "block";
 }
