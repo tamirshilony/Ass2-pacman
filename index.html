@@ -28,29 +28,31 @@
         </ul>
     </div>
 
-    <div id="score">
-        <label for="lblScore" style='font-size:40px;'>&#x1F3C6:</label>
-        <input id="lblScore" type="text" />
-    </div>
-    <div id="life">
-        <label for="lblLife" style='font-size:40px;'>&#128151:</label>
-        <input id="lblLife" type="text" />
-    </div>
-    <div id="time">
-        <label for="lblTime" style='font-size:40px;'>&#8987:</label>
-        <input id="lblTime" type="text" />
-    </div>
-    <div id="game">
-        <canvas id="canvas" height="960" width="960"></canvas>
-    </div>
-
-    <div class="section" id="welcom" style="display: block;">
-        <h1 class="title">Welcome</h1>
-        <div id="lwelcome">
-            <button class='welcomelink' onclick="show_div('Login')">Login</button>
+    <div class="section" id="game" style="display: none;"></div>
+        <div id="score">
+            <label for="lblScore" style='font-size:40px;'>&#x1F3C6:</label>
+            <input id="lblScore" type="text" />
         </div>
-        <div id="rwelcome">
-            <button class="welcomelink" onclick="show_div('register')">Register</button>
+        <div id="life">
+            <label for="lblLife" style='font-size:40px;'>&#128151:</label>
+            <input id="lblLife" type="text" />
+        </div>
+        <div id="time">
+            <label for="lblTime" style='font-size:40px;'>&#8987:</label>
+            <input id="lblTime" type="text" />
+        </div>
+        <div id="game">
+            <canvas id="canvas" height="960" width="960"></canvas>
+        </div>
+
+        <div class="section" id="welcom" style="display: block;">
+            <h1 class="title">Welcome</h1>
+            <div id="lwelcome">
+                <button class='welcomelink' onclick="show_div('Login')">Login</button>
+            </div>
+            <div id="rwelcome">
+                <button class="welcomelink" onclick="show_div('register')">Register</button>
+            </div>
         </div>
     </div>
 
@@ -107,6 +109,7 @@
                 <br>
             </p>
     </div>
+
     </form>
     </div>
     <div class="section" id="setup" style="display: none;">
@@ -128,6 +131,7 @@
             </div>
         </div>
     </div>
+
     <div class="Customize_Setting">
         <div class="section" id="select_keys" style="display: none;">
             <h1 class="title">Setting The Game Buttons</h1>
@@ -155,6 +159,7 @@
                 <button type="button" id="next_step" style="display: none;" onclick="show_div('ball_setup')">Move To Next Step</button>
             </form>
         </div>
+
         <div class="section" id="ball_setup" style="display: none;">
             <br>
             <br><br>
@@ -174,6 +179,7 @@
                 </div>
             </form>
         </div>
+        
         <div class="section" id="balls_color" style="display: none;">
             <br>
             <br><br>

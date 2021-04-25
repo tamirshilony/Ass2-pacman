@@ -19,7 +19,8 @@ function random_setup() {
     game_settings['balls_color'] = balls_color;
     console.log(game_settings);
     display_prop();
-    // start game
+    
+    startGame();
 
 }
 
@@ -102,7 +103,8 @@ function Save_monsters() {
         game_settings['monster'] = monster_num;
         console.log(game_settings);
         display_prop();
-        //start game
+
+        startGame();
     }
 }
 
