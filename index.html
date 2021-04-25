@@ -30,21 +30,21 @@
 
     <div class="section" id="game_container" style="display: none;">
         <div id="score">
-            <label for="lblScore" style='font-size:40px;'>&#x1F3C6:</label>
+            <label for="lblScore" style='font-size:15px;'>&#x1F3C6:</label>
             <input id="lblScore" type="text" />
         </div>
         <div id="life">
-            <label for="lblLife" style='font-size:40px;'>&#128151:</label>
+            <label for="lblLife" style='font-size:15px;'>&#128151:</label>
             <input id="lblLife" type="text" />
-            <span>+1 &#128151</span>
+            <span style="display: none;">+1 &#128151</span>
         </div>
         <div id="time">
-            <label for="lblTime" style='font-size:40px;'>&#8987:</label>
+            <label for="lblTime" style='font-size:15px;'>&#8987:</label>
             <input id="lblTime" type="text" />
         </div>
         
         <div id="game">
-            <canvas id="canvas" height="960" width="960"></canvas>
+            <canvas id="canvas" height="400" width="800"></canvas>
             <div class="prop_display" id="prop_display">
                 <table id="myTable" style="display: none;">
                     
@@ -106,7 +106,7 @@
                     <input type="text" name="rusername" id="rusername" required><br/>
                 </p>
                 <p>
-                    <label for="rpassword">Password (should contain at least 6 english letters or numbers)</label>
+                    <label for="rpassword">Password</label>
                     <input type="password" name="rpassword" id="rpassword"><br/>
                 </p>
 

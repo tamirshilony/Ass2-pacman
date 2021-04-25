@@ -23,7 +23,7 @@ function modal_handler(modalID) {
     modal.style.display = "block";
 
     // Get the <span> element that closes the modal
-    let span = document.getElementsByClassName("closeModal")[0];
+    let span = modal.querySelector(".closeModal");
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";

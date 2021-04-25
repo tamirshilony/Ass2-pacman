@@ -23,7 +23,7 @@ $().ready(function() {
                 minDate: true
             }
         },
-        errorElement: "em",
+        errorElement: "div",
         errorPlacement: function (error, element) {error.insertAfter(element)},
     });
 

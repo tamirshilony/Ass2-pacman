@@ -8,7 +8,8 @@ let start_time;
 let time_elapsed;
 let interval1;
 let interval2;
-let board_size = 16;
+let board_width = 20;
+let board_hgit = 10
 let game_settings = new Object();
 let monster_num;
 let moving_objects_num;
@@ -34,9 +35,9 @@ let moving_objects = [new MovingObject(1), new MovingObject(5), new MovingObject
 
 let monst_loc = [
     [1, 1],
-    [1, 14],
-    [14, 1],
-    [14, 14]
+    [1, 8],
+    [18, 1],
+    [18, 8]
 ];
 
 function startGame() {
@@ -51,11 +52,12 @@ function startGame() {
 // });
 
 function Start() {
-    board = new Array(board_size).fill(0);
+    board = new Array(board_width).fill(0);
     score = 0;
     life = 5;
     pac_color = "yellow";
     let food_remain = game_settings.num_balls;
+    console.log(food_remain);
     let food5 = Math.floor(food_remain * 0.6);
     let food15 = Math.floor(food_remain * 0.3);
     let food25 = food_remain - food5 - food15;
@@ -66,17 +68,17 @@ function Start() {
     start_time = new Date();
 
     //creat board and fix walls
-    for (let i = 0; i < board_size; i++) {
-        board[i] = new Array(board_size).fill(0);
+    for (let i = 0; i < board_width; i++) {
+        board[i] = new Array(board_hgit).fill(0);
         fix_walls(i);
     }
 
     placeMonsters();
 
     //place moving food in center
-    moving_objects[0].i = 7;
-    moving_objects[0].j = 7;
-    board[7][7] = 1;
+    moving_objects[0].i = 9;
+    moving_objects[0].j = 5;
+    board[moving_objects[0].i][moving_objects[0].j] = 1;
 
     // place time and life food
     let emptyCell = findRandomEmptyCell(board);
@@ -97,6 +99,7 @@ function Start() {
         emptyCell = findRandomEmptyCell(board);
         board[emptyCell[0]][emptyCell[1]] = food_kind;
         food_remain--;
+        console.log(food_remain);
     }
 
     placePacman();
@@ -146,11 +149,11 @@ function placePacman() {
 }
 
 function findRandomEmptyCell(board) {
-    let i = Math.floor(Math.random() * (board_size - 1) + 1);
-    let j = Math.floor(Math.random() * (board_size - 1) + 1);
+    let i = Math.floor(Math.random() * (board_width - 1) + 1);
+    let j = Math.floor(Math.random() * (board_hgit - 1) + 1);
     while (board[i][j] != 0) {
-        i = Math.floor(Math.random() * (board_size - 1) + 1);
-        j = Math.floor(Math.random() * (board_size - 1) + 1);
+        i = Math.floor(Math.random() * (board_width - 1) + 1);
+        j = Math.floor(Math.random() * (board_hgit - 1) + 1);
     }
     return [i, j];
 }
@@ -175,19 +178,19 @@ function Draw() {
     lblScore.value = score;
     lblTime.value = Math.floor(time_elapsed);
     lblLife.value = life;
-    for (let i = 0; i < board_size; i++) {
-        for (let j = 0; j < board_size; j++) {
+    for (let i = 0; i < board_width; i++) {
+        for (let j = 0; j < board_hgit; j++) {
             let center = new Object();
-            center.x = i * 60 + 30;
-            center.y = j * 60 + 30;
+            center.x = i * 40 + 20;
+            center.y = j * 40 + 20;
             if (board[i][j] == 2) {
                 context.beginPath();
-                context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+                context.arc(center.x, center.y, 20, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
                 context.lineTo(center.x, center.y);
                 context.fillStyle = pac_color; //color
                 context.fill();
                 context.beginPath();
-                context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+                context.arc(center.x + 5, center.y - 10, 5, 0, 2 * Math.PI); // circle
                 context.fillStyle = "black"; //color
                 context.fill();
             } else if (board[i][j] == 20) {
@@ -213,14 +216,14 @@ function Draw() {
 
 function DrawFood(x, y, color) {
     context.beginPath();
-    context.arc(x, y, 15, 0, 2 * Math.PI); // circle
+    context.arc(x, y, 10, 0, 2 * Math.PI); // circle
     context.fillStyle = color; //color
     context.fill();
 }
 
 function DrawFullRect(x, y, color) {
     context.beginPath();
-    context.rect(x - 30, y - 30, 60, 60);
+    context.rect(x - 20, y - 20, 40, 40);
     context.fillStyle = color; //color
     context.fill();
 }
@@ -229,22 +232,22 @@ function UpdatePosition() {
     board[shape.i][shape.j] = 0;
     let x = GetKeyPressed();
     if (x == 1) {
-        if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+        if (board[shape.i][shape.j - 1] != 4) {
             shape.j--;
         }
     }
     if (x == 2) {
-        if (shape.j < (board_size - 1) && board[shape.i][shape.j + 1] != 4) {
+        if (board[shape.i][shape.j + 1] != 4) {
             shape.j++;
         }
     }
     if (x == 3) {
-        if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+        if (board[shape.i - 1][shape.j] != 4) {
             shape.i--;
         }
     }
     if (x == 4) {
-        if (shape.i < (board_size - 1) && board[shape.i + 1][shape.j] != 4) {
+        if (board[shape.i + 1][shape.j] != 4) {
             shape.i++;
         }
     }
@@ -266,7 +269,6 @@ function UpdatePosition() {
 
 function UpdateObjectsPositions() {
     let mov, next_i, next_j;
-    let copy_objects = moving_objects
     for (let m = 0; m < moving_objects_num; m++) {
         board[moving_objects[m].i][moving_objects[m].j] = moving_objects[m].typeBefore;
         do {
@@ -294,14 +296,19 @@ function UpdateObjectsPositions() {
 function CheckCollision() {
     if (board[shape.i][shape.j] == 20) {
         score += 5;
+        eatAndCheckWin();
     } else if (board[shape.i][shape.j] == 21) {
         score += 15;
+        eatAndCheckWin();
     } else if (board[shape.i][shape.j] == 22) {
         score += 25;
+        eatAndCheckWin();
     } else if (board[shape.i][shape.j] == 23) {
         game_settings.time += 10;
+        hideShowSpan('#time');
     } else if (board[shape.i][shape.j] == 24) {
         life++;
+        hideShowSpan('#life');
     } else if (board[shape.i][shape.j] == 5) {
         score -= 10;
         life--;
@@ -315,6 +322,13 @@ function CheckCollision() {
         moving_objects_num--;
         score += 50;
         moving_objects.shift()
+    }
+}
+
+function eatAndCheckWin(){
+    game_settings.num_balls --;
+    if(game_settings.num_balls == 0){
+        EndGame();
     }
 }
 
@@ -359,8 +373,7 @@ function EndGame() {
 
     if (life == 0) {
         endMsg.innerHTML = "Loser!"
-    }
-    if (score < 100) {
+    }else if (score < 100) {
         endMsg.innerHTML = "You are better than " + score + " points!"
     } else {
         endMsg.innerHTML = "Winner!!!"
@@ -368,9 +381,16 @@ function EndGame() {
     modal_handler('gameEnd');
 }
 
+function hideShowSpan(id){
+    $(id).children('span').show();
+    setInterval(function() {
+        $(id).children('span').hide()
+    }, 2000);
+}
+
 function fix_walls(i) {
     if (i == 0) {
-        for (let j = 0; j < board_size; j++)
+        for (let j = 0; j < board_hgit; j++)
             board[i][j] = 4;
     } else if (i == 1) {
         board[i][9] = 4;
@@ -385,33 +405,35 @@ function fix_walls(i) {
         board[i][15] = 4;
     } else if (i == 3) {
         board[i][7] = 4;
-        board[i][0] = 4;
         board[i][15] = 4;
+        board[i][9] = 4;
+        board[i][0] = 4;
     } else if (i == 4) {
         for (let j = 10; j < 15; j++) {
             board[i][j] = 4;
         }
         board[i][7] = 4;
-        board[i][0] = 4;
         board[i][15] = 4;
+        board[i][9] = 4;
+        board[i][0] = 4;
     } else if (i == 5) {
         board[i][7] = 4;
         board[i][6] = 4;
         board[i][10] = 4;
-        board[i][0] = 4;
         board[i][15] = 4;
         board[i][5] = 4;
+        board[i][9] = 4;
+        board[i][0] = 4;
     } else if (i == 6) {
-        board[i][7] = 4;
         board[i][9] = 4;
         board[i][10] = 4;
         board[i][0] = 4;
         board[i][15] = 4;
     } else if (i == 7) {
-        board[i][0] = 4;
         board[i][2] = 4;
+        board[i][9] = 4;
+        board[i][0] = 4;
         board[i][15] = 4;
-        board[i][7] = 4;
     } else if (i == 8) {
         board[i][4] = 4;
         board[i][1] = 4;
@@ -420,8 +442,10 @@ function fix_walls(i) {
         board[i][12] = 4;
         board[i][13] = 4;
         board[i][15] = 4;
+        board[i][9] = 4;
         board[i][0] = 4;
     } else if (i == 9) {
+        board[i][9] = 4;
         board[i][0] = 4;
         board[i][4] = 4;
         board[i][12] = 4;
@@ -429,11 +453,12 @@ function fix_walls(i) {
         board[i][7] = 4;
         board[i][8] = 4;
     } else if (i == 10) {
-        board[i][0] = 4;
         board[i][4] = 4;
         board[i][12] = 4;
         board[i][15] = 4;
         board[i][15] = 4;
+        board[i][9] = 4;
+        board[i][0] = 4;
     } else if (i == 11) {
         board[i][9] = 4;
         board[i][10] = 4;
@@ -454,12 +479,39 @@ function fix_walls(i) {
         board[i][12] = 4;
         board[i][13] = 4;
         board[i][15] = 4;
+        board[i][9] = 4;
         board[i][0] = 4;
     } else if (i == 14) {
         board[i][15] = 4;
+        board[i][7] = 4;
         board[i][0] = 4;
-    } else if (i == board_size - 1) {
-        for (let j = 0; j < board_size; j++)
+        board[i][9] = 4;
+    } else if (i == 15) {
+        board[i][15] = 4;
+        board[i][0] = 4;
+        board[i][9] = 4;
+    } else if (i == 16) {
+        board[i][15] = 4;
+        board[i][0] = 4;
+        board[i][9] = 4;
+        board[i][3] = 4;
+        board[i][4] = 4;
+        board[i][5] = 4;
+        
+    } else if (i == 17) {
+        board[i][4] = 4;
+        board[i][15] = 4;
+        board[i][0] = 4;
+        board[i][9] = 4;
+        
+    } else if (i == 18) {
+        board[i][4] = 4;
+        board[i][15] = 4;
+        board[i][0] = 4;
+        board[i][9] = 4;
+        
+    } else if (i == board_width - 1) {
+        for (let j = 0; j < board_hgit; j++)
             board[i][j] = 4;
     }
 }
