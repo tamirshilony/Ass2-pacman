@@ -28,26 +28,27 @@
         </ul>
     </div>
 
-    <div class="section" id="game_container" style="display: none;"></div>
-    <div id="score">
-        <label for="lblScore" style='font-size:40px;'>&#x1F3C6:</label>
-        <input id="lblScore" type="text" />
-    </div>
-    <div id="life">
-        <label for="lblLife" style='font-size:40px;'>&#128151:</label>
-        <input id="lblLife" type="text" />
-    </div>
-    <div id="time">
-        <label for="lblTime" style='font-size:40px;'>&#8987:</label>
-        <input id="lblTime" type="text" />
-    </div>
-    <div id="game">
-        <canvas id="canvas" height="960" width="960"></canvas>
-        <div class="prop_display" id="prop_display">
-            <table id="myTable" style="display: none;">
-
-                <tr>
-                    <td>UserName: </td>
+    <div class="section" id="game_container" style="display: none;">
+        <div id="score">
+            <label for="lblScore" style='font-size:40px;'>&#x1F3C6:</label>
+            <input id="lblScore" type="text" />
+        </div>
+        <div id="life">
+            <label for="lblLife" style='font-size:40px;'>&#128151:</label>
+            <input id="lblLife" type="text" />
+        </div>
+        <div id="time">
+            <label for="lblTime" style='font-size:40px;'>&#8987:</label>
+            <input id="lblTime" type="text" />
+        </div>
+        
+        <div id="game">
+            <canvas id="canvas" height="960" width="960"></canvas>
+            <div class="prop_display" id="prop_display">
+                <table id="myTable" style="display: none;">
+                    
+                    <tr>
+                        <td>UserName: </td>
                     <td id='currUserName'></td>
                 </tr>
                 <tr>
@@ -79,10 +80,11 @@
                         <td>Game lenght(in sec) is: </td>
                         <td id='gameLen'></td>
                     </tr>
-            </table>
+                </table>
+            </div>
         </div>
     </div>
-
+    
     <div class="section" id="welcom" style="display: block;">
         <h1 class="title">Welcome</h1>
         <div id="lwelcome">
