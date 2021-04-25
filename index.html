@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    
+
     <meta charset="UTF-8">
 
     <script src="./jquery-3.4.1.slim.min.js"></script>
@@ -28,32 +28,70 @@
         </ul>
     </div>
 
-    <div class="section" id="game" style="display: none;"></div>
-        <div id="score">
-            <label for="lblScore" style='font-size:40px;'>&#x1F3C6:</label>
-            <input id="lblScore" type="text" />
-        </div>
-        <div id="life">
-            <label for="lblLife" style='font-size:40px;'>&#128151:</label>
-            <input id="lblLife" type="text" />
-        </div>
-        <div id="time">
-            <label for="lblTime" style='font-size:40px;'>&#8987:</label>
-            <input id="lblTime" type="text" />
-        </div>
-        <div id="game">
-            <canvas id="canvas" height="960" width="960"></canvas>
-        </div>
+    <div class="section" id="game_container" style="display: none;"></div>
+    <div id="score">
+        <label for="lblScore" style='font-size:40px;'>&#x1F3C6:</label>
+        <input id="lblScore" type="text" />
+    </div>
+    <div id="life">
+        <label for="lblLife" style='font-size:40px;'>&#128151:</label>
+        <input id="lblLife" type="text" />
+    </div>
+    <div id="time">
+        <label for="lblTime" style='font-size:40px;'>&#8987:</label>
+        <input id="lblTime" type="text" />
+    </div>
+    <div id="game">
+        <canvas id="canvas" height="960" width="960"></canvas>
+        <div class="prop_display" id="prop_display">
+            <table id="myTable" style="display: none;">
 
-        <div class="section" id="welcom" style="display: block;">
-            <h1 class="title">Welcome</h1>
-            <div id="lwelcome">
-                <button class='welcomelink' onclick="show_div('Login')">Login</button>
-            </div>
-            <div id="rwelcome">
-                <button class="welcomelink" onclick="show_div('register')">Register</button>
-            </div>
+                <tr>
+                    <td>UserName: </td>
+                    <td id='currUserName'></td>
+                </tr>
+                <tr>
+                    <tr>
+                        <td>To move right press: </td>
+                        <td id='Rbutton'></td>
+                    </tr>
+                    <tr>
+                        <td>To move left press: </td>
+                        <td id='Lbutton'></td>
+                    </tr>
+                    <tr>
+                        <td>To move up press: </td>
+                        <td id='Ubutton'></td>
+                    </tr>
+                    <tr>
+                        <td>To move down press: </td>
+                        <td id='Dbutton'></td>
+                    </tr>
+                    <tr>
+                        <td>Number of balls is: </td>
+                        <td id='Nball'></td>
+                    </tr>
+                    <tr>
+                        <td>Number of mansters is: </td>
+                        <td id='Nmanster'></td>
+                    </tr>
+                    <tr>
+                        <td>Game lenght(in sec) is: </td>
+                        <td id='gameLen'></td>
+                    </tr>
+            </table>
         </div>
+    </div>
+
+    <div class="section" id="welcom" style="display: block;">
+        <h1 class="title">Welcome</h1>
+        <div id="lwelcome">
+            <button class='welcomelink' onclick="show_div('Login')">Login</button>
+        </div>
+        <div id="rwelcome">
+            <button class="welcomelink" onclick="show_div('register')">Register</button>
+        </div>
+    </div>
     </div>
 
     <div class="section" id="register" style="display: none;">
@@ -179,7 +217,7 @@
                 </div>
             </form>
         </div>
-        
+
         <div class="section" id="balls_color" style="display: none;">
             <br>
             <br><br>
@@ -265,9 +303,9 @@
                     </span>
                 </h3>
                 <h2><span>Difficulties:</span></h1>
-                <h3><span>In the beginning we had difficulty connecting the scripts to html.<br> 
+                    <h3><span>In the beginning we had difficulty connecting the scripts to html.<br> 
                     After many attempts we study the subject ans the work was much simpler</span></h3>
-                <button class="modalBtn" onclick="document.getElementById('about').style.display='none'">Close</button>
+                    <button class="modalBtn" onclick="document.getElementById('about').style.display='none'">Close</button>
             </div>
         </div>
     </dialog>
@@ -307,8 +345,8 @@
                 <span><h1 id = 'endMsg'>end message</h1></span>
             </div>
             <div class="modal-body">
-                    <button class="modalBtn" onclick="show_div('welcom')">Home</button>
-                    <button class="modalBtn" onclick="close_modal_move_to_setup('gameEnd')">New Game</button>
+                <button class="modalBtn" onclick="show_div('welcom')">Home</button>
+                <button class="modalBtn" onclick="close_modal_move_to_setup('gameEnd')">New Game</button>
             </div>
         </div>
     </dialog>

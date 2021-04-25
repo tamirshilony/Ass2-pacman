@@ -19,7 +19,7 @@ function random_setup() {
     game_settings['balls_color'] = balls_color;
     console.log(game_settings);
     display_prop();
-    
+
     startGame();
 
 }
@@ -109,7 +109,6 @@ function Save_monsters() {
 }
 
 function display_prop() {
-    // var right = game_settings.rightBotton;
     var right = keyCodeRight;
     document.getElementById("Rbutton").innerHTML = right;
     var left = game_settings.leftBotton;
@@ -124,5 +123,7 @@ function display_prop() {
     document.getElementById("Nmanster").innerHTML = manster;
     var len = game_settings.time;
     document.getElementById("gameLen").innerHTML = len;
+    var user = currUser;
+    document.getElementById("currUserName").innerHTML = user;
     document.getElementById("myTable").style.display = "block";
 }
