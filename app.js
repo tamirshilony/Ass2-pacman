@@ -17,7 +17,7 @@ let keyCodeDown;
 let keyCodeRight;
 let keyCodeLeft;
 let endMsg;
-game_settings.time = 5;
+game_settings.time = 20;
 
 class MovingObject {
     constructor(type, i = 0, j = 0, typeBefore = 0) {

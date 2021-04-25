@@ -1,13 +1,17 @@
 function show_div(div_name) {
-    hide_all_sections();
+    hideAllDivAndModal();
     div2show = document.getElementById(div_name);
     div2show.style.display = "block"
 }
 
-function hide_all_sections() {
+function hideAllDivAndModal() {
     let divs = document.getElementsByClassName("section");
+    let modals = document.getElementsByClassName("modal");
     for (let i = 0; i < divs.length; i++) {
         divs[i].style.display = "none";
+    }
+    for (let i = 0; i < modals.length; i++) {
+        modals[i].style.display = "none";
     }
 }
 
@@ -20,7 +24,6 @@ function modal_handler(modalID) {
 
     // Get the <span> element that closes the modal
     let span = document.getElementsByClassName("closeModal")[0];
-    console.log(span);
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
