@@ -20,6 +20,17 @@ let keyCodeLeft;
 let endMsg;
 let currUser;
 
+let moveup = document.createElement("img");	
+let movedown = document.createElement("img");	
+let moveright = document.createElement("img");	
+let moveleft = document.createElement("img");
+let monsterImg = document.createElement("img");
+let timeFood = document.createElement("img");
+let lifeFood = document.createElement("img");
+let scoreFood = document.createElement("img");
+
+moveup.src = './images/mask.jpeg';
+
 class MovingObject {
     constructor(type, i = 0, j = 0, typeBefore = 0) {
         this.type = type; //5 for monster, 1 for moving food
@@ -206,7 +217,8 @@ function Draw() {
                 DrawFood(center.x, center.y, game_settings.color25p);
                 food_remain++
             } else if (board[i][j] == 23) {
-                DrawFullRect(center.x, center.y, 'DeepPink')
+                context.drawImage(moveup, center.x-20, center.y-20, 40, 40);
+                // DrawFullRect(center.x, center.y, 'DeepPink')
             } else if (board[i][j] == 24) {
                 DrawFullRect(center.x, center.y, 'BlueViolet')
             } else if (board[i][j] == 4) {
@@ -268,7 +280,7 @@ function UpdatePosition() {
     if (score >= 20 && time_elapsed <= 10) {
         pac_color = "green";
     }
-    if (lblTime.value == 0) {
+    if (game_settings.time - Math.floor(time_elapsed) == 0) {
         EndGame();
     } else {
         Draw();
@@ -332,12 +344,6 @@ function CheckCollision() {
     }
 }
 
-function eatAndCheckWin() {
-    game_settings.num_balls--;
-    if (game_settings.num_balls == 0) {
-        EndGame();
-    }
-}
 
 // get direction for moving objects
 function getDirection(obj) {
