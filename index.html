@@ -33,16 +33,17 @@
             <div id="score">
                 <label for="lblScore" style='font-size:20px;'>&#x1F3C6:</label>
                 <input id="lblScore" type="text" style="width: 10%; font-size: 15px;" />
+                <span style="display: none;"><b>+50 &#x1F3C6</b></span>
             </div>
             <div id="life">
                 <label for="lblLife" style='font-size:20px;'>&#128151:</label>
                 <input id="lblLife" type="text" style="width: 10%; font-size: 15px;" />
-                <span style="display: none;">+1 &#128151</span>
+                <span style="display: none;"><b>+1 &#128151</b></span>
             </div>
             <div id="time">
                 <label for="lblTime" style='font-size:20px;'>&#8987:</label>
                 <input id="lblTime" type="text" style="width: 10%; font-size: 15px;" />
-                <span style="display: none;">+10 &#8987</span>
+                <span style="display: none;"><b>+10 &#8987</b></span>
             </div>
         </div>
 
@@ -364,6 +365,11 @@
             </div>
         </div>
     </dialog>
+    <div id = "music">
+        <audio id = "gameSound" src="./sounds/Elevator Music.mp3"></audio>
+        <audio id = "winSound" src="./sounds/win.mp3"></audio>
+        <audio id = "scoreSound" src="./sounds/score.mp3"></audio>
+    </div>
 </body>
 
 </html>

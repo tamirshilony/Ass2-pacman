@@ -1,4 +1,6 @@
 function show_div(div_name) {
+    let music = document.getElementById("gameSound");
+    music.pause();
     hideAllDivAndModal();
     div2show = document.getElementById(div_name);
     div2show.style.display = "block"
@@ -17,6 +19,9 @@ function hideAllDivAndModal() {
 
 
 function modal_handler(modalID) {
+
+    let music = document.getElementById("gameSound");
+    music.pause();
 
     // Get the modal
     let modal = document.getElementById(modalID);

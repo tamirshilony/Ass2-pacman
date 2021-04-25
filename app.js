@@ -52,6 +52,9 @@ function startGame() {
 // });
 
 function Start() {
+    let music = document.getElementById("gameSound");
+    music.play();
+    music.volume = 0.1;
     board = new Array(board_width).fill(0);
     score = 0;
     life = 5;
@@ -322,6 +325,7 @@ function CheckCollision() {
         placeMonsters();
         placePacman();
     } else if (board[shape.i][shape.j] == 1) {
+        hideShowSpan('#score');
         moving_objects_num--;
         score += 50;
         moving_objects.shift()
@@ -379,12 +383,16 @@ function EndGame() {
     } else if (score < 100) {
         endMsg.innerHTML = currUser + " You are better than " + score + " points!"
     } else {
+        let sound = document.getElementById("winSound");
+        sound.play();
         endMsg.innerHTML = currUser + " Is A Winner!!!"
     }
     modal_handler('gameEnd');
 }
 
 function hideShowSpan(id) {
+    let sound = document.getElementById("scoreSound");
+    sound.play();
     $(id).children('span').show();
     setInterval(function() {
         $(id).children('span').hide()
