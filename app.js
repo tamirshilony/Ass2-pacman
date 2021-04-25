@@ -40,7 +40,7 @@ let monst_loc = [
 ];
 
 function startGame() {
-    // document.getElementById("game").style.display = "block";
+    context = canvas.getContext("2d");
     show_div("game_container");
     Start();
 }
@@ -191,11 +191,11 @@ function Draw() {
                 context.fillStyle = "black"; //color
                 context.fill();
             } else if (board[i][j] == 20) {
-                DrawFood(center.x, center.y, 'green');
+                DrawFood(center.x, center.y, game_settings.color5p);
             } else if (board[i][j] == 21) {
-                DrawFood(center.x, center.y, 'red');
+                DrawFood(center.x, center.y, game_settings.color15p);
             } else if (board[i][j] == 22) {
-                DrawFood(center.x, center.y, 'blue');
+                DrawFood(center.x, center.y, game_settings.color25p);
             } else if (board[i][j] == 23) {
                 DrawFullRect(center.x, center.y, 'DeepPink')
             } else if (board[i][j] == 24) {

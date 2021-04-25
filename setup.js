@@ -1,3 +1,12 @@
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 function random_setup() {
     keyCodeRight = "ArrowRight";
     keyCodeLeft = "ArrowLeft";
@@ -10,7 +19,8 @@ function random_setup() {
     num_balls = Math.floor(50 + Math.random() * 40);
     colors = [];
     for (i = 0; i < 3; i++) {
-        colors[i] = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+        // colors[i] = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+        colors[i] = getRandomColor();
     }
     game_settings['color5p'] = colors[0];
     game_settings['color15p'] = colors[1];
