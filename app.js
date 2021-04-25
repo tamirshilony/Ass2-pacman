@@ -17,6 +17,7 @@ let keyCodeDown;
 let keyCodeRight;
 let keyCodeLeft;
 let endMsg;
+let currUser;
 
 class MovingObject {
     constructor(type, i = 0, j = 0, typeBefore = 0) {
@@ -40,14 +41,14 @@ let monst_loc = [
 
 function startGame() {
     // document.getElementById("game").style.display = "block";
-    show_div("game");
+    show_div("game_container");
     Start();
 }
 
-$(document).ready(function() {
-    context = canvas.getContext("2d");
-    Start();
-});
+// $(document).ready(function() {
+//     context = canvas.getContext("2d");
+//     Start();
+// });
 
 function Start() {
     board = new Array(board_size).fill(0);

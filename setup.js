@@ -1,4 +1,8 @@
 function random_setup() {
+    keyCodeRight = "ArrowRight";
+    keyCodeLeft = "ArrowLeft";
+    keyCodeUp = "ArrowUp";
+    keyCodeDown = "ArrowDown";
     game_settings['rightBotton'] = 39;
     game_settings['leftBotton'] = 37;
     game_settings['upBotton'] = 38;
@@ -111,11 +115,11 @@ function Save_monsters() {
 function display_prop() {
     var right = keyCodeRight;
     document.getElementById("Rbutton").innerHTML = right;
-    var left = game_settings.leftBotton;
+    var left = keyCodeLeft;
     document.getElementById("Lbutton").innerHTML = left;
-    var up = game_settings.upBotton;
+    var up = keyCodeUp;
     document.getElementById("Ubutton").innerHTML = up;
-    var down = game_settings.downBotton;
+    var down = keyCodeDown;
     document.getElementById("Dbutton").innerHTML = down;
     var ball = game_settings.num_balls;
     document.getElementById("Nball").innerHTML = ball;
