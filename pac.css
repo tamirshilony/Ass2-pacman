@@ -4,7 +4,7 @@ body {
 }
 
 .error {
-    display: none;
+    /* display: none; */
     color: Red;
     font-size: 25px;
 }

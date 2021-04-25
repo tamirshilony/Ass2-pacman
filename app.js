@@ -29,7 +29,7 @@ let timeFood = document.createElement("img");
 let lifeFood = document.createElement("img");
 let scoreFood = document.createElement("img");
 
-moveup.src = './images/mask.jpeg';
+timeFood.src = './images/mask.jpeg';
 
 class MovingObject {
     constructor(type, i = 0, j = 0, typeBefore = 0) {
@@ -63,9 +63,9 @@ function startGame() {
 // });
 
 function Start() {
-    let music = document.getElementById("gameSound");
-    music.play();
-    music.volume = 0.1;
+    playSound("gameSound");
+    // music.play();
+    // music.volume = 0.1;
     board = new Array(board_width).fill(0);
     score = 0;
     life = 5;
@@ -134,6 +134,7 @@ function Start() {
     );
     interval1 = setInterval(UpdatePosition, 150);
     interval2 = setInterval(UpdateObjectsPositions, 400);
+    interval3 = setInterval(randomTimeLifeFood,30000);
 }
 
 function placeMonsters() {
@@ -217,8 +218,7 @@ function Draw() {
                 DrawFood(center.x, center.y, game_settings.color25p);
                 food_remain++
             } else if (board[i][j] == 23) {
-                context.drawImage(moveup, center.x-20, center.y-20, 40, 40);
-                // DrawFullRect(center.x, center.y, 'DeepPink')
+                context.drawImage(timeFood, center.x-20, center.y-20, 40, 40);
             } else if (board[i][j] == 24) {
                 DrawFullRect(center.x, center.y, 'BlueViolet')
             } else if (board[i][j] == 4) {
@@ -274,6 +274,8 @@ function UpdatePosition() {
     }
     CheckCollision();
 
+
+
     board[shape.i][shape.j] = 2;
     let currentTime = new Date();
     time_elapsed = (currentTime - start_time) / 1000;
@@ -322,12 +324,13 @@ function CheckCollision() {
     } else if (board[shape.i][shape.j] == 22) {
         score += 25;
     } else if (board[shape.i][shape.j] == 23) {
-        game_settings.time += 10;
+        game_settings.time += 5;
         hideShowSpan('#time');
     } else if (board[shape.i][shape.j] == 24) {
         life++;
         hideShowSpan('#life');
     } else if (board[shape.i][shape.j] == 5) {
+        playSound("ouchSound");
         score -= 10;
         life--;
         if (life == 0) {
@@ -380,29 +383,48 @@ function getDirection(obj) {
     return [i_change, j_change]
 }
 
+function randomTimeLifeFood(){
+    let foodType;
+    let emptyCell = findRandomEmptyCell(board);
+    let random = Math.random();
+    if(random < 0.5){
+        foodType = 23;
+    } else {
+        foodType = 24;
+    }
+    board[emptyCell[0]][emptyCell[1]] = foodType;
+}
+
 function EndGame() {
     window.clearInterval(interval1);
     window.clearInterval(interval2);
-
+    window.clearInterval(interval3);
     if (life == 0) {
+        playSound('booSound')
         endMsg.innerHTML = currUser + " Is A Loser!"
     } else if (score < 100) {
         endMsg.innerHTML = currUser + " You are better than " + score + " points!"
     } else {
-        let sound = document.getElementById("winSound");
-        sound.play();
+        playSound("winSound");
         endMsg.innerHTML = currUser + " Is A Winner!!!"
     }
     modal_handler('gameEnd');
 }
 
 function hideShowSpan(id) {
-    let sound = document.getElementById("scoreSound");
-    sound.play();
+    playSound("scoreSound");
+    // sound.play();
+    // sound.volume = 0.15;
     $(id).children('span').show();
     setInterval(function() {
         $(id).children('span').hide()
     }, 2000);
+}
+
+function playSound(sound){
+    let music = document.getElementById(sound);
+    music.play();
+    music.volume = 0.15;
 }
 
 function fix_walls(i) {

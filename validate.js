@@ -24,8 +24,9 @@ $().ready(function() {
             }
         },
         submitHandler: function(form) {
-            save_user();
-            // onclick="save_user()"
+            if($("#regform").valid() == true){
+                save_user();
+            }
         },
         errorElement: "div",
         errorPlacement: function (error, element) {error.insertAfter(element)},
