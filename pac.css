@@ -1,3 +1,8 @@
+body {
+    background-image: url('welcom3.jpg');
+    background-size: cover;
+}
+
 .err {
     display: none;
     color: Red;
@@ -27,26 +32,33 @@ ul {
     box-shadow: 2px 2px 10px #66686e;
 }
 
-a.nav_link {
+button.nav_link {
     display: inline-block;
     line-height: 35px;
     min-width: 110px;
     padding: 2px 2px #DADADA;
-    color: #ffffff;
+    color: black;
     text-align: center;
     text-decoration: none;
     font-family: segoe script, dancing, purisa;
-    font-size: 14px;
+    font-size: 22px;
+    cursor: pointer;
 }
 
-a.nav_link:hover {
+button.nav_link:hover {
     padding: 0px;
     background: #2091dd;
-    color: #000000;
+    box-shadow: 2px 2px 10px #66686e;
+    color: white;
+    cursor: pointer;
 }
 
 .section {
     text-align: center;
+    right: 0%;
+    left: 0%;
+    top: 0%;
+    bottom: 0%;
 }
 
 .form {
@@ -57,37 +69,83 @@ a.nav_link:hover {
     font-weight: bold;
 }
 
-input[type=text],
-input[type=password] {
-    background-color: cornflowerblue;
+input {
+    background-color: rgb(9, 74, 104);
     color: white;
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    resize: both;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 30px;
+    width: 20%;
 }
 
-input[type=text]:hover,
-input[type=password]:hover {
+input:hover {
     opacity: 0.8;
     cursor: pointer;
 }
 
-button {
-    background-color: cornflowerblue;
+button.before_game {
+    background-color: white;
     color: black;
     padding: 12px 60px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    resize: both;
+    font-size: 30px;
+    width: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    display: inline-block;
+    white-space: normal;
+    position: relative;
 }
 
-button:hover {
+button.modalBtn {
+    background-color: rgb(248, 249, 250);
+    color: rgb(180, 58, 13);
+    padding: 12px 60px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 50px;
+    width: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    display: inline-block;
+    white-space: normal;
+}
+
+button.before_game:hover {
     opacity: 0.8;
+    color: indianred;
     cursor: pointer;
 }
+
+button.modalBtn:hover {
+    opacity: 0.8;
+    color: indianred;
+    cursor: pointer;
+}
+
+.text {
+    font-size: 30px;
+    color: black;
+}
+
+label {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    font-family: "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+
+/* label.color_lable {
+    font-size: 30px;
+    color: salmon;
+} */
 
 .choose_setup {
     position: relative;
@@ -104,6 +162,10 @@ button:hover {
     border-radius: 6px;
     position: absolute;
     z-index: 1;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 400px;
+    font-size: 23px;
 }
 
 .choose_setup:hover .tooltiptext {
@@ -111,9 +173,11 @@ button:hover {
 }
 
 .title {
+    color: ivory;
     text-align: center;
-    font-size: 50px;
+    font-size: 75px;
     font-weight: bold;
+    font-family: "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 
 
@@ -146,11 +210,14 @@ button:hover {
 /* Modal Content */
 
 .modal-content {
-    background-color: #fefefe;
+    background-image: url('fight-covid.jpg');
+    background-size: cover;
+    /* background-color: #fefefe; */
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 1200px;
+    height: 600px;
 }
 
 
@@ -168,10 +235,4 @@ button:hover {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-}
-
-.prop_display {
-    width: 50%;
-    float: left;
-    left: 0%;
 }
