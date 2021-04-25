@@ -202,6 +202,9 @@ td {
     background-color: rgb(55, 56, 63, 0.6);
     color: white;
     text-align: center;
+    font-size: 30px;
+    position: relative;
+    z-index: -1;
 }
 
 
