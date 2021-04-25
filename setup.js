@@ -77,7 +77,7 @@ function save_buttons() {
         }
     }
     if (validuniq) {
-        document.getElementById("next_step").style.display = "block";
+        document.getElementById("next_step").style.display = "inline";
     }
 }
 

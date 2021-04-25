@@ -21,7 +21,7 @@
 
     <div class="navbar">
         <ul>
-            <li class=nav><button class=nav_link onclick="show_div('welcom')">Welcom</button></li>
+            <li class=nav><button type="button" class=nav_link onclick="show_div('welcom')">Welcom</button></li>
             <li class=nav><button class=nav_link onclick="show_div('register')">Register</button></li>
             <li class=nav><button class=nav_link onclick="show_div('Login')">Login</button></li>
             <li class=nav><button class=nav_link onclick="modal_handler('about')">About</button></li>
@@ -42,57 +42,58 @@
             <label for="lblTime" style='font-size:40px;'>&#8987:</label>
             <input id="lblTime" type="text" />
         </div>
-        
+
         <div id="game">
             <canvas id="canvas" height="960" width="960"></canvas>
             <div class="prop_display" id="prop_display">
                 <table id="myTable" style="display: none;">
-                    
+
                     <tr>
                         <td>UserName: </td>
-                    <td id='currUserName'></td>
-                </tr>
-                <tr>
-                    <tr>
-                        <td>To move right press: </td>
-                        <td id='Rbutton'></td>
+                        <td id='currUserName'></td>
                     </tr>
                     <tr>
-                        <td>To move left press: </td>
-                        <td id='Lbutton'></td>
-                    </tr>
-                    <tr>
-                        <td>To move up press: </td>
-                        <td id='Ubutton'></td>
-                    </tr>
-                    <tr>
-                        <td>To move down press: </td>
-                        <td id='Dbutton'></td>
-                    </tr>
-                    <tr>
-                        <td>Number of balls is: </td>
-                        <td id='Nball'></td>
-                    </tr>
-                    <tr>
-                        <td>Number of mansters is: </td>
-                        <td id='Nmanster'></td>
-                    </tr>
-                    <tr>
-                        <td>Game lenght(in sec) is: </td>
-                        <td id='gameLen'></td>
-                    </tr>
+                        <tr>
+                            <td>To move right press: </td>
+                            <td id='Rbutton'></td>
+                        </tr>
+                        <tr>
+                            <td>To move left press: </td>
+                            <td id='Lbutton'></td>
+                        </tr>
+                        <tr>
+                            <td>To move up press: </td>
+                            <td id='Ubutton'></td>
+                        </tr>
+                        <tr>
+                            <td>To move down press: </td>
+                            <td id='Dbutton'></td>
+                        </tr>
+                        <tr>
+                            <td>Number of balls is: </td>
+                            <td id='Nball'></td>
+                        </tr>
+                        <tr>
+                            <td>Number of mansters is: </td>
+                            <td id='Nmanster'></td>
+                        </tr>
+                        <tr>
+                            <td>Game lenght(in sec) is: </td>
+                            <td id='gameLen'></td>
+                        </tr>
                 </table>
             </div>
         </div>
     </div>
-    
+
     <div class="section" id="welcom" style="display: block;">
         <h1 class="title">Welcome</h1>
         <div id="lwelcome">
-            <button class='welcomelink' onclick="show_div('Login')">Login</button>
+            <button class='before_game' onclick="show_div('Login')">Login</button>
         </div>
+        <br><br>
         <div id="rwelcome">
-            <button class="welcomelink" onclick="show_div('register')">Register</button>
+            <button class="before_game" onclick="show_div('register')">Register</button>
         </div>
     </div>
     </div>
@@ -123,7 +124,7 @@
                     <input type="date" name="rdate" id="rdate"><br/>
                 </p>
                 <p>
-                    <button id="submit" type="button" onclick="save_user()">Submit</button>
+                    <button class="before_game" id="submit" type="button" onclick="save_user()">Submit</button>
                 </p>
             </div>
         </form>
@@ -144,7 +145,7 @@
             </p>
             </br>
             <p>
-                <button type="button" onclick="checkLoginValid('usename_err','pass_err')">Login</button>
+                <button class="before_game" type="button" onclick="checkLoginValid('usename_err','pass_err')">Login</button>
                 <label id="usename_err" class="err">username does not exist! Try Again!</label>
                 <label id="pass_err" class="err">Invalid password! Try Again!</label>
                 <br>
@@ -155,18 +156,18 @@
     </div>
     <div class="section" id="setup" style="display: none;">
         <h1 class="title">Game Setup</h1>
-        <h2>Selecting Your Game Settings Please</h2>
+        <h2 class="text">Selecting Your Game Settings Please</h2>
         <div class="setup">
             <div class="choose_setup">
-                <h3>Click 'Customize Setting' To Initialize Game Setting By Your Self</h3>
-                <button type="button" onclick="show_div('select_keys')">Customize Setting</button>
+                <h3 class="text">Click 'Customize Setting' To Initialize Game Setting By Your Self</h3>
+                <button class="before_game" type="button" onclick="show_div('select_keys')">Customize Setting</button>
                 <span class="tooltiptext" id="Customize_Setting_explain">By clicking on 'Customize Setting' you will need to choose buttons, difficulty and time </span>
                 </br>
             </div>
-            <h3>Or</h3>
+            <h3 class="text">Or</h3>
             <div class="choose_setup">
-                <h3>Click 'Start With Randomize Setting'</h3>
-                <button type="button" onclick="random_setup()">Start With Randomize Setting</button>
+                <h3 class="text">Click 'Start With Randomize Setting'</h3>
+                <button class="before_game" type="button" onclick="random_setup()">Start With Randomize Setting</button>
                 <span class="tooltiptext" id="random_setup_explain">By clicking on 'Start With Randomize Setting' you will get<br> 
                 defult buttons to move with and random game properties</span>
             </div>
@@ -195,9 +196,9 @@
                 <br>
                 <label id="key_error" class="err">Please enter uniqe key for each one</label><br />
                 <br><br>
-                <button type="button" id="check_buttons" onclick="save_buttons()">Save Buttons</button>
+                <button class="before_game" type="button" id="check_buttons" onclick="save_buttons()">Save Buttons</button>
                 <br>
-                <button type="button" id="next_step" style="display: none;" onclick="show_div('ball_setup')">Move To Next Step</button>
+                <button class="before_game" type="button" id="next_step" style="display: none; align-self: center; " onclick="show_div('ball_setup')">Move To Next Step</button>
             </form>
         </div>
 
@@ -205,17 +206,17 @@
             <br>
             <br><br>
             <form class="form" id="balls_form" name="balls_form">
-                <label class="ballLable"><strong>Write The Desirable Number Of Balls In The Game (Between 50 To 90):</strong></label>
+                <h1 class="title"><strong>Write The Desirable Number Of Balls In The Game (Between 50 To 90):</strong></h1>
                 <br><br>
                 <input id="numBalls" name="numBalls" type="text">
                 <br>
                 <label class="err" id="balls_err">Invalid Number Of Balls</label>
                 <label class="err" id="balls_ok">valid Number Of Balls!<br> Can Advance To The Next Stage</label>
                 <br><br>
-                <button id="check_nballs" name="check_nballs" type="button" onclick="save_num_ball()">Save</button>
+                <button class="before_game" id="check_nballs" name="check_nballs" type="button" onclick="save_num_ball()">Save</button>
                 <br><br>
                 <div class="choose_setup">
-                    <button type="button" id="end_ball_num" disabled onclick="show_div('balls_color')">Next</button>
+                    <button class="before_game" type="button" id="end_ball_num" disabled onclick="show_div('balls_color')">Next</button>
                     <span class="tooltiptext" id="Nball">You Can Only Continue After Inserting And Saving A Valid Number Of Balls </span>
                 </div>
             </form>
@@ -225,7 +226,7 @@
             <br>
             <br><br>
             <p>
-                <lable class="color_lable">Choose Different Colors For 3 Type Of Balls:</lable>
+                <h1 class="title"><strong>Choose Different Colors For 3 Type Of Balls:</strong></h1>
             </p>
             <table>
                 <tr>
@@ -241,51 +242,57 @@
                 </tr>
                 <tr>
                     <td id="color5p">
-                        Please Select color 1: <input class="c1" type="text" id="col1n" value="#222222"><br>
+                        <br><br>
+                        <label class="color_lable"><strong>Please Select color 1:</strong></label>
+                        <input class="c1" type="text" id="col1n" value="#222222"><br>
                         <div class="displayColor" id="color1"></div>
                     </td>
                     <td id="color15p">
-                        Please Select color 2: <input class="c1" type="text" id="col2n" value="#222222"><br>
+                        <br><br>
+                        <label class="color_lable"><strong>Please Select color 2:</strong></label>
+                        <input class="c1" type="text" id="col2n" value="#222222"><br>
                         <div class="displayColor" id="color2"></div>
                     </td>
                     <td id="color25p">
-                        Please Select color 3: <input class="c2" type="text" id="col3n" value="#222222"><br>
+                        <br><br>
+                        <label class="color_lable"><strong>Please Select color 3:</strong></label>
+                        <input class="c2" type="text" id="col3n" value="#222222"><br>
                         <div class="displayColor" id="color3"></div>
                     </td>
                 </tr>
             </table>
             <br>
             <p>
-                <button type="button" onclick="save_color()">Next</button><br>
+                <button class="before_game" type="button" onclick="save_color()">Next</button><br>
             </p>
         </div>
 
         <div class="section" id="Game_time" style="display: none;">
             <br><br>
             <form class="form" id="time_form" name="time_form">
-                <lable class="time_lable"><strong>Insert The Desirable Time in Seconds (60 seconds Or More):</strong></lable>
+                <h1 class="title"><strong>Insert The Desirable Time in Seconds (60 seconds Or More):</strong></h1>
                 <br><br>
                 <input id="time_game" name="time_game" type="text" name="time" autofocus>
                 <br><br>
-                <button type="button" id="save_time" name="save_time" onclick="saveTime()">Save</button>
+                <button class="before_game" type="button" id="save_time" name="save_time" onclick="saveTime()">Save</button>
                 <br><br>
                 <div class="next">
-                    <button type="button" id="finish_time" name="finish_time" disabled onclick="show_div('Monsters')">Next</button>
+                    <button class="before_game" type="button" id="finish_time" name="finish_time" disabled onclick="show_div('Monsters')">Next</button>
                 </div>
             </form>
         </div>
         <div class="section" id="Monsters" style="display: none;">
             <br>
             <form class="form" id="Monsters_form" name="Monsters_form">
-                <lable class="monster_lable"><strong>Write Number Of Monsters:</strong></lable>
+                <h1 class="title"><strong>Write Number Of Monsters:</strong></h1>
                 <br>
-                <lable class="monster_lable"><strong>(Between 1 To 4 include)</strong></lable>
+                <lable class="monster_lable" style="font-size: 40px; color: white;">(Between 1 To 4 include)</lable>
                 <br><br>
                 <input id="Nmonster" type="text" name="Nmonster" required>
                 <br><br>
-                <button type="button" id="save_monster" name="save_monster" onclick="Save_monsters()">Save</button>
+                <button class="before_game" type="button" id="save_monster" name="save_monster" onclick="Save_monsters()">Save</button>
                 <br><br>
-                <button type="button" id="finish_monster" disabled>Submit</button>
+                <button class="before_game" type="button" id="finish_monster" disabled>Submit</button>
             </form>
         </div>
     </div>
@@ -317,11 +324,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="closeModal">&times;</span>
-                <h1><span>Registration has been successfully completed</span></h1>
+                <h1><span style="font-size: 40px; color: rgb(180, 58, 13);">Registration has been successfully completed</span></h1>
             </div>
             <div class="modal-body">
-                <h2><span>Thank you for registering our game</span></h2>
-                <h3><span>Now its time for Packman!!!</span><br>
+                <h2><span style="font-size: 40px; color: rgb(180, 58, 13);">Thank you for registering our game</span></h2>
+                <h3><span style="font-size: 40px; color: rgb(180, 58, 13);">Now its time for Packman!!!</span><br>
                     <button class="modalBtn" onclick="close_modal_move_to_setup('registerModal')">continue</button>
             </div>
         </div>
@@ -331,10 +338,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="closeModal">&times;</span>
-                <h1><span>You have been logged in successfully</span></h1>
+                <h1><span style="font-size: 40px; color: rgb(180, 58, 13);">You have been logged in successfully</span></h1>
             </div>
             <div class="modal-body">
-                <h3><span>Please click the continue button</span><br>
+                <h3><span style="font-size: 40px;color: rgb(180, 58, 13);">Please click the continue button and toghter fight the covid 19</span><br>
                     <button class="modalBtn" onclick="close_modal_move_to_setup('loginModal')">continue</button>
             </div>
         </div>
@@ -344,8 +351,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="closeModal">&times;</span>
-                <span><h1 id = 'usr-name'>end message</h1></span>
-                <span><h1 id = 'endMsg'>end message</h1></span>
+                <span><h1 id = 'usr-name'  style="font-size: 40px; color: rgb(180, 58, 13);">End message:</h1></span>
+                <span><h1 id = 'endMsg'  style="font-size: 40px; color: rgb(180, 58, 13);">End message:</h1></span>
             </div>
             <div class="modal-body">
                 <button class="modalBtn" onclick="show_div('welcom')">Home</button>

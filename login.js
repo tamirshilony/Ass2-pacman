@@ -9,7 +9,7 @@ function checkLoginValid(msg1, msg2) {
         // get the user information from the data base
     var info = JSON.parse(localStorage.getItem(username));
     //checking if user exsist
-    if (info === null) {
+    if (info === null || info['username'] == "") {
         document.getElementById(msg1).style.display = "inline"
         document.getElementById("Login_sec").reset();
     } else {
