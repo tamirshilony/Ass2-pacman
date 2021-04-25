@@ -99,7 +99,6 @@ function Start() {
         emptyCell = findRandomEmptyCell(board);
         board[emptyCell[0]][emptyCell[1]] = food_kind;
         food_remain--;
-        console.log(food_remain);
     }
 
     placePacman();
@@ -174,9 +173,10 @@ function GetKeyPressed() {
 }
 
 function Draw() {
+    let food_remain = 0;
     canvas.width = canvas.width; //clean board
     lblScore.value = score;
-    lblTime.value = Math.floor(time_elapsed);
+    lblTime.value = game_settings.time - Math.floor(time_elapsed);
     lblLife.value = life;
     for (let i = 0; i < board_width; i++) {
         for (let j = 0; j < board_hgit; j++) {
@@ -195,10 +195,13 @@ function Draw() {
                 context.fill();
             } else if (board[i][j] == 20) {
                 DrawFood(center.x, center.y, game_settings.color5p);
+                food_remain++
             } else if (board[i][j] == 21) {
                 DrawFood(center.x, center.y, game_settings.color15p);
+                food_remain++
             } else if (board[i][j] == 22) {
                 DrawFood(center.x, center.y, game_settings.color25p);
+                food_remain++
             } else if (board[i][j] == 23) {
                 DrawFullRect(center.x, center.y, 'DeepPink')
             } else if (board[i][j] == 24) {
@@ -211,6 +214,9 @@ function Draw() {
                 DrawFullRect(center.x, center.y, 'DarkMagenta')
             }
         }
+    }
+    if (food_remain == 0) { // ate all regular food
+        EndGame();
     }
 }
 
@@ -259,7 +265,7 @@ function UpdatePosition() {
     if (score >= 20 && time_elapsed <= 10) {
         pac_color = "green";
     }
-    if (lblTime.value == game_settings.time) {
+    if (lblTime.value == 0) {
         EndGame();
     } else {
         Draw();
@@ -296,13 +302,10 @@ function UpdateObjectsPositions() {
 function CheckCollision() {
     if (board[shape.i][shape.j] == 20) {
         score += 5;
-        eatAndCheckWin();
     } else if (board[shape.i][shape.j] == 21) {
         score += 15;
-        eatAndCheckWin();
     } else if (board[shape.i][shape.j] == 22) {
         score += 25;
-        eatAndCheckWin();
     } else if (board[shape.i][shape.j] == 23) {
         game_settings.time += 10;
         hideShowSpan('#time');
@@ -372,11 +375,11 @@ function EndGame() {
     window.clearInterval(interval2);
 
     if (life == 0) {
-        endMsg.innerHTML = "Loser!"
+        endMsg.innerHTML = currUser + " Is A Loser!"
     } else if (score < 100) {
-        endMsg.innerHTML = "You are better than " + score + " points!"
+        endMsg.innerHTML = currUser + " You are better than " + score + " points!"
     } else {
-        endMsg.innerHTML = "Winner!!!"
+        endMsg.innerHTML = currUser + " Is A Winner!!!"
     }
     modal_handler('gameEnd');
 }
