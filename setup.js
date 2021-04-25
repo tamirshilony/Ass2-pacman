@@ -1,4 +1,17 @@
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 function random_setup() {
+    keyCodeRight = "ArrowRight";
+    keyCodeLeft = "ArrowLeft";
+    keyCodeUp = "ArrowUp";
+    keyCodeDown = "ArrowDown";
     game_settings['rightBotton'] = 39;
     game_settings['leftBotton'] = 37;
     game_settings['upBotton'] = 38;
@@ -6,7 +19,8 @@ function random_setup() {
     num_balls = Math.floor(50 + Math.random() * 40);
     colors = [];
     for (i = 0; i < 3; i++) {
-        colors[i] = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+        // colors[i] = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+        colors[i] = getRandomColor();
     }
     game_settings['color5p'] = colors[0];
     game_settings['color15p'] = colors[1];
@@ -111,11 +125,11 @@ function Save_monsters() {
 function display_prop() {
     var right = keyCodeRight;
     document.getElementById("Rbutton").innerHTML = right;
-    var left = game_settings.leftBotton;
+    var left = keyCodeLeft;
     document.getElementById("Lbutton").innerHTML = left;
-    var up = game_settings.upBotton;
+    var up = keyCodeUp;
     document.getElementById("Ubutton").innerHTML = up;
-    var down = game_settings.downBotton;
+    var down = keyCodeDown;
     document.getElementById("Dbutton").innerHTML = down;
     var ball = game_settings.num_balls;
     document.getElementById("Nball").innerHTML = ball;
