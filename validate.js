@@ -23,6 +23,10 @@ $().ready(function() {
                 minDate: true
             }
         },
+        submitHandler: function(form) {
+            save_user();
+            // onclick="save_user()"
+        },
         errorElement: "div",
         errorPlacement: function (error, element) {error.insertAfter(element)},
     });
@@ -32,7 +36,7 @@ $.validator.addMethod("minDate", function(value, element) {
     var now = new Date();
     var myDate = new Date(value);
     return this.optional(element) || myDate < now;
-}, "this date is in the future");
+}, "This date is in the future");
 
 $.validator.addMethod('validPassword', function(value, element) {
     return this.optional(element) ||
