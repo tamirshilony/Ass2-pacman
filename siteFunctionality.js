@@ -1,13 +1,17 @@
 function show_div(div_name) {
-    hide_all_sections();
+    hideAllDivAndModal();
     div2show = document.getElementById(div_name);
     div2show.style.display = "block"
 }
 
-function hide_all_sections() {
+function hideAllDivAndModal() {
     let divs = document.getElementsByClassName("section");
+    let modals = document.getElementsByClassName("modal");
     for (let i = 0; i < divs.length; i++) {
         divs[i].style.display = "none";
+    }
+    for (let i = 0; i < modals.length; i++) {
+        modals[i].style.display = "none";
     }
 }
 
@@ -15,12 +19,11 @@ function hide_all_sections() {
 function modal_handler(modalID) {
 
     // Get the modal
-    var modal = document.getElementById(modalID);
+    let modal = document.getElementById(modalID);
     modal.style.display = "block";
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("closeModal")[0];
-    console.log(span);
+    let span = document.getElementsByClassName("closeModal")[0];
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
@@ -33,6 +36,7 @@ function modal_handler(modalID) {
         }
     }
 }
+
 
 function close_modal_move_to_setup(modalID) {
     document.getElementById(modalID).style.display = "none";

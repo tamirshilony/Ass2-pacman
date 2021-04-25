@@ -2,14 +2,18 @@
 <html>
 
 <head>
+    
+    <meta charset="UTF-8">
+
     <script src="./jquery-3.4.1.slim.min.js"></script>
     <script src="./jquery.drawrpalette.js" defer></script>
-    <script type="text/javascript" src="./app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
     <script type="text/javascript" src="./registration.js"></script>
     <script type="text/javascript" src="./login.js"></script>
     <script type="text/javascript" src="./setup.js"></script>
     <script type="text/javascript" src="./siteFunctionality.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+    <script src="validate.js"></script>
     <link rel="stylesheet" type="text/css" href="pac.css" />
 </head>
 
@@ -17,32 +21,36 @@
 
     <div class="navbar">
         <ul>
-            <li class=nav><a class=nav_link>Welcom</a></li>
-            <li class=nav><a class=nav_link onclick="show_div('register')">Register</a></li>
-            <li class=nav><a class=nav_link onclick="show_div('Login')">Login</a></li>
-            <li class=nav><a class=nav_link onclick="show_div()">About</a></li>
+            <li class=nav><button class=nav_link onclick="show_div('welcom')">Welcom</button></li>
+            <li class=nav><button class=nav_link onclick="show_div('register')">Register</button></li>
+            <li class=nav><button class=nav_link onclick="show_div('Login')">Login</button></li>
+            <li class=nav><button class=nav_link onclick="modal_handler('about')">About</button></li>
         </ul>
     </div>
 
     <div id="score">
-        <label for="lblScore">SCORE:</label>
+        <label for="lblScore" style='font-size:40px;'>&#x1F3C6:</label>
         <input id="lblScore" type="text" />
     </div>
+    <div id="life">
+        <label for="lblLife" style='font-size:40px;'>&#128151:</label>
+        <input id="lblLife" type="text" />
+    </div>
     <div id="time">
-        <label for="lblTime">TIME:</label>
+        <label for="lblTime" style='font-size:40px;'>&#8987:</label>
         <input id="lblTime" type="text" />
     </div>
     <div id="game">
         <canvas id="canvas" height="960" width="960"></canvas>
     </div>
 
-    <div class="section" id="welcome" style="display: block;">
+    <div class="section" id="welcom" style="display: block;">
         <h1 class="title">Welcome</h1>
         <div id="lwelcome">
-            <span class='welcomelink' onclick="show_div('Login')">Login</span>
+            <button class='welcomelink' onclick="show_div('Login')">Login</button>
         </div>
         <div id="rwelcome">
-            <span class="welcomelink" onclick="show_div('register')">Register</span>
+            <button class="welcomelink" onclick="show_div('register')">Register</button>
         </div>
     </div>
 
@@ -52,27 +60,26 @@
                 <h1 class="title">Registration</h1>
                 <p>
                     <label for="rusername">User Name</label>
-                    <input type="text" name="username" id="rusername" required><br/>
+                    <input type="text" name="rusername" id="rusername" required><br/>
                 </p>
                 <p>
                     <label for="rpassword">Password (should contain at least 6 english letters or numbers)</label>
-                    <input type="password" name="password" id="rpassword"><br/>
+                    <input type="password" name="rpassword" id="rpassword"><br/>
                 </p>
 
                 <p>
-                    <label for="fullname">Full Name</label>
-                    <input type="text" name="fullname" id="rname"><br/>
+                    <label for="rfullname">Full Name</label>
+                    <input type="text" name="rfullname" id="rname"><br/>
                 </p>
                 <p>
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="rmail"><br/>
+                    <label for="remail">Email</label>
+                    <input type="email" name="remail" id="rmail"><br/>
                 </p>
                 <p>
-                    <label for="date">Date of Birth</label>
-                    <input type="date" name="date" id="rdate"><br/>
+                    <label for="rdate">Date of Birth</label>
+                    <input type="date" name="rdate" id="rdate"><br/>
                 </p>
                 <p>
-                    <!-- <input type="submit" value ="submit" onclick="return addUser();">Submit</button> -->
                     <button id="submit" type="button" onclick="save_user()">Submit</button>
                 </p>
             </div>
@@ -236,7 +243,7 @@
         </div>
     </div>
 
-    <!-- model -->
+    <!-- modals -->
 
     <dialog class="modal" id="about">
         <div class="modal-content">
@@ -251,9 +258,10 @@
                     <br> https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js
                     </span>
                 </h3>
-                <h2><span>Difficulties:</span></h2>
+                <h2><span>Difficulties:</span></h1>
                 <h3><span>In the beginning we had difficulty connecting the scripts to html.<br> 
                     After many attempts we study the subject ans the work was much simpler</span></h3>
+                <button class="modalBtn" onclick="document.getElementById('about').style.display='none'">Close</button>
             </div>
         </div>
     </dialog>
@@ -262,7 +270,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="closeModal">&times;</span>
-                <h1><span>Registration has been successfully completed</span></h2>
+                <h1><span>Registration has been successfully completed</span></h1>
             </div>
             <div class="modal-body">
                 <h2><span>Thank you for registering our game</span></h2>
@@ -276,7 +284,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="closeModal">&times;</span>
-                <h1><span>You have been logged in successfully</span></h2>
+                <h1><span>You have been logged in successfully</span></h1>
             </div>
             <div class="modal-body">
                 <h3><span>Please click the continue button</span><br>
@@ -285,7 +293,19 @@
         </div>
     </dialog>
 
-    <script src="validate.js"></script>
+    <dialog class="modal" id="gameEnd">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="closeModal">&times;</span>
+                <span><h1 id = 'usr-name'>end message</h1></span>
+                <span><h1 id = 'endMsg'>end message</h1></span>
+            </div>
+            <div class="modal-body">
+                    <button class="modalBtn" onclick="show_div('welcom')">Home</button>
+                    <button class="modalBtn" onclick="close_modal_move_to_setup('gameEnd')">New Game</button>
+            </div>
+        </div>
+    </dialog>
 </body>
 
 </html>

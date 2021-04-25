@@ -1,29 +1,30 @@
 $().ready(function() {
     $("#regform").validate({
         rules: {
-            username: {
+            rusername: {
                 required: true,
                 minlength: 2
             },
-            password: {
+            rpassword: {
                 required: true,
                 minlength: 6,
                 validPassword: true
             },
-            fullname: {
+            rfullname: {
                 required: true,
                 validName: true
             },
-            email: {
+            remail: {
                 required: true,
                 email: true
             },
-            date: {
+            rdate: {
                 required: true,
                 minDate: true
             }
         },
-        errorElement: "em"
+        errorElement: "em",
+        errorPlacement: function (error, element) {error.insertAfter(element)},
     });
 
 });
