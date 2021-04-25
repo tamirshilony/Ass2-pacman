@@ -13,6 +13,7 @@ function checkLoginValid(msg1, msg2) {
         document.getElementById(msg1).style.display = "inline"
         document.getElementById("Login_sec").reset();
     } else {
+        currUser = username;
         // checking valid password
         // getting the real password
         console.log(info);
