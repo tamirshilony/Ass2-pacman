@@ -8,6 +8,7 @@ let start_time;
 let time_elapsed;
 let interval1;
 let interval2;
+let interval3;
 let board_width = 20;
 let board_hgit = 10
 let game_settings = new Object();
@@ -76,7 +77,8 @@ function Start() {
     let food15 = Math.floor(food_remain * 0.3);
     let food25 = food_remain - food5 - food15;
     endMsg = document.getElementById('endMsg');
-    console.log(endMsg);
+    console.log(game_settings.num_balls);
+    console.log(food);
     let monster_num = game_settings.num_mansters;
     moving_objects_num = monster_num + 1; // monsters + candy
     start_time = new Date();
@@ -324,7 +326,6 @@ function CheckCollision() {
     } else if (board[shape.i][shape.j] == 22) {
         score += 25;
     } else if (board[shape.i][shape.j] == 23) {
-        game_settings.time += 5;
         hideShowSpan('#time');
     } else if (board[shape.i][shape.j] == 24) {
         life++;
@@ -344,6 +345,9 @@ function CheckCollision() {
         moving_objects_num--;
         score += 50;
         moving_objects.shift()
+    }
+    if(game_settings.num_balls == 0){
+        EndGame();
     }
 }
 
@@ -396,9 +400,8 @@ function randomTimeLifeFood(){
 }
 
 function EndGame() {
-    window.clearInterval(interval1);
-    window.clearInterval(interval2);
-    window.clearInterval(interval3);
+    stopGameIfInProgress();
+    
     if (life == 0) {
         playSound('booSound')
         endMsg.innerHTML = currUser + " Is A Loser!"
@@ -409,6 +412,20 @@ function EndGame() {
         endMsg.innerHTML = currUser + " Is A Winner!!!"
     }
     modal_handler('gameEnd');
+}
+
+function stopGameIfInProgress(){
+    // stop intervals
+    window.clearInterval(interval1);
+    window.clearInterval(interval2);
+    window.clearInterval(interval3);
+    
+    // stop music
+    let sounds = document.getElementsByClassName('sound');
+    for(let i = 0; i < sounds.length; i++){
+        sounds[i].pause();
+    }
+
 }
 
 function hideShowSpan(id) {
