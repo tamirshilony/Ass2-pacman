@@ -111,7 +111,7 @@ function saveTime() {
 }
 
 function Save_monsters() {
-    var monster_num = document.getElementById("Nmonster").value;
+    var monster_num = parseInt(document.getElementById("Nmonster").value);
     if (monster_num >= 1 && monster_num <= 4) {
         document.getElementById("finish_monster").disabled = false;
         game_settings['num_mansters'] = monster_num;
