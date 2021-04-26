@@ -298,7 +298,7 @@
                 <label id="monster_error" class="error" style="display: none;">Number of manster must be in between 1 to 4</label><br />
                 <button class="before_game" type="button" id="save_monster" name="save_monster" onclick="Save_monsters()">Save</button>
                 <br><br>
-                <button class="before_game" type="button" id="finish_monster" disabled>Submit</button>
+                <button class="before_game" type="button" id="finish_monster" style="display: none;">Start Game</button>
             </form>
         </div>
     </div>
@@ -338,7 +338,7 @@
             <div class="modal-body">
                 <h2><span style="font-size: 40px; color: rgb(180, 58, 13);">Thank you for registering our game</span></h2>
                 <h3><span style="font-size: 40px; color: rgb(180, 58, 13);">Now its time for Packman!!!</span><br>
-                    <button class="modalBtn" onclick="close_modal_move_to_setup('registerModal')">continue</button>
+                    <button class="modalBtn" onclick="close_modal_move_to_login('registerModal')">continue</button>
             </div>
         </div>
     </dialog>
