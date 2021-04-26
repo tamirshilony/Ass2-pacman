@@ -24,12 +24,12 @@ $().ready(function() {
             }
         },
         submitHandler: function(form) {
-            if($("#regform").valid() == true){
+            if ($("#regform").valid() == true) {
                 save_user();
             }
         },
         errorElement: "div",
-        errorPlacement: function (error, element) {error.insertAfter(element)},
+        errorPlacement: function(error, element) { error.insertAfter(element) },
     });
 
 });
