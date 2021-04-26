@@ -21,17 +21,19 @@ let keyCodeLeft;
 let endMsg;
 let currUser;
 let moving_objects = [];
+let curr_direction = 4; // 1 up 2 down 3 left 4 right
+let draw_details = {up: [1.65,-10,-5], down: [0.65,-10,5], left: [1.15,-5,-10], right: [0.15,5,-10]};
 
-let moveup = document.createElement("img");
-let movedown = document.createElement("img");
-let moveright = document.createElement("img");
-let moveleft = document.createElement("img");
+
 let monsterImg = document.createElement("img");
 let timeFood = document.createElement("img");
 let lifeFood = document.createElement("img");
 let scoreFood = document.createElement("img");
 
 timeFood.src = './images/mask.jpeg';
+lifeFood.src = './images/syringe.jpg';
+monsterImg.src = './images/virus.png';
+scoreFood.src = './images/doc.png';
 
 class MovingObject {
     constructor(type, i = 0, j = 0, typeBefore = 0) {
@@ -72,14 +74,13 @@ function Start() {
     moving_objects = [new MovingObject(1), new MovingObject(5), new MovingObject(5),
         new MovingObject(5), new MovingObject(5),
     ]; //1 moving food 4 monsters 
+
     let food_remain = game_settings.num_balls;
-    console.log(food_remain);
     let food5 = Math.floor(food_remain * 0.6);
     let food15 = Math.floor(food_remain * 0.3);
     let food25 = food_remain - food5 - food15;
-    endMsg = document.getElementById('endMsg');
-    console.log(game_settings.num_balls);
     let monster_num = game_settings.num_mansters;
+
     moving_objects_num = monster_num + 1; // monsters + candy
     start_time = new Date();
 
@@ -201,15 +202,7 @@ function Draw() {
             center.x = i * 40 + 20;
             center.y = j * 40 + 20;
             if (board[i][j] == 2) {
-                context.beginPath();
-                context.arc(center.x, center.y, 20, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-                context.lineTo(center.x, center.y);
-                context.fillStyle = pac_color; //color
-                context.fill();
-                context.beginPath();
-                context.arc(center.x + 5, center.y - 10, 5, 0, 2 * Math.PI); // circle
-                context.fillStyle = "black"; //color
-                context.fill();
+                DrawPacman(center.x, center.y, curr_direction);
             } else if (board[i][j] == 20) {
                 DrawFood(center.x, center.y, game_settings.color5p);
                 food_remain++
@@ -222,19 +215,42 @@ function Draw() {
             } else if (board[i][j] == 23) {
                 context.drawImage(timeFood, center.x - 20, center.y - 20, 40, 40);
             } else if (board[i][j] == 24) {
-                DrawFullRect(center.x, center.y, 'BlueViolet')
+                context.drawImage(lifeFood, center.x - 20, center.y - 20, 40, 40);
             } else if (board[i][j] == 4) {
                 DrawFullRect(center.x, center.y, 'grey')
             } else if (board[i][j] == 5) {
-                DrawFullRect(center.x, center.y, 'black')
+                context.drawImage(monsterImg, center.x - 20, center.y - 20, 40, 40);
             } else if (board[i][j] == 1) {
-                DrawFullRect(center.x, center.y, 'DarkMagenta')
+                context.drawImage(scoreFood, center.x - 20, center.y - 20, 40, 40);
             }
         }
     }
     if (food_remain == 0) { // ate all regular food
         EndGame();
     }
+}
+
+function DrawPacman(x, y, curr_direction){
+    let details;
+    if (curr_direction == 1){
+        details = draw_details.up;
+    } else if (curr_direction == 2){
+        details = draw_details.down;
+    } else if (curr_direction == 3){
+        details = draw_details.left;
+    } else if (curr_direction == 4){
+        details = draw_details.right;
+    }
+    context.beginPath();
+    context.arc(x, y, 20, details[0]* Math.PI, (details[0]+1.7) * Math.PI); // half circle
+    context.lineTo(x, y);
+    context.fillStyle = pac_color; //color
+    context.fill();
+    context.beginPath();
+    context.arc(x + details[1], y + details[2], 5, 0, 2 * Math.PI); // circle
+    context.fillStyle = "black"; //color
+    context.fill();
+
 }
 
 function DrawFood(x, y, color) {
@@ -254,6 +270,8 @@ function DrawFullRect(x, y, color) {
 function UpdatePosition() {
     board[shape.i][shape.j] = 0;
     let x = GetKeyPressed();
+    if (x)
+        curr_direction = x;
     if (x == 1) {
         if (board[shape.i][shape.j - 1] != 4) {
             shape.j--;
@@ -401,7 +419,7 @@ function randomTimeLifeFood() {
 
 function EndGame() {
     stopGameIfInProgress();
-
+    let endMsg = document.getElementById('endMsg');
     if (life == 0) {
         playSound('booSound')
         endMsg.innerHTML = currUser + " Is A Loser!"
@@ -411,6 +429,7 @@ function EndGame() {
         playSound("winSound");
         endMsg.innerHTML = currUser + " Is A Winner!!!"
     }
+    document.getElementById('endScore').innerHTML = "Yor score is: " + score;
     modal_handler('gameEnd');
 }
 
@@ -428,6 +447,7 @@ function stopGameIfInProgress() {
 
 }
 
+
 function hideShowSpan(id) {
     playSound("scoreSound");
     // sound.play();
@@ -444,6 +464,8 @@ function playSound(sound) {
     music.volume = 0.15;
 }
 
+
+// ----------------fix walls----------
 function fix_walls(i) {
     if (i == 0) {
         for (let j = 0; j < board_hgit; j++)
