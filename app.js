@@ -78,7 +78,6 @@ function Start() {
     let food25 = food_remain - food5 - food15;
     endMsg = document.getElementById('endMsg');
     console.log(game_settings.num_balls);
-    console.log(food);
     let monster_num = game_settings.num_mansters;
     moving_objects_num = monster_num + 1; // monsters + candy
     start_time = new Date();
