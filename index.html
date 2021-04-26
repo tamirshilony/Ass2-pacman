@@ -18,6 +18,10 @@
 </head>
 
 <body>
+    <div class="header">
+        Defeat the Covid-19 Packman &emsp;
+        <image id="logo" src="./images/logo.jpg"></image> &emsp; Created By: Ofer Avin & Tamir Shilony
+    </div>
 
     <div class="navbar">
         <ul>
@@ -105,7 +109,7 @@
 
     <div class="section" id="register" style="display: none;">
         <form class="form" id="regform" name="regform" method="get">
-            <div class=c ontainer>
+            <div class=container>
                 <h1 class="title">Registration</h1>
                 <p>
                     <label for="rusername">User Name</label>
@@ -291,11 +295,11 @@
             <form class="form" id="Monsters_form" name="Monsters_form">
                 <h1 class="title"><strong>Write Number Of Monsters:</strong></h1>
                 <br>
-                <lable class="monster_lable" style="font-size: 40px; color: white;">(Between 1 To 4 include)</lable>
+                <lable class="monster_lable" style="font-size: 40px; color: white;">(1 up to 4)</lable>
                 <br><br>
                 <input id="Nmonster" type="text" name="Nmonster" required>
                 <br><br>
-                <label id="monster_error" class="error" style="display: none;">Number of manster must be in between 1 to 4</label><br />
+                <label id="monster_error" class="error" style="display: none;">Number of manster must be in range 1 to 4</label><br />
                 <button class="before_game" type="button" id="save_monster" name="save_monster" onclick="Save_monsters()">Save</button>
                 <br><br>
                 <button class="before_game" type="button" id="finish_monster" style="display: none;" onclick="finishSetup()">Start Game</button>
@@ -304,13 +308,13 @@
     </div>
 
     <div class="footer">
-        <p>Creators: Ofer Avin & Tamir Shilony &emsp; contact us: avino@post.bgu.ac.il &emsp; shilonyt@post.bgu.ac.il <br> Only Toghter We Will Win The Epidemic!!</p>
+        Creators: Ofer Avin & Tamir Shilony &emsp; contact us: avino@post.bgu.ac.il &emsp; shilonyt@post.bgu.ac.il <br> Only toghter we defeat the epidemic!!
     </div>
 
     <!-- modals -->
 
     <dialog class="modal" id="about">
-        <div class="modal-content" style="background-image: url('about2.jpg');background-size: cover;width: 900px; height: 800px;">
+        <div class="modal-content" style="background-image: url('./images/about2.jpg');background-size: cover;width: 900px; height: 800px;">
             <div class="modal-header">
                 <span class="closeModal">&times;</span>
                 <h1>About Us</h1>
@@ -350,7 +354,7 @@
                 <h1><span style="font-size: 40px; color: rgb(180, 58, 13);">You have been logged in successfully</span></h1>
             </div>
             <div class="modal-body">
-                <h3><span style="font-size: 40px;color: rgb(180, 58, 13);">Please click the continue button<br><br> and toghter fight the covid 19</span><br>
+                <h3><span style="font-size: 40px;color: rgb(180, 58, 13);">Please click the continue button<br><br> and toghter defeat the covid 19</span><br>
                     <button class="modalBtn" onclick="close_modal_move_to_setup('loginModal')">continue</button>
             </div>
         </div>
