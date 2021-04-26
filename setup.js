@@ -83,6 +83,7 @@ function save_buttons() {
 
 function save_num_ball() {
     document.getElementById("balls_err").style.display = "none";
+    document.getElementById("end_ball_num").disabled = true;
     num_balls = document.getElementById("numBalls").value;
     if (num_balls >= 50 && num_balls <= 90) {
         document.getElementById("end_ball_num").disabled = false;
@@ -105,6 +106,7 @@ function save_color() {
 
 function saveTime() {
     document.getElementById("time_error").style.display = "none";
+    document.getElementById("finish_time").disabled = true;
     var time = document.getElementById("time_game").value;
     if (time >= 60) {
         document.getElementById("finish_time").disabled = false;
@@ -117,6 +119,7 @@ function saveTime() {
 
 function Save_monsters() {
     document.getElementById("monster_error").style.display = "none";
+    document.getElementById("finish_monster").disabled = true;
     var monster_num = parseInt(document.getElementById("Nmonster").value);
     if (monster_num >= 1 && monster_num <= 4) {
         document.getElementById("finish_monster").disabled = false;
