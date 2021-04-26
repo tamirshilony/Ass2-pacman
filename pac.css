@@ -1,23 +1,49 @@
 body {
-    background-image: url('welcom3.jpg');
+    background-image: url('./images/welcom3.jpg');
     background-size: cover;
 }
 
+.header {
+    width: 100%;
+    height: 90px;
+    color: #da5975;
+    background: black;
+    margin: 0%;
+    margin-top: -200;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    top: 0;
+    text-align: center;
+    font-size: x-large;
+    position: relative;
+    z-index: 10000;
+}
+
+#logo {
+    width: 75px;
+    height: 75px;
+    border-radius: 120px;
+    border-color: #da5975;
+    border: 3px solid #da5975;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .error {
-    /* display: none; */
     color: Red;
     font-size: 25px;
 }
 
-#navbar {
+.navbar {
     z-index: 10000;
+    position: relative;
+    top: 0;
 }
 
 ul {
     display: inline-block;
     width: 100%;
     list-style: none;
-    background-color: rgb(55, 56, 63, 0.6);
     text-align: center;
     padding: 0;
     margin: 0;
@@ -195,14 +221,20 @@ td {
 }
 
 .footer {
-    position: fixed;
+    /* position: fixed; */
     left: 0;
     bottom: 0;
+    top: 50px;
     width: 100%;
+    height: 50px;
     background-color: rgb(55, 56, 63, 0.6);
+    padding-top: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
     color: white;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
     position: relative;
     z-index: -1;
 }
@@ -237,7 +269,7 @@ td {
 /* Modal Content */
 
 .modal-content {
-    background-image: url('fight-covid.jpg');
+    background-image: url('./images/fight-covid.jpg');
     background-size: cover;
     /* background-color: #fefefe; */
     margin: auto;
