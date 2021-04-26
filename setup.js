@@ -119,17 +119,22 @@ function saveTime() {
 
 function Save_monsters() {
     document.getElementById("monster_error").style.display = "none";
-    document.getElementById("finish_monster").disabled = true;
+    document.getElementById("finish_monster").style.display = "none"
     var monster_num = parseInt(document.getElementById("Nmonster").value);
     if (monster_num >= 1 && monster_num <= 4) {
-        document.getElementById("finish_monster").disabled = false;
+        document.getElementById("finish_monster").style.display = "inline"
         game_settings['num_mansters'] = monster_num;
         console.log(game_settings);
-        display_prop();
-        startGame();
+        // display_prop();
+        // startGame();
     } else {
         document.getElementById("monster_error").style.display = "inline";
     }
+}
+
+function finishSetup() {
+    display_prop();
+    startGame();
 }
 
 function display_prop() {

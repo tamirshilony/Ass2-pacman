@@ -41,6 +41,11 @@ function modal_handler(modalID) {
 }
 
 
+function close_modal_move_to_login(modalID) {
+    document.getElementById(modalID).style.display = "none";
+    show_div('Login');
+}
+
 function close_modal_move_to_setup(modalID) {
     document.getElementById(modalID).style.display = "none";
     show_div('setup');
