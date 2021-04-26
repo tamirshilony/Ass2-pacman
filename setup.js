@@ -19,7 +19,6 @@ function random_setup() {
     num_balls = Math.floor(50 + Math.random() * 40);
     colors = [];
     for (i = 0; i < 3; i++) {
-        // colors[i] = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
         colors[i] = getRandomColor();
     }
     game_settings['color5p'] = colors[0];
@@ -83,10 +82,13 @@ function save_buttons() {
 
 
 function save_num_ball() {
+    document.getElementById("balls_err").style.display = "none";
     num_balls = document.getElementById("numBalls").value;
     if (num_balls >= 50 && num_balls <= 90) {
         document.getElementById("end_ball_num").disabled = false;
         game_settings['num_balls'] = num_balls;
+    } else {
+        document.getElementById("balls_err").style.display = "inline";
     }
 }
 

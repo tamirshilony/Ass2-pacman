@@ -109,7 +109,7 @@
                 <h1 class="title">Registration</h1>
                 <p>
                     <label for="rusername">User Name</label>
-                    <input type="text" name="rusername" id="rusername" required><br/>
+                    <input type="text" name="rusername" id="rusername"><br/>
                 </p>
                 <p>
                     <label for="rpassword">Password</label>
@@ -129,7 +129,7 @@
                     <input type="date" name="rdate" id="rdate"><br/>
                 </p>
                 <p>
-                    <button class="before_game" id="submit" name = submitReg type="submit">Submit</button>
+                    <button class="before_game" id="submit" name=s ubmitReg type="submit">Submit</button>
                 </p>
             </div>
         </form>
@@ -151,8 +151,8 @@
             </br>
             <p>
                 <button class="before_game" type="button" onclick="checkLoginValid('usename_err','pass_err')">Login</button>
-                <label id="usename_err" class="error">username does not exist! Try Again!</label>
-                <label id="pass_err" class="error">Invalid password! Try Again!</label>
+                <label id="usename_err" class="error" style="display: none;">username does not exist! Try Again!</label>
+                <label id="pass_err" class="error" style="display: none;">Invalid password! Try Again!</label>
                 <br>
             </p>
     </div>
@@ -198,7 +198,7 @@
                 <label class="lablesButtons"><strong>please press the button to move down</strong></label>
                 <input id="downBotton" type="text" maxlength="1" onkeydown="uniKeyCode(event,'downBotton')">
                 <br>
-                <label id="key_error" class="error">Please enter uniqe key for each one</label><br />
+                <label id="key_error" class="error" style="display: none;">Please enter uniqe key for each one</label><br />
                 <br><br>
                 <button class="before_game" type="button" id="check_buttons" onclick="save_buttons()">Save Buttons</button>
                 <br>
@@ -214,8 +214,8 @@
                 <br><br>
                 <input id="numBalls" name="numBalls" type="text">
                 <br>
-                <label class="error" id="balls_err">Invalid Number Of Balls</label>
-                <label class="error" id="balls_ok">valid Number Of Balls!<br> Can Advance To The Next Stage</label>
+                <label class="error" id="balls_err" style="display: none;">Invalid Number Of Balls</label>
+                <label class="error" id="balls_ok" style="display: none;">valid Number Of Balls!<br> Can Advance To The Next Stage</label>
                 <br><br>
                 <button class="before_game" id="check_nballs" name="check_nballs" type="button" onclick="save_num_ball()">Save</button>
                 <br><br>
@@ -368,12 +368,12 @@
             </div>
         </div>
     </dialog>
-    <div id = "music">
-        <audio class = "sound" id = "gameSound" src="./sounds/Elevator Music.mp3"></audio>
-        <audio class = "sound" id = "winSound" src="./sounds/win.mp3"></audio>
-        <audio class = "sound" id = "scoreSound" src="./sounds/score.mp3"></audio>
-        <audio class = "sound" id = "ouchSound" src="./sounds/ouch.mp3"></audio>
-        <audio class = "sound" id = "booSound" src="./sounds/Booo.mp3"></audio>
+    <div id="music">
+        <audio class="sound" id="gameSound" src="./sounds/Elevator Music.mp3"></audio>
+        <audio class="sound" id="winSound" src="./sounds/win.mp3"></audio>
+        <audio class="sound" id="scoreSound" src="./sounds/score.mp3"></audio>
+        <audio class="sound" id="ouchSound" src="./sounds/ouch.mp3"></audio>
+        <audio class="sound" id="booSound" src="./sounds/Booo.mp3"></audio>
     </div>
 </body>
 
