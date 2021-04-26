@@ -20,10 +20,11 @@ let keyCodeRight;
 let keyCodeLeft;
 let endMsg;
 let currUser;
+let moving_objects = [];
 
-let moveup = document.createElement("img");	
-let movedown = document.createElement("img");	
-let moveright = document.createElement("img");	
+let moveup = document.createElement("img");
+let movedown = document.createElement("img");
+let moveright = document.createElement("img");
 let moveleft = document.createElement("img");
 let monsterImg = document.createElement("img");
 let timeFood = document.createElement("img");
@@ -41,9 +42,6 @@ class MovingObject {
     }
 }
 
-let moving_objects = [new MovingObject(1), new MovingObject(5), new MovingObject(5),
-    new MovingObject(5), new MovingObject(5),
-]; //1 moving food 4 monsters 
 
 let monst_loc = [
     [1, 1],
@@ -58,10 +56,10 @@ function startGame() {
     Start();
 }
 
-// $(document).ready(function() {
-//     context = canvas.getContext("2d");
-//     Start();
-// });
+$(document).ready(function() {
+    var k = { username: "k", password: "k", name: "", mail: "", date: "" };
+    localStorage.setItem("k", JSON.stringify(k));
+});
 
 function Start() {
     playSound("gameSound");
@@ -71,6 +69,9 @@ function Start() {
     score = 0;
     life = 5;
     pac_color = "yellow";
+    moving_objects = [new MovingObject(1), new MovingObject(5), new MovingObject(5),
+        new MovingObject(5), new MovingObject(5),
+    ]; //1 moving food 4 monsters 
     let food_remain = game_settings.num_balls;
     console.log(food_remain);
     let food5 = Math.floor(food_remain * 0.6);
@@ -135,7 +136,7 @@ function Start() {
     );
     interval1 = setInterval(UpdatePosition, 150);
     interval2 = setInterval(UpdateObjectsPositions, 400);
-    interval3 = setInterval(randomTimeLifeFood,30000);
+    interval3 = setInterval(randomTimeLifeFood, 30000);
 }
 
 function placeMonsters() {
@@ -219,7 +220,7 @@ function Draw() {
                 DrawFood(center.x, center.y, game_settings.color25p);
                 food_remain++
             } else if (board[i][j] == 23) {
-                context.drawImage(timeFood, center.x-20, center.y-20, 40, 40);
+                context.drawImage(timeFood, center.x - 20, center.y - 20, 40, 40);
             } else if (board[i][j] == 24) {
                 DrawFullRect(center.x, center.y, 'BlueViolet')
             } else if (board[i][j] == 4) {
@@ -345,7 +346,7 @@ function CheckCollision() {
         score += 50;
         moving_objects.shift()
     }
-    if(game_settings.num_balls == 0){
+    if (game_settings.num_balls == 0) {
         EndGame();
     }
 }
@@ -386,11 +387,11 @@ function getDirection(obj) {
     return [i_change, j_change]
 }
 
-function randomTimeLifeFood(){
+function randomTimeLifeFood() {
     let foodType;
     let emptyCell = findRandomEmptyCell(board);
     let random = Math.random();
-    if(random < 0.5){
+    if (random < 0.5) {
         foodType = 23;
     } else {
         foodType = 24;
@@ -400,7 +401,7 @@ function randomTimeLifeFood(){
 
 function EndGame() {
     stopGameIfInProgress();
-    
+
     if (life == 0) {
         playSound('booSound')
         endMsg.innerHTML = currUser + " Is A Loser!"
@@ -413,15 +414,15 @@ function EndGame() {
     modal_handler('gameEnd');
 }
 
-function stopGameIfInProgress(){
+function stopGameIfInProgress() {
     // stop intervals
     window.clearInterval(interval1);
     window.clearInterval(interval2);
     window.clearInterval(interval3);
-    
+
     // stop music
     let sounds = document.getElementsByClassName('sound');
-    for(let i = 0; i < sounds.length; i++){
+    for (let i = 0; i < sounds.length; i++) {
         sounds[i].pause();
     }
 
@@ -437,7 +438,7 @@ function hideShowSpan(id) {
     }, 2000);
 }
 
-function playSound(sound){
+function playSound(sound) {
     let music = document.getElementById(sound);
     music.play();
     music.volume = 0.15;

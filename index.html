@@ -278,6 +278,7 @@
                 <br><br>
                 <input id="time_game" name="time_game" type="text" name="time" autofocus>
                 <br><br>
+                <label id="time_error" class="error" style="display: none;">Invalid number of second</label><br />
                 <button class="before_game" type="button" id="save_time" name="save_time" onclick="saveTime()">Save</button>
                 <br><br>
                 <div class="next">
@@ -294,6 +295,7 @@
                 <br><br>
                 <input id="Nmonster" type="text" name="Nmonster" required>
                 <br><br>
+                <label id="monster_error" class="error" style="display: none;">Number of manster must be in between 1 to 4</label><br />
                 <button class="before_game" type="button" id="save_monster" name="save_monster" onclick="Save_monsters()">Save</button>
                 <br><br>
                 <button class="before_game" type="button" id="finish_monster" disabled>Submit</button>
@@ -302,27 +304,26 @@
     </div>
 
     <div class="footer">
-        <p>Creators: Ofer Avin & Tamir Shilony &emsp; contact us: avino@post.bgu.ac.il &emsp; shilonyt@post.bgu.ac.il <br> only toghter we will win the epidemic</p>
+        <p>Creators: Ofer Avin & Tamir Shilony &emsp; contact us: avino@post.bgu.ac.il &emsp; shilonyt@post.bgu.ac.il <br> Only Toghter We Will Win The Epidemic!!</p>
     </div>
 
     <!-- modals -->
 
     <dialog class="modal" id="about">
-        <div class="modal-content">
+        <div class="modal-content" style="background-image: url('about2.jpg');background-size: cover;width: 900px; height: 800px;">
             <div class="modal-header">
                 <span class="closeModal">&times;</span>
                 <h1>About Us</h1>
             </div>
             <div class="modal-body">
-                <h2><span>we are: Inbal Bitton and  Noa Shabtay</span></h2>
-                <h2><span>PlugIn: to make the validation form we used this links :</span></h2>
-                <h3><span>https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js</span><br> https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js
-                    <br> https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js
-                    </span>
-                </h3>
+                <h2><span>Creators: Ofer Avin and  Tamir Shilony</span></h2>
+                <h2><span>PlugIn: to make the validation form we used validation plugin.<br><br>
+                PlugIn: to create the color picker we downloaded and attached a plugin.</span></h2>
+                <br>
+                <span></span>
                 <h2><span>Difficulties:</span></h1>
-                    <h3><span>In the beginning we had difficulty connecting the scripts to html.<br> 
-                    After many attempts we study the subject ans the work was much simpler</span></h3>
+                    <h2><span>In the beginning we had difficulty using and manipulate the jquery along side with JavaScript.<br><br> 
+                    More over we had a hard time unite as many parts as possible into class together, in order to avoid duplication in the code</span></h2>
                     <button class="modalBtn" onclick="document.getElementById('about').style.display='none'">Close</button>
             </div>
         </div>
