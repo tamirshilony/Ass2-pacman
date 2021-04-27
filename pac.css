@@ -290,7 +290,7 @@ td {
 /* Modal Content */
 
 .modal-content {
-    background-image: url('./images/fight-covid.jpg');
+    background-image: url('./images/fight_covid.jpg');
     background-size: cover;
     /* background-color: #fefefe; */
     margin: auto;

@@ -3,7 +3,8 @@ $().ready(function() {
         rules: {
             rusername: {
                 required: true,
-                minlength: 2
+                minlength: 2,
+                userExist: true 
             },
             rpassword: {
                 required: true,
@@ -26,6 +27,7 @@ $().ready(function() {
         submitHandler: function(form) {
             if ($("#regform").valid() == true) {
                 save_user();
+                document.getElementById('regform').reset();
             }
         },
         errorElement: "div",
@@ -33,6 +35,11 @@ $().ready(function() {
     });
 
 });
+$.validator.addMethod("userExist", function(value, element) {
+    var info = JSON.parse(localStorage.getItem(value));
+    return info == null;
+}, "This user name already exist");
+
 $.validator.addMethod("minDate", function(value, element) {
     var now = new Date();
     var myDate = new Date(value);
@@ -51,9 +58,6 @@ $.validator.addMethod('validName', function(value, element) {
 }, "Full name should contains only letters")
 
 
-$("#submit").on('click', function() {
-    $("#regform").valid();
-});
 
 //valid the number of balls in the game
 $("#balls_form").validate({

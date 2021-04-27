@@ -295,7 +295,6 @@ function UpdatePosition() {
     CheckCollision();
 
 
-
     board[shape.i][shape.j] = 2;
     let currentTime = new Date();
     time_elapsed = (currentTime - start_time) / 1000;
@@ -370,7 +369,7 @@ function CheckCollision() {
 }
 
 
-// get direction for moving objects
+// get direction for moving objects 
 function getDirection(obj) {
     let i_change, j_change;
     let rand = Math.random();
@@ -451,11 +450,9 @@ function stopGameIfInProgress() {
 
 }
 
-
+// when eating special food shows beside scoreboard
 function hideShowSpan(id) {
     playSound("scoreSound");
-    // sound.play();
-    // sound.volume = 0.15;
     $(id).children('span').show();
     setInterval(function() {
         $(id).children('span').hide()
