@@ -22,7 +22,7 @@ let endMsg;
 let currUser;
 let moving_objects = [];
 let curr_direction = 4; // 1 up 2 down 3 left 4 right
-let draw_details = {up: [1.65,-10,-5], down: [0.65,-10,5], left: [1.15,-5,-10], right: [0.15,5,-10]};
+let draw_details = { up: [1.65, -10, -5], down: [0.65, -10, 5], left: [1.15, -5, -10], right: [0.15, 5, -10] };
 
 
 let monsterImg = document.createElement("img");
@@ -230,19 +230,19 @@ function Draw() {
     }
 }
 
-function DrawPacman(x, y, curr_direction){
+function DrawPacman(x, y, curr_direction) {
     let details;
-    if (curr_direction == 1){
+    if (curr_direction == 1) {
         details = draw_details.up;
-    } else if (curr_direction == 2){
+    } else if (curr_direction == 2) {
         details = draw_details.down;
-    } else if (curr_direction == 3){
+    } else if (curr_direction == 3) {
         details = draw_details.left;
-    } else if (curr_direction == 4){
+    } else if (curr_direction == 4) {
         details = draw_details.right;
     }
     context.beginPath();
-    context.arc(x, y, 20, details[0]* Math.PI, (details[0]+1.7) * Math.PI); // half circle
+    context.arc(x, y, 20, details[0] * Math.PI, (details[0] + 1.7) * Math.PI); // half circle
     context.lineTo(x, y);
     context.fillStyle = pac_color; //color
     context.fill();
@@ -430,6 +430,10 @@ function EndGame() {
         endMsg.innerHTML = currUser + " Is A Winner!!!"
     }
     document.getElementById('endScore').innerHTML = "Yor score is: " + score;
+    delete game_settings.rightBotton;
+    delete game_settings.leftBotton;
+    delete game_settings.upBotton;
+    delete game_settings.downBotton;
     modal_handler('gameEnd');
 }
 

@@ -29,6 +29,21 @@ body {
     margin-right: auto;
 }
 
+#Monster_Image {
+    width: 45px;
+    height: 45px;
+}
+
+#extra_life {
+    width: 45px;
+    height: 45px;
+}
+
+#extra_time {
+    width: 45px;
+    height: 45px;
+}
+
 .error {
     color: Red;
     font-size: 25px;
@@ -218,6 +233,12 @@ td {
     float: left;
     width: 50%;
     height: 160px;
+}
+
+.legend {
+    float: right;
+    width: 20%;
+    height: 140px;
 }
 
 .footer {

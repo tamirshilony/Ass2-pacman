@@ -90,6 +90,30 @@
             </table>
         </div>
 
+        <div class="legend" id="legend">
+            <table id="legend_table" style="display: none;">
+                <tr>
+                    <td>Monster Image: </td>
+                    <td id='Monster_Image'>
+                        <image id='Monster_Image' src="./images/virus.png"></image>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Extra Life Image: </td>
+                    <td>
+                        <image id='extra_life' src="./images/syringe.jpg"></image>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Extra Time Image: </td>
+                    <td>
+                        <image id='extra_time' src="./images/mask.jpeg"></image>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
         <div id="game">
             <canvas class="game_board" id="canvas" height="400" width="800"></canvas>
         </div>
@@ -206,7 +230,7 @@
                 <br><br>
                 <button class="before_game" type="button" id="check_buttons" onclick="save_buttons()">Save Buttons</button>
                 <br>
-                <button class="before_game" type="button" id="next_step" style="display: none; align-self: center; " onclick="show_div('ball_setup')">Move To Next Step</button>
+                <button class="before_game" type="button" id="next_step" style="display: none; align-self: center; " onclick="finish_button()">Move To Next Step</button>
             </form>
         </div>
 

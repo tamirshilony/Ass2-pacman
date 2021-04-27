@@ -80,6 +80,11 @@ function save_buttons() {
     }
 }
 
+function finish_button() {
+    document.getElementById("next_step").style.display = "none";
+    show_div('ball_setup');
+}
+
 
 function save_num_ball() {
     document.getElementById("balls_err").style.display = "none";
@@ -155,4 +160,5 @@ function display_prop() {
     var user = currUser;
     document.getElementById("currUserName").innerHTML = user;
     document.getElementById("myTable").style.display = "block";
+    document.getElementById("legend_table").style.display = "block";
 }
